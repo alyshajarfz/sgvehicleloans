@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - AutoMotoCredit{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'apploan/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{% include 'apploan/modals/apply.html' with form=form %}
+
+<section class="hero-glass">
+  <!-- Carousel -->
+  <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'apploan/images/drive-1.jpg' %}" class="d-block w-100" alt="Car 1">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'apploan/images/drive-2.jpg' %}" class="d-block w-100" alt="Car 2">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'apploan/images/drive-3.jpg' %}" class="d-block w-100" alt="Car 3">
+      </div>
+    </div>
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <!-- Overlay -->
+  <div class="hero-overlay"></div>
+
+  <!-- Glass Card (Centered) -->
+  <div class="hero-card">
+    <h1>Welcome to AutoMotoCredit</h1>
+    <p>Your One-Stop Solution for Car and Motorcycle Loans, Financing and Insurance in Singapore</p>
+    <a data-bs-toggle="modal" data-bs-target="#applyNowModal" class="btn btn-secondary">Apply Now</a>
+  </div>
+</section>
+
+
+<!-- Card -->
+<div class="card category p-4">
+  <h5 class="card-title text-center mb-4">Browse by Categories</h5>
+  
+  <div class="d-flex justify-content-around text-center flex-wrap">
+    
+    <!-- Category Item -->
+    <a href="{% url 'financeUsed' %}" class="category-item text-decoration-none">
+      <i class="fas fa-car fa-3x mb-2"></i>
+      <div>Loans</div>
+    </a>
+
+    <a href="{% url 'COERenewCar' %}" class="category-item text-decoration-none">
+      <i class="fas fa-file-invoice-dollar fa-3x mb-2"></i>
+      <div>COE Renewal</div>
+    </a>
+    
+    <a href="{% url 'insCar' %}" class="category-item text-decoration-none">
+      <i class="fa-solid fa-car-burst fa-3x mb-2"></i>
+      <div>Insurance</div>
+    </a>
+    
+    <a href="{% url 'rates' %}" class="category-item text-decoration-none">
+      <i class="fa-solid fa-ranking-star fa-3x mb-2"></i>
+      <div>Rates</div>
+    </a>
+    
+    <a href="{% url 'guidesFaq' %}" class="category-item text-decoration-none">
+      <i class="fas fa-book fa-3x mb-2"></i>
+      <div>Guides</div>
+    </a>
+    
+  </div>
+</div>
+
+<h2 class="loan-section-title mt-5">Get Your Car & Motorcycle Loan Now!</h2>
+<div class="card-row">
+    <div class="loan-card">
+        <div class="icon-circle"><i class="fas fa-bolt"></i></div>
+        <h5>Fast Loans</h5>
+        <p>Get loans approved quickly with minimal paperwork.</p>
+    </div>
+    <div class="loan-card">
+        <div class="icon-circle"><i class="fas fa-coins"></i></div>
+        <h5>Lowest Rates</h5>
+        <p>Enjoy competitive interest rates for all loan types.</p>
+    </div>
+    <div class="loan-card">
+        <div class="icon-circle"><i class="fas fa-star"></i></div>
+        <h5>Largest Network</h5>
+        <p>We have the largest network of lenders in Singapore.</p>
+    </div>
+    <div class="loan-card">
+        <div class="icon-circle"><i class="fas fa-shield-alt"></i></div>
+        <h5>Safe & Secure</h5>
+        <p>Your information is protected with industry-standard security.</p>
+    </div>
+    <div class="loan-card">
+        <div class="icon-circle"><i class="fas fa-clock"></i></div>
+        <h5>24/7 Support</h5>
+        <p>Our team is available around the clock to assist you.</p>
+    </div>
+    <div class="loan-card">
+        <div class="icon-circle"><i class="fas fa-car"></i></div>
+        <h5>Car & Motorcycle Loans</h5>
+        <p>Flexible Car & Motorcycle loan options tailored for your needs.</p>
+    </div>
+    <div class="loan-card">
+        <div class="icon-circle"><i class="fas fa-hand-holding-usd"></i></div>
+        <h5>Easy Application</h5>
+        <p>Apply online with simple and fast steps.</p>
+    </div>
+    <div class="loan-card">
+        <div class="icon-circle"><i class="fas fa-chart-line"></i></div>
+        <h5>Trusted Reviews</h5>
+        <p>Thousands of satisfied clients have trusted us for years.</p>
+    </div>
+</div>
+
+<div class="loan-type-row">
+    <div class="cards-wrapper">
+      <div class="loan-type overlay-red" style="--card-width:380px; --card-height:450px; background-image: url('{% static 'apploan/images/loan-type-img-1.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="content-type">
+          <p class="heading">New Car & Motorcycle Loan</p>
+          <p class="para">Fast approval for brand new cars and motorcycles with flexible terms and competitive interest rates.</p>
+          <button class="btn btn-learn" type="button" onclick="window.location.href='{% url 'financeNew' %}'">
+              LEARN MORE
+          </button>
+        </div>
+      </div>
+
+      <div class="loan-type overlay-red" style="--card-width:380px; --card-height:450px; background-image: url('{% static 'apploan/images/loan-type-img-6.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="content-type">
+          <p class="heading">Direct Buyer → Seller</p>
+          <p class="para">Buy Directly from Owners with the Best Loan Options.</p>
+          <button class="btn btn-learn" type="button" onclick="window.location.href='{% url 'financeDirect' %}'">
+              LEARN MORE
+          </button>
+        </div>
+      </div>
+
+      <div class="loan-type overlay-red" style="--card-width:380px; --card-height:450px; background-image: url('{% static 'apploan/images/loan-type-img-5.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="content-type">
+          <p class="heading">COE Car<br>Loan</p>
+          <p class="para">Quick renewal to keep your vehicle on the road hassle-free.</p>
+          <button class="btn btn-learn" type="button" onclick="window.location.href='{% url 'financeCOECar' %}'">
+              LEARN MORE
+          </button>
+        </div>
+      </div>
+
+      <div class="loan-type overlay-red" style="--card-width:380px; --card-height:450px; background-image: url('{% static 'apploan/images/loan-type-img-3.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="content-type">
+          <p class="heading">COE Car Refinancing</p>
+          <p class="para">Easily refinance your existing car loan for lower interest rates.</p>
+          <button class="btn btn-learn" type="button" onclick="window.location.href='{% url 'financeRefinance' %}'">
+              LEARN MORE
+          </button>
+        </div>
+      </div>
+
+       <div class="loan-type overlay-red" style="--card-width:380px; --card-height:450px; background-image: url('{% static 'apploan/images/loan-type-img-4.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="content-type">
+          <p class="heading">In-House<br>Car Loan</p>
+          <p class="para">Easy In-House Financing Designed to Fit Your Budget and Lifestyle.</p>
+          <button class="btn btn-learn" type="button" onclick="window.location.href='{% url 'financeInHouse' %}'">
+              LEARN MORE
+          </button>
+        </div>
+      </div>
+
+      <div class="loan-type overlay-red" style="--card-width:380px; --card-height:450px; background-image: url('{% static 'apploan/images/loan-type-img-2.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="content-type">
+          <p class="heading">Private Hire Vehicle (PHV) Car Loan</p>
+          <p class="para">Specialized loans for PHV Car on the Road with Flexible Financing.</p>
+          <button class="btn btn-learn" type="button" onclick="window.location.href='{% url 'financePHVCar' %}'">
+              LEARN MORE
+          </button>
+        </div>
+      </div>
+
+    </div>
+</div>
+
+{% endblock %}

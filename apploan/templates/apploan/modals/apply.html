@@ -1,0 +1,338 @@
+<div class="modal fade" id="applyNowModal" tabindex="-1" aria-labelledby="applyNowLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content apply-card">
+
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold text-navy" id="applyNowLabel">Apply Online</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Progress Bar -->
+        <div class="progress-wrapper mb-4">
+          <div class="progress-outer">
+            <div id="formProgressBar" class="progress-inner"></div>
+          </div>
+
+          <div class="step-labels">
+            <span class="step-label">Contact</span>
+            <span class="step-label">Vehicle</span>
+            <span class="step-label">Loan</span>
+            <span class="step-label">Remarks</span>
+          </div>
+        </div>
+
+        <!-- Step Indicators -->
+        <div class="step-indicator-wrapper mb-3">
+          <div class="step-dot active">1</div>
+          <div class="step-dot">2</div>
+          <div class="step-dot">3</div>
+          <div class="step-dot">4</div>
+        </div>
+
+        <form id="applyForm" method="post" action="{% url 'apply' %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+
+          <!-- STEP 1: Contact -->
+          <div class="step step-1 active">
+            <h6 class="step-title">Contact Details</h6>
+
+            <div class="mb-3">
+              <label class="form-label">Full Name *</label>
+              {{ apply_form.full_name }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Phone Number *</label>
+              {{ apply_form.phone }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email *</label>
+              {{ apply_form.email }}
+            </div>
+
+            <button type="button" class="btn next-btn">Next</button>
+          </div>
+
+          <!-- STEP 2: Vehicle -->
+          <div class="step step-2">
+            <h6 class="step-title">Vehicle Details</h6>
+
+            <div class="mb-3">
+              <label class="form-label">Buy from *</label>
+              {{ apply_form.car_source }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Vehicle Price *</label>
+              {{ apply_form.vehicle_price }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Model *</label>
+              {{ apply_form.vehicle_model }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">OMV *</label>
+              {{ apply_form.omv }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">ARF *</label>
+              {{ apply_form.arf }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Registration Date *</label>
+              {{ apply_form.registration_date }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Registration No. *</label>
+              {{ apply_form.registration_number }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Owner LTA Access Code *</label>
+              {{ apply_form.lta_access_code }}
+              <small class="text-muted d-block mt-1">
+                Get code at OneMotoring → “Request Access Code”.  
+                Recipient number: <strong>98518281</strong>
+              </small>
+            </div>
+
+            <button type="button" class="btn back-btn">Previous</button>
+            <button type="button" class="btn next-btn">Next</button>
+          </div>
+
+          <!-- STEP 3: Loan -->
+          <div class="step step-3">
+            <h6 class="step-title">Loan Details</h6>
+
+            <div class="mb-3">
+              <label class="form-label">Loan Amount *</label>
+              {{ apply_form.loan_amount }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Tenure (Months) *</label>
+              {{ apply_form.loan_tenure }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Loan Type *</label>
+              {{ apply_form.loan_type }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Repayment Mode *</label>
+              {{ apply_form.repayment_mode }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Preferred Bank *</label>
+              {{ apply_form.preferred_bank }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Down Payment</label>
+              {{ apply_form.down_payment }}
+            </div>
+
+            <button type="button" class="btn back-btn">Previous</button>
+            <button type="button" class="btn next-btn">Next</button>
+          </div>
+
+          <!-- STEP 4: Remarks -->
+          <div class="step step-4">
+            <h6 class="step-title">Remarks</h6>
+
+            <div class="mb-3">
+              {{ apply_form.remarks }}
+            </div>
+
+            <div class="form-check mb-3">
+              {{ apply_form.privacy_policy }}
+              <label class="form-check-label">
+                I agree to the Privacy Policy and consent to communication.
+              </label>
+            </div>
+
+            <button type="button" class="btn back-btn">Previous</button>
+            <button type="submit" class="btn submit-btn">Submit Application</button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+  :root {
+  --navy: #0a1a35;
+  --blue: #1b6ec2;
+  --light-blue: #d9e6f8;
+}
+
+/* Modal Card */
+.apply-card {
+  border-radius: 14px;
+  padding: 10px 20px;
+  animation: fadeIn .35s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.text-navy { color: var(--navy); }
+
+.modal-dialog-scrollable .modal-body {
+  overflow-y: auto;
+  overflow-x: hidden; /* force no horizontal scroll */
+}
+
+/* Progress Bar */
+.progress-outer {
+  height: 10px;
+  background: #e8f0fb;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-inner {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+  border-radius: 20px;
+  transition: width .5s ease;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 4px var(--blue); }
+  to { box-shadow: 0 0 12px var(--blue); }
+}
+
+.step-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+/* Step Indicators */
+.step-indicator-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--light-blue);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  transition: .25s;
+}
+
+.step-dot.active {
+  background: var(--blue);
+  color: white;
+  transform: scale(1.2);
+}
+
+/* Step animation */
+.step {
+  display: none;
+  animation: slideIn .35s ease;
+}
+
+.step.active { display: block; }
+
+@keyframes slideIn {
+  from { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Buttons */
+.next-btn, .submit-btn {
+  background: var(--blue);
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  width: 100%;
+  padding: 12px;
+}
+
+.back-btn {
+  background: var(--light-blue);
+  color: var(--navy);
+  font-weight: 600;
+  border-radius: 10px;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+</style>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const steps = document.querySelectorAll(".step");
+  const dots = document.querySelectorAll(".step-dot");
+  const progress = document.getElementById("formProgressBar");
+
+  let currentStep = 0;
+
+  function updateUI() {
+    steps.forEach((step, i) => step.classList.toggle("active", i === currentStep));
+    dots.forEach((dot, i) => dot.classList.toggle("active", i === currentStep));
+
+    progress.style.width = ((currentStep + 1) / steps.length) * 100 + "%";
+  }
+
+  function validateStep(step) {
+    const inputs = steps[step].querySelectorAll("[required]");
+    for (let input of inputs) {
+      if (!input.value.trim()) {
+        input.classList.add("is-invalid");
+        return false;
+      }
+      input.classList.remove("is-invalid");
+    }
+    return true;
+  }
+
+  document.querySelectorAll(".next-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (!validateStep(currentStep)) return;
+      currentStep++;
+      updateUI();
+    });
+  });
+
+  document.querySelectorAll(".back-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentStep--;
+      updateUI();
+    });
+  });
+
+  updateUI();
+});
+
+</script>

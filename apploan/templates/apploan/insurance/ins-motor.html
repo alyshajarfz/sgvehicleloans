@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Motorcycle Insurance{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'apploan/css/ins-motor.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include 'apploan/modals/quote-m.html' with form=form %}
+
+<!-- HERO -->
+<section class="hero video-hero">
+  <!--<video autoplay muted loop class="hero-video">
+    <source src="{{ video.video.url }}" type="video/mp4">
+    <source src="{% static 'apploan/videos/ins-motor.mp4' %}" type="video/mp4"> 
+    Your browser does not support the video tag.
+  </video> -->
+
+  <video autoplay muted loop class="hero-video">
+    {% if video %}
+        <source src="{{ video.video.url }}" type="video/mp4">
+    {% else %}
+        <p>Your browser does not support the video tag.</p>
+    {% endif %}
+  </video>
+
+
+  <!-- Overlay div -->
+  <div class="hero-overlay"></div>
+
+  <!-- Text content -->
+  <div class="hero-content">
+    <h1>Ride Freely, Insure Wisely. <br> Your Ride, Fully Protected.</h1>
+    <p>Affordable motorcycle insurance with complete coverage and easy claims.</p>
+    <a href="#" data-bs-toggle="modal" data-bs-target="#mquoteModal">Get Motorcycle Quote</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <h2 class="section-title text-center mb-4">Complete Motorcycle Protection, Anytime, Anywhere</h2>
+  <div class="feature-card">
+    <i class="fas fa-fire"></i>
+    <h3>Theft & Fire Protection</h3>
+    <p>Additional coverage for theft, fire, and accidental damages.</p>
+  </div>
+  <div class="feature-card">
+    <i class="fas fa-motorcycle"></i>
+    <h3>Motorcycle Insurance</h3>
+    <p>Coverage for all rider classes — comprehensive or third-party options.</p>
+  </div>
+  <div class="feature-card">
+    <i class="fas fa-tools"></i>
+    <h3>Roadside Assistance</h3>
+    <p>Emergency support anytime, anywhere in Singapore.</p>
+  </div>
+  <div class="feature-card">
+    <i class="fas fa-shield-alt"></i>
+    <h3>Fast Claims</h3>
+    <p>Submit claims online and get quick updates throughout the process.</p>
+  </div>
+</section>
+
+<!-- MOTORCYCLE INSURANCE BENEFITS -->
+<section class="benefits-section">
+  <h2 class="section-title text-center mb-4">Motorcycle Insurance benefits for Every Ride</h2>
+  <div class="benefit-card">
+    <i class="fas fa-bolt"></i>
+    <h4>Accidental Collision & Overturning</h4>
+    <p>Protects your motorcycle against damage caused by accidents or overturning.</p>
+  </div>
+
+  <div class="benefit-card">
+    <i class="fas fa-shield-alt"></i>
+    <h4>Impact Damage by Falling Objects</h4>
+    <p>Includes damage caused by falling objects (excluding natural convulsions).</p>
+  </div>
+
+    <div class="benefit-card">
+    <i class="fas fa-cog"></i>
+    <h4>Emergency Assistance</h4>
+    <p>Provides immediate support on-the-spot accidents involving third parties including guidance, etc.</p>
+  </div>
+
+
+  <div class="benefit-card">
+    <i class="fas fa-hand-holding-usd"></i>
+    <h4>Quick Claims</h4>
+    <p>Fast and convenient claims submission through website, keeping you informed every step of the way.</p>
+  </div>
+
+    <div class="benefit-card">
+    <i class="fas fa-exclamation-triangle"></i>
+    <h4>Malicious Act Damage</h4>
+    <ul>
+      <li>Intentional damage by others</li>
+      <li>Vandalism or deliberate tampering with your motorcycle</li>
+    </ul>
+  </div>
+
+  <div class="benefit-card">
+    <i class="fas fa-users"></i>
+    <h4>Liabilities to Third Parties</h4>
+    <ul>
+      <li>Bodily Injury or Death</li>
+      <li>Property Loss or Damage</li>
+      <li>Personal Liability Protection</li>
+    </ul>
+  </div>
+
+    <div class="benefit-card">
+    <i class="fas fa-fire"></i>
+    <h4>Fire, Explosion or Lightning</h4>
+    <ul>
+      <li>Fire damage</li>
+      <li>Explosion damage</li>
+      <li>Lightning damage</li>
+    </ul>
+  </div>
+
+  <div class="benefit-card">
+    <i class="fas fa-user-secret"></i>
+    <h4>Burglary, Housebreaking or Theft</h4>
+    <ul>
+      <li>Loss due to theft</li>
+      <li>Loss due to burglary or housebreaking</li>
+    </ul>
+  </div>
+
+
+</section>
+
+
+
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Get Protected Today</h2>
+  <a href="#" data-bs-toggle="modal" data-bs-target="#mquoteModal">Get Your Insurance Quote</a>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'apploan/js/loan.js' %}"></script>
+{% endblock %}

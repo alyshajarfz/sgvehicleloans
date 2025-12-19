@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Interest Rates{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'apploan/css/rates.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{% include 'apploan/modals/apply.html' with form=form %}
+{% include 'apploan/modals/enquire.html' with form=form %}
+
+<!-- HERO SECTION -->
+<section class="hero-landing">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Discover Low Interest Rates Today!</h1>
+    <p>Flexible loan plans with competitive rates. Apply online and get fast approval.</p>
+    <a href="#rates" class="hero-btn text-uppercase">Check Rates</a>
+  </div>
+</section>
+
+<!-- FEATURES / BENEFITS SECTION -->
+<section class="features-alt">
+  <h2 class="section-title">Why Choose AutoMotoCredit? Here’s Why.</h2>
+  <div class="features-container">
+    <div class="feature">
+      <i class="fas fa-percent"></i>
+      <h3>Low Interest Rates</h3>
+      <p>Save money with our competitive loan rates tailored to your needs.</p>
+    </div>
+    <div class="feature">
+      <i class="fas fa-clock"></i>
+      <h3>Fast Approval</h3>
+      <p>Get approval in as little as 24 hours, with minimal paperwork.</p>
+    </div>
+    <div class="feature">
+      <i class="fas fa-shield-alt"></i>
+      <h3>Trusted Lender</h3>
+      <p>Secure and reliable services you can count on for your finances.</p>
+    </div>
+  </div>
+</section>
+
+<div id="rates" class="container rate-section my-5">
+  <h2 class="rate-heading">Explore your options and choose the right rate for you.</h2>
+  <p class="rate-subheading">Compare. Decide. Save.</p>
+
+  <div class="rate-row">
+    <div class="rate-header">
+      <h2 class="rate-heading">Used Car &<br>Motorcycle Loan</h2>
+    </div>
+
+    <div class="rate-cards">
+      {% with rate=loan_rates.used_cm %}
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Exclusive at AutoMotoCredit</h6>
+        <p class="txt-from text-muted mb-1">From*</p>
+        <h1 class="fw-bold mb-2 text-success">{{ rate.interest_rate }}%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply" data-bs-toggle="modal" data-bs-target="#applyNowModal">Apply Now</a>
+      </div>
+      {% endwith %}
+
+      <div class="vertical-divider d-none d-md-block"></div>
+
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
+        <p class="txt-from text-muted mb-1">From</p>
+        <h1 class="fw-bold mb-2 text-danger">2.88%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="rate-row">
+    <div class="rate-header">
+      <h2 class="rate-heading">New Car &<br>Motorcycle Loan </h2>
+    </div>
+
+    <div class="rate-cards">
+      {% with rate=loan_rates.new_cm %}
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Exclusive at AutoMotoCredit</h6>
+        <p class="txt-from text-muted mb-1">From*</p>
+        <h1 class="fw-bold mb-2 text-success">{{ rate.interest_rate }}%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply" data-bs-toggle="modal" data-bs-target="#applyNowModal">Apply Now</a>
+      </div>
+      {% endwith %}
+
+      <div class="vertical-divider d-none d-md-block"></div>
+
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
+        <p class="txt-from text-muted mb-1">From</p>
+        <h1 class="fw-bold mb-2 text-danger">2.89%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="rate-row">
+    <div class="rate-header">
+      <h2 class="rate-heading">Direct Buyer → <br>Seller Loan</h2>
+    </div>
+
+    <div class="rate-cards">
+      {% with rate=loan_rates.direct_bs %}
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Exclusive at AutoMotoCredit</h6>
+        <p class="txt-from text-muted mb-1">From*</p>
+        <h1 class="fw-bold mb-2 text-success">{{ rate.interest_rate }}%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply" data-bs-toggle="modal" data-bs-target="#applyNowModal">Apply Now</a>
+      </div>
+      {% endwith %}
+
+      <div class="vertical-divider d-none d-md-block"></div>
+
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
+        <p class="txt-from text-muted mb-1">From</p>
+        <h1 class="fw-bold mb-2 text-danger">2.98%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="rate-row">
+    <div class="rate-header">
+      <h2 class="rate-heading">COE Car Loan</h2>
+    </div>
+
+    <div class="rate-cards">
+      {% with rate=loan_rates.coe_car %}
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Exclusive at AutoMotoCredit</h6>
+        <p class="txt-from text-muted mb-1">From*</p>
+        <h1 class="fw-bold mb-2 text-success">{{ rate.interest_rate }}%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply" data-bs-toggle="modal" data-bs-target="#applyNowModal">Apply Now</a>
+      </div>
+      {% endwith %}
+
+      <div class="vertical-divider d-none d-md-block"></div>
+
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
+        <p class="txt-from text-muted mb-1">From</p>
+        <h1 class="fw-bold mb-2 text-danger">3.28%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="rate-row">
+    <div class="rate-header">
+      <h2 class="rate-heading">Refinancing Car<br>Loan</h2>
+    </div>
+
+    <div class="rate-cards">
+      {% with rate=loan_rates.ref_car %}
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Exclusive at AutoMotoCredit</h6>
+        <p class="txt-from text-muted mb-1">From*</p>
+        <h1 class="fw-bold mb-2 text-success">{{ rate.interest_rate }}%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply" data-bs-toggle="modal" data-bs-target="#applyNowModal">Apply Now</a>
+      </div>
+      {% endwith %}
+
+      <div class="vertical-divider d-none d-md-block"></div>
+
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
+        <p class="txt-from text-muted mb-1">From</p>
+        <h1 class="fw-bold mb-2 text-danger">3.98%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="rate-row">
+    <div class="rate-header">
+      <h2 class="rate-heading">In-House Car<br>Loan</h2>
+    </div>
+
+    <div class="rate-cards">
+      {% with rate=loan_rates.in_house %}
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Exclusive at AutoMotoCredit</h6>
+        <p class="txt-from text-muted mb-1">From*</p>
+        <h1 class="fw-bold mb-2 text-success">{{ rate.interest_rate }}%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply" data-bs-toggle="modal" data-bs-target="#applyNowModal">Apply Now</a>
+      </div>
+      {% endwith %}
+
+      <div class="vertical-divider d-none d-md-block"></div>
+
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
+        <p class="txt-from text-muted mb-1">From</p>
+        <h1 class="fw-bold mb-2 text-danger">5.78%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="rate-row">
+    <div class="rate-header">
+      <h2 class="rate-heading">PHV Car Loan</h2>
+    </div>
+
+    <div class="rate-cards">
+      {% with rate=loan_rates.phv_car %}
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Exclusive at AutoMotoCredit</h6>
+        <p class="txt-from text-muted mb-1">From*</p>
+        <h1 class="fw-bold mb-2 text-success">{{ rate.interest_rate }}%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply" data-bs-toggle="modal" data-bs-target="#applyNowModal">Apply Now</a>
+      </div>
+      {% endwith %}
+
+      <div class="vertical-divider d-none d-md-block"></div>
+
+      <div class="rate-card">
+        <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
+        <p class="txt-from text-muted mb-1">From</p>
+        <h1 class="fw-bold mb-2 text-danger">3.88%</h1>
+        <p class="txt-rate text-muted mb-3">Interest Rate</p>
+        <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+{% endblock %}

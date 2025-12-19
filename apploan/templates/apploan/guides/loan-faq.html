@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load faq_tags %}
+
+{% block title %}Guides - FAQ{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'apploan/css/loan-faq.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<section class="faq-hero-spotlight">
+  <div class="spot-content">
+    <h1>Frequently Asked Questions</h1>
+    <p>Find helpful answers instantly inside our FAQ.</p>
+  </div>
+</section>
+
+
+
+{% get_faqs "used" as faqs %}
+{% include "apploan/content/faq.html" with faqs=faqs faq_title="Used Car & Motorcycle Loan FAQ" %}
+
+{% get_faqs "new" as faqs %}
+{% include "apploan/content/faq.html" with faqs=faqs faq_title="New Car & Motorcycle Loan FAQ" %}
+
+{% get_faqs "direct" as faqs %}
+{% include "apploan/content/faq.html" with faqs=faqs faq_title="Direct Buyer → Seller Auto Loan FAQ" %}
+
+{% get_faqs "coe_car_loan" as faqs %}
+{% include "apploan/content/faq.html" with faqs=faqs faq_title="COE Car Loan FAQ" %}
+
+{% get_faqs "coe_ref" as faqs %}
+{% include "apploan/content/faq.html" with faqs=faqs faq_title="Car Refinancing Loan FAQ" %}
+
+{% get_faqs "in_house" as faqs %}
+{% include "apploan/content/faq.html" with faqs=faqs faq_title="In-House Car Loan FAQ" %}
+
+{% get_faqs "phv" as faqs %}
+{% include "apploan/content/faq.html" with faqs=faqs faq_title="Private Hire Vehicle (PHV) Car Loan FAQ" %}
+
+{% get_faqs "coe_renew_car" as faqs %}
+{% include "apploan/content/faq.html" with faqs=faqs faq_title="COE Renew Loan FAQ" %}
+
+{% get_faqs "coe_renew_motor" as faqs %}
+{% include "apploan/content/faq.html" with faqs=faqs faq_title="COE Motor Loan FAQ" %}
+
+
+
+{% endblock %}

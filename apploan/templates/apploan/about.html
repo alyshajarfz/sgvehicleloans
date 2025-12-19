@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load faq_tags %}
+
+{% block title %}About{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'apploan/css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-gradient container-fluid">
+  <div class="hero-gradient-content row align-items-center">
+    <div class="col-lg-6 hero-text">
+      <h1>AutoMotoCredit</h1>
+      <p>Financing and insurance solutions tailored for your car or motorcycle needs.</p>
+      <a href="#services" class="cta">Get Started</a>
+    </div>
+  </div>
+</section>
+
+
+<section class="about-us container my-5">
+  <div class="row align-items-center">
+    <div class="col-md-6 text">
+        <h2>About AutoMotoCredit</h2>
+        <p>AutoMotoCredit is a certified automotive financing company based in Singapore, specializing in car and motorcycle loans. We are fully licensed and regulated, ensuring our clients receive safe, transparent, and professional financial services.</p>
+        <p>Founded over 12 years ago, we have helped more than 6,500 customers secure their dream vehicles while maintaining a 99% customer satisfaction rate. Our experienced team is committed to providing personalized solutions for every client, whether you are looking for new car financing, used vehicle loans, or COE renewals.</p>
+        <p><b>Our Mission:</b> To empower Singaporeans with flexible, transparent, and reliable vehicle financing solutions while providing peace of mind through trusted insurance services.</p>
+    </div>
+    <div class="col-md-6 image">
+        <img src="{% static 'apploan/images/logo-2.png' %}" alt="About AutoMotoCredit" class="img-fluid">
+    </div>
+  </div>
+</section>
+
+<section class="why-choose py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Why Choose AutoMotoCredit</h2>
+
+        <!-- Feature Cards -->
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="feature-card text-center p-4 h-100">
+                    <i class="fa-solid fa-certificate feature-icon mb-3"></i>
+                    <h5>Certified Company</h5>
+                    <p>Fully licensed and regulated automotive financing provider in Singapore.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card text-center p-4 h-100">
+                    <i class="fa-solid fa-handshake-angle feature-icon mb-3"></i>
+                    <h5>Trusted by Customers</h5>
+                    <p>Over 6,500 satisfied clients with a 99% satisfaction rate.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card text-center p-4 h-100">
+                    <i class="fa-solid fa-building-columns feature-icon mb-3"></i>
+                    <h5>Partner Network</h5>
+                    <p>Collaborates with 200+ dealerships and financial institutions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="row mt-5 text-center g-4">
+            <div class="col-md-3">
+                <div class="stat-card p-4 rounded">
+                    <h3>12+</h3>
+                    <p>Years</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card p-4 rounded">
+                    <h3>6,500+</h3>
+                    <p>Clients</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card p-4 rounded">
+                    <h3>99%</h3>
+                    <p>Satisfaction</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card p-4 rounded">
+                    <h3>200+</h3>
+                    <p>Partners</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="services container">
+  <h2>Our Services</h2>
+  <div class="row g-4">
+    <!-- Row 1 -->
+    <div class="col-md-3"><div class="service-card"><i class="fa-solid fa-car"></i><span>Used Car & Motorcycle Loan</span></div></div>
+    <div class="col-md-3"><div class="service-card"><i class="fa-solid fa-car-side"></i><span>New Car & Motorcycle Loan</span></div></div>
+    <div class="col-md-3"><div class="service-card"><i class="fa-solid fa-money-bill-transfer"></i><span>Direct Buyer – Seller Loan</span></div></div>
+    <div class="col-md-3"><div class="service-card"><i class="fa-solid fa-coins"></i><span>COE Car Loan</span></div></div>
+    
+    <!-- Row 2 -->
+    <div class="col-md-3"><div class="service-card"><i class="fa-solid fa-rotate"></i><span>COE Refinancing</span></div></div>
+    <div class="col-md-3"><div class="service-card"><i class="fa-solid fa-building"></i><span>In-House Car Loan</span></div></div>
+    <div class="col-md-3"><div class="service-card"><i class="fa-solid fa-taxi"></i><span>PHV Car Loan</span></div></div>
+    <div class="col-md-3"><div class="service-card"><i class="fa-solid fa-file-invoice"></i><span>COE Renewal (Cars & CV)</span></div></div>
+
+    <!-- Row 3 (last 3 wider) -->
+    <div class="col-md-4"><div class="service-card"><i class="fa-solid fa-motorcycle"></i><span>COE Renewal (Motorcycle)</span></div></div>
+    <div class="col-md-4"><div class="service-card"><i class="fa-solid fa-shield-halved"></i><span>Car Insurance</span></div></div>
+    <div class="col-md-4"><div class="service-card"><i class="fa-solid fa-shield"></i><span>Motorcycle Insurance</span></div></div>
+  </div>
+</section>
+
+
+<section class="testimonials-chat-alt container my-5">
+  <h2 class="text-center mb-5">What Our Customers Say</h2>
+
+  <div class="chat-container">
+
+    <!-- Chat Bubble 1 -->
+    <div class="chat-bubble left">
+      <img src="{% static 'apploan/images/p2.png' %}" alt="James L." class="avatar">
+      <div class="message">
+        <p>“AutoMotoCredit made buying my first car effortless. Fast approval and excellent support!”</p>
+        <span class="customer">– James L.</span>
+      </div>
+    </div>
+
+    <!-- Chat Bubble 2 -->
+    <div class="chat-bubble right">
+      <img src="{% static 'apploan/images/p1.png' %}" alt="Sarah T." class="avatar">
+      <div class="message">
+        <p>“Professional team and transparent process. I highly recommend AutoMotoCredit for motorcycles.”</p>
+        <span class="customer">– Sarah T.</span>
+      </div>
+    </div>
+
+    <!-- Chat Bubble 3 -->
+    <div class="chat-bubble left">
+      <img src="{% static 'apploan/images/p3.png' %}" alt="John K." class="avatar">
+      <div class="message">
+        <p>“Fast, reliable, and easy to work with. Got my car loan approved in no time!”</p>
+        <span class="customer">– John K.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Call-to-Action Section -->
+<section class="cta-section text-center py-5">
+  <h2>Ready to Finance Your Vehicle?</h2>
+  <p>Get your car or motorcycle loan approved quickly and easily with AutoMotoCredit.</p>
+  <a href="#apply" class="cta-btn">Apply Now</a>
+  <a href="#quote" class="cta-btn-outline">Get a Quote</a>
+</section>
+
+
+{% endblock %}

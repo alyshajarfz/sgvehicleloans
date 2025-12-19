@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load faq_tags %}
+
+{% block title %}Guides - Payment{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'apploan/css/loan-pay.css' %}">
+{% endblock %}
+
+{% block content %}
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container">
+      <h1>Secure & Simple Payments</h1>
+      <p>Secure and convenient online payments for your car financing. </p>
+    </div>
+  </section>
+
+  <!-- PAYMENT SECTION -->
+  <section class="container mt-5 mb-5">
+    <div class="payment-section">
+      <div class="payment-text">
+        <h2>Online Bank Payments & Accounts</h2>
+        <p>We kindly request our customers to make payments via online bank transfer, cheque deposit, or PayNow for a faster and secure processing experience.</p>
+        <p>To learn more about PayNow, please <a href="#">click here</a>.</p>
+        <ul>
+          <li>All payments should be made to <strong>AUTOMOTOCREDIT Pte Ltd</strong> only.</li>
+          <li>Account Holder: AUTOMOTOCREDIT PTE LTD</li>
+          <li>DBS Corporate Multi-Currency Account Number: 019-911111-9 (Bank code: 1111)</li>
+          <li>PayNow UEN: 100000111N</li>
+        </ul>
+        <div class="highlight">
+          Scan the QR code on the right to pay via PayNow instantly.
+        </div>
+      </div>
+      <div class="payment-qr">
+        <img src="{% static 'apploan/images/AutoMotoCredit.png' %}" alt="PayNow QR Code">
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

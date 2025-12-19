@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'apploan/css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-contact text-white text-center">
+  <div class="container py-5">
+    <h1 class="display-4 fw-bold">Contact Us</h1>
+    <p class="lead">We are here to help you with your car and motorcycle financing and insurance needs.</p>
+    <a href="#contact" class="hero-btn">Send Us a Message</a>
+  </div>
+</section>
+
+<!-- Cards Section -->
+<section class="container my-5">
+  <div class="row g-4">
+
+    <!-- Logo + Newsletter + Icons -->
+<div class="col-md-4">
+  <div class="card shadow-sm h-100 text-center p-4 newsletter-card">
+
+    <!-- Logo -->
+    <img src="{% static 'apploan/images/logo-2.png' %}" 
+         class="card-img-top mx-auto my-3" 
+         style="width:150px;" 
+         alt="AutoMotoCredit Logo">
+
+    <div class="card-body">
+
+      <h5 class="card-title fw-bold">Get Exclusive Insights, Offers, and Updates Straight to Your Inbox</h5>
+      <p class="card-text">Subscribe now and stay connected with the latest financing options, insurance opportunities, COE updates
+         and expert recommendations tailored for drivers and riders in Singapore.</p>
+
+      <!-- Newsletter Form -->
+      <form class="d-flex flex-column mb-4">
+        <input type="email" class="form-control mb-2" placeholder="Enter your email" required>
+        <button class="btn btn-primary">Subscribe</button>
+      </form>
+
+      <h6 class="connect-title text-center fw-bold mt-5 mb-3">Connect With Us Now</h6>
+
+      <!-- Contact Icons -->
+      <div class="icon-row mt-3 mb-3">
+        <a href="tel:+6564444400" class="icon-bubble"><i class="fa-solid fa-phone"></i></a>
+        <a href="mailto:loan@automotocredit.com.sg" class="icon-bubble"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://maps.app.goo.gl/" class="icon-bubble" target="_blank"><i class="fa-solid fa-location-dot"></i></a>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="icon-row mt-3">
+        <a href="#" class="icon-bubble"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#" class="icon-bubble"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="icon-bubble"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#" class="icon-bubble"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://m.me/automotocredit.com.sg" class="icon-bubble" target="_blank"><i class="fa-brands fa-facebook-messenger"></i></a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    <!-- Contact Form Card -->
+    <div class="col-md-8">
+      <div class="card shadow-sm h-100 p-4">
+        <h4 class="mb-3">Send Us a Message</h4>
+        <p class="mb-4">Let us know how we can help you and we will contact you within 1-2 business days.</p>
+        <form>
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label">First Name *</label>
+              <input type="text" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Last Name *</label>
+              <input type="text" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Mobile Number *</label>
+              <input type="tel" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email Address *</label>
+              <input type="email" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Enquiry Type *</label>
+            <select class="form-select" required>
+              <option value="">Please select...</option>
+              <option>Car Loan</option>
+              <option>Motorcycle Loan</option>
+              <option>Insurance</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" rows="5"></textarea>
+          </div>
+
+          <div class="mb-3 form-check">
+            <input class="form-check-input" type="checkbox" required>
+            <label class="form-check-label">
+              I agree to the Privacy Policy and receive communication from AutoMotoCredit.
+            </label>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">CAPTCHA *</label>
+            <input type="text" class="form-control" placeholder="5 + 4 = ?" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Contact Details Card -->
+<section class="container my-5">
+    <h2 class="text-center mb-4 fw-bold">Get in Touch</h2>
+
+    <div class="row g-4">
+
+        <!-- EMAIL & SOCIAL -->
+        <div class="col-md-4">
+            <div class="contact-card-1 p-4 h-100 text-center">
+                <div class="icon-box mb-3">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+                <h5 class="fw-bold mb-3">Email & Social</h5>
+
+                <p class="mb-1 fw-semibold">Email:</p>
+                <a href="mailto:loan@automotocredit.com.sg" class="link">loan@automotocredit.com.sg</a>
+
+                <p class="mt-3 mb-1 fw-semibold">Facebook:</p>
+                <a href="#" class="link">Link</a>
+
+                <p class="mt-3 mb-1 fw-semibold">Tiktok:</p>
+                <a href="#" class="link">Link</a>
+            </div>
+        </div>
+
+        <!-- CONTACT NUMBERS -->
+        <div class="col-md-4">
+            <div class="contact-card-1 p-4 h-100 text-center">
+                <div class="icon-box mb-3">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+                <h5 class="fw-bold mb-3">Contact Numbers</h5>
+
+                <p class="mb-1"><strong>Hotline:</strong> (+65) 6444 4400</p>
+                <p class="mb-1"><strong>Office:</strong> +65 6681 6778</p>
+                <p class="mb-1"><strong>Fax:</strong> +65 6256 1229</p>
+
+                <p class="mt-3 mb-1 fw-semibold">Messenger:</p>
+                <a href="https://m.me/automotocredit.com.sg" class="link" target="_blank">Click here</a>
+
+                <p class="mt-3 mb-1 fw-semibold">Whatsapp:</p>
+                <a href="https://wa.me/6589259233" class="link" target="_blank">+65 8925 9233</a>
+            </div>
+        </div>
+
+        <!-- LOCATION -->
+        <div class="col-md-4">
+            <div class="contact-card-1 p-4 h-100 text-center">
+                <div class="icon-box mb-3">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <h5 class="fw-bold mb-3">Location</h5>
+
+                <p class="mb-2">
+                    400 Balestier Road,<br>
+                    Balestier Plaza #02-23,<br>
+                    Singapore 329802
+                </p>
+
+                <p class="fw-semibold mt-3 mb-1">Operating Hours:</p>
+                <p class="mb-0">Mon–Fri: 10am–6pm</p>
+                <p>Sat: 12pm–4pm</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+<!-- Map Card -->
+<section class="container my-5">
+  <div class="card shadow-sm rounded"> <!-- card rounded -->
+    <div class="map-wrapper">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.750498216391!2d103.8478215758166!3d1.3256235616514813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19d8ad2a9e11%3A0x1b8c2cdaf63e0fbb!2sBalestier%20Plaza!5e0!3m2!1sen!2smy!4v1764923928289!5m2!1sen!2smy" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

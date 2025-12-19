@@ -1,0 +1,647 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load faq_tags %}
+
+{% block title %}Financing - COE Car Loan{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'apploan/css/coe-car-loan.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'apploan/modals/apply.html' with form=form %}
+{% include 'apploan/modals/enquire.html' with form=form %}
+
+<div class="used-loan-banner">
+    <div class="banner-content">
+        <h1>COE Car Loan</h1>
+        <p>Affordable COE financing that brings your dream car closer.</p>
+        <a href="" class="cta-btn button" data-bs-toggle="modal" data-bs-target="#applyNowModal">Apply Now</a>
+    </div>
+    <div class="banner-image"></div>
+    <!-- <img src="{% static 'apploan/images/coe-car.png' %}" alt="Transparent Logo" class="center-image"> -->
+    {% if header_image %}
+        <img src="{{ header_image.image.url }}" alt="Header Image" class="header-img">
+    {% else %}
+        <img src="{% static 'apploan/images/coe-car.png' %}" alt="Default Header" class="header-img">
+    {% endif %}
+</div>
+
+<div class="loan-card container">
+  <h2>Fast Facts: COE Car Loans</h2>
+  
+  {% with rate=loan_rates.coe_car %}
+    <div class="row features-row text-center">
+      <div class="col-12 col-md feature">
+        <div class="note">From*</div>
+        <div class="value">{{ rate.interest_rate }}%</div>
+        <div class="label">Interest Rate</div>
+      </div>
+      <div class="col-12 col-md feature">
+        <div class="note">Since 2000</div>
+        <div class="value">100%</div>
+        <div class="label">Approval Rate</div>
+      </div>
+      <div class="col-12 col-md feature">
+        <div class="note">As Fast As*</div>
+        <div class="value">1–2 Days</div>
+        <div class="label">Loan Approval</div>
+      </div>
+      <div class="col-12 col-md feature">
+        <div class="note">Up To*</div>
+        <div class="value">7 Years</div>
+        <div class="label">Loan Tenure</div>
+      </div>
+      <div class="col-12 col-md feature">
+        <div class="note">Up To*</div>
+        <div class="value">{{ rate.financing }}%</div>
+        <div class="label">Financing</div>
+      </div>
+    </div>
+  {% endwith %}
+
+  <div class="terms-rate text-center mt-4">
+    <p class="t-and-c small text-muted">
+      *Terms & Conditions apply. 
+      <i class="fas fa-info-circle" data-bs-toggle="tooltip" title="Car loan interest rate offers at AutoMotoCredit ranges from 1.68% &#8211; 
+      6.68% and may vary based on vehicle type, loan type, loan amount, repayment period, past and present financial or credit status and 
+      other eligibility criteria. We cover various vehicle types such as normal cars, sports and exotic cars, commercial vehicles,
+      Private Hire Vehicles (PHV), rental vehicles, COE cars, vans, lorries, trucks and buses — from light to heavy industry vehicles."></i>
+  </div>
+</div>
+
+<div class="coe-loan-wrapper py-5">
+  <div class="container">
+
+    <div class="row g-5 text-center text-lg-start">
+      
+      <div class="col-lg-4">
+        <h2 class="fw-bold mb-3">Your Easy Route to Owning a Car</h2>
+        <p class="lead text-muted mb-4">COE car ownership easy and affordable.</p>
+        <p class="text-muted mb-3">
+          AutoMotoCredit makes COE car ownership easy. Choose your vehicle, and we’ll get you the best rate while taking care of all the steps and LTA paperwork for you.
+        </p>
+        <p class="mt-4 text-muted">
+          Browse the market, choose a reliable vehicle, and let Automoto Credit handle your financing. Quick approval and full guidance.
+        </p>
+      </div>
+
+      <div class="col-lg-4">
+        <h2 class="fw-bold mb-3">Choosing the Right COE Vehicle</h2>
+        <p class="lead text-muted mb-4">How to Make the Right Choice:</p>
+        <ul class="list-unstyled feature-list text-start">
+          <li><i class="fas fa-check-circle me-2 text-danger"></i> Review available models</li>
+          <li><i class="fas fa-check-circle me-2 text-danger"></i> Check the vehicle’s history</li>
+          <li><i class="fas fa-check-circle me-2 text-danger"></i> Compare total costs</li>
+          <li><i class="fas fa-check-circle me-2 text-danger"></i> Get a professional inspection</li>
+        </ul>
+        <p class="mt-4 text-muted">
+          Whether it’s your first ride or an upgrade, with the right approach, a COE car can be an affordable, practical, and rewarding choice for your next vehicle.
+        </p>
+      </div>
+
+      <div class="col-lg-4">
+        <h2 class="fw-bold mb-3">Why Consider a COE Car?</h2>
+        <p class="lead text-muted mb-4">Smarter Choice, Bigger Savings</p>
+        <p class="text-muted mb-3">
+          A well-maintained, thoroughly inspected COE car can offer significant cost savings compared to buying new. If the condition, model, and price align with your expectations,
+          a COE vehicle becomes a value-driven option that lets you spend less without compromising on reliability.
+        </p>
+        <p class="mt-4 text-muted">
+          Enjoy a smooth, hassle-free experience with less effort from you and more savings in return.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="company-container container">
+  <div class="text-center mb-5">
+    <h2 class="company-heading">Why Get a COE Car Loan From AutoMotoCredit?</h2>
+      <div class="mx-auto my-3" style="width: 150px; height: 3.5px; background: linear-gradient(90deg, #960000ff, #a80000ff);"></div>
+    <p class="calc-subheading">Finance Your COE Car Loan with Confidence.</p>
+  </div>
+
+    <!-- Company Competence -->
+    <h2 class="cards-heading">Company Competence</h2>
+    <div class="row cards-wrapper">
+      <div class="col-12 col-md-6 col-lg-3 info-card">
+        <div class="icon"><i class="fa fa-money-bill-wave"></i></div>
+        <div class="text"> $1.7 Billion in Car & Motorcycle Loan Transactions </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 info-card">
+        <div class="icon"><i class="fa fa-handshake"></i></div>
+        <div class="text"> Trusted by Thousands of Singaporeans and PRs </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 info-card">
+        <div class="icon"><i class="fa fa-university"></i></div>
+        <div class="text"> Strong Network of Banks and Financial Institutions </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 info-card">
+        <div class="icon"><i class="fa fa-users"></i></div>
+        <div class="text"> Experienced Car & Motorcycle Finance Experts </div>
+      </div>
+    </div>
+
+    <!-- Competitive Distinction -->
+    <h2 class="cards-heading">Competitive Distinction</h2>
+    <div class="row cards-wrapper">
+      <div class="col-12 col-md-6 col-lg-3 info-card">
+        <div class="icon"><i class="fa fa-percent"></i></div>
+        <div class="text"> Lowest Interest Rates </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 info-card">
+        <div class="icon"><i class="fa fa-clock"></i></div>
+        <div class="text"> Fast Loan Approval </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 info-card">
+        <div class="icon"><i class="fa fa-car"></i></div>
+        <div class="text"> Financing for All Car & Motorcycle Types </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 info-card">
+        <div class="icon"><i class="fa fa-star"></i></div>
+        <div class="text"> Exclusive Offers Only Available Here </div>
+      </div>
+    </div>
+
+    <!-- Free Assistance & Services -->
+    <h2 class="cards-heading">Free Assistance & Services</h2>
+    <div class="row cards-wrapper">
+      <div class="col-12 col-md-6 col-lg-3 info-card">
+        <div class="icon"><i class="fa fa-file-alt"></i></div>
+        <div class="text"> Paperwork Handled for You </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 info-card">
+        <div class="icon"><i class="fa fa-phone-alt"></i></div>
+        <div class="text"> Personalized Consultation </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 info-card">
+        <div class="icon"><i class="fa fa-car-side"></i></div>
+        <div class="text"> Vehicle Financing Guidance </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 info-card">
+        <div class="icon"><i class="fa fa-clock"></i></div>
+        <div class="text"> Save Time with Fast Processing </div>
+      </div>
+    </div>
+
+</div>
+
+<div class="eligibility-container container">
+  <h2 class="eligibility-heading">Eligibility Criteria for COE Car Loan</h2>
+
+  <div class="eligibility-list">
+    <div class="eligibility-item">
+      <span class="check-icon">✔</span>
+      Applicants should be between 21 – 65 years of age
+    </div>
+
+    <div class="eligibility-item">
+      <span class="check-icon">✔</span>
+      Singaporeans, Singapore PRs, Foreigners
+    </div>
+  </div>
+</div>
+
+<div class="text-center mb-5 mt-4">
+  <h2 class="adv-heading">Advantages of Buying a COE Car in Singapore</h2>
+    <div class="mx-auto my-3" style="width: 150px; height: 3.5px; background: linear-gradient(90deg, #960000ff, #a80000ff);"></div>
+  <p class="adv-subheading">Your Guide to Affordable Car Ownership</p>
+</div>
+
+<div class="adv-coe">
+
+  <div class="adv-step">
+    <div class="adv-title">Cheapest Price</div>
+    <div class="adv-icon"><i class="fa-solid fa-tag"></i></div>
+    <div class="adv-desc">
+      COE Cars are the cheapest used cars in Singapore, giving you the lowest possible entry price.
+    </div>
+  </div>
+
+  <div class="adv-step">
+    <div class="adv-title">Lower Cost</div>
+    <div class="adv-icon"><i class="fa-solid fa-coins"></i></div>
+    <div class="adv-desc">
+      Owning a COE car is significantly cheaper even after adding road tax, insurance, and maintenance.
+    </div>
+  </div>
+
+  <div class="adv-step">
+    <div class="adv-title">Saleable</div>
+    <div class="adv-icon"><i class="fa-solid fa-handshake"></i></div>
+    <div class="adv-desc">
+      10-year renewed COE cars are easy to sell and replace with minimal loss.
+    </div>
+  </div>
+
+  <div class="adv-step">
+    <div class="adv-title">Cash Preservation</div>
+    <div class="adv-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+    <div class="adv-desc">
+      Preserve cash for more important priorities while still owning a car.
+    </div>
+  </div>
+
+  <div class="adv-step">
+    <div class="adv-title">Lowest Downpayment</div>
+    <div class="adv-icon"><i class="fa-solid fa-chart-line"></i></div>
+    <div class="adv-desc">
+      Lower car price means lower downpayment and more affordable monthly instalments.
+    </div>
+  </div>
+
+  <div class="adv-step">
+    <div class="adv-title">Peace of Mind</div>
+    <div class="adv-icon"><i class="fa-solid fa-shield-halved"></i></div>
+    <div class="adv-desc">
+      Enjoy stability with a 7-year tenure, low instalment, and competitive interest rate.
+    </div>
+  </div>
+
+  <div class="adv-step">
+    <div class="adv-title">Car Upgrade for Less</div>
+    <div class="adv-icon"><i class="fa-solid fa-car"></i></div>
+    <div class="adv-desc">
+      Premium COE cars can cost the same or even less than a brand-new mid-range car.
+    </div>
+  </div>
+
+  <div class="adv-step">
+    <div class="adv-title">Durability</div>
+    <div class="adv-icon"><i class="fa-solid fa-gears"></i></div>
+    <div class="adv-desc">
+      Modern cars are built to last 10–20 years when well maintained.
+    </div>
+  </div>
+
+</div>
+
+
+<div class="req-container container">
+<h2 class="req-heading">Requirements for COE Car Loan</h2>
+
+  <div class="req-item">
+    <div class="req-content">
+
+      <!-- COLLAPSIBLE ITEM 1 -->
+      <div class="req-collapse">
+        <div class="req-title">
+          <span>Individual (Local)</span>
+          <span class="toggle">+</span>
+        </div>
+        <div class="req-body">
+          <p><strong>Buyer</strong></p>
+          <ul>
+            <li>Page 1 of Loan Application Form (1 Copy – Signed, Filled & Completed)</li>
+            <li>Clear Copy of NRIC (Front & Back)</li>
+            <li>Income Documents (Any of the Following):
+              <ul>
+                <li>Latest 12 Months CPF Contribution Assessment</li>
+                <li>Last 2 Years Notice of Assessment (NOA)</li>
+                <li>Latest 6 Months Computerised Payslip or Latest 3 Months Bank Statement if Self-Employed</li>
+              </ul>
+            </li>
+            <li>Sales & Purchase Agreement of Purchased Vehicle</li>
+            <li>Copy of Enquire PARF / COE Rebate for Registered Vehicle</li>
+          </ul>
+          <p><strong>Seller</strong></p>
+          <ul>
+            <li>Vehicle Log Card / Acknowledgement</li>
+            <li>Clear Copy of NRIC (Front & Back)</li>
+            <li>Authorization Form To Check Full Settlement (if Vehicle Is Still Under Financing)</li>
+          </ul>
+          <p><strong>Guarantor</strong></p>
+          <ul>
+            <li>Page 2 of Loan Application Form (1 Copy – Signed, Filled & Completed)</li>
+            <li>Clear Copy of NRIC (Front & Back)</li>
+            <li>Income Documents (Any of the Following):
+              <ul>
+                <li>Latest 12 Months CPF Contribution Assessment</li>
+                <li>Last 2 Years Notice of Assessment (NOA)</li>
+                <li>Latest 6 Months Computerised Payslip or Latest 3 Months Bank Statement if Self-Employed</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- COLLAPSIBLE ITEM 2 -->
+      <div class="req-collapse">
+        <div class="req-title">
+          <span>Individual (Foreigner)</span>
+          <span class="toggle">+</span>
+        </div>
+        <div class="req-body">
+          <p><strong>Buyer</strong></p>
+          <ul>
+            <li>Page 1 of Loan Application Form (1 Copy – Signed, Filled & Completed)</li>
+            <li>Clear Copy of Passport</li>
+            <li>Clear Copy of Employment Pass</li>
+            <li>Income Documents (Any of the Following):
+              <ul>
+                <li>Latest 12 Months CPF Contribution Assessment</li>
+                <li>Last 2 Years Notice of Assessment (NOA)</li>
+                <li>Latest 6 Months Computerised Payslip or Latest 3 Months Bank Statement if Self-Employed</li>
+              </ul>
+            </li>
+            <li>Sales & Purchase Agreement of Purchased Vehicle</li>
+            <li>Copy of Enquire PARF / COE Rebate for Registered Vehicle</li>
+          </ul>
+          <p><strong>Seller</strong></p>
+          <ul>
+            <li>Vehicle Log Card / Acknowledgement</li>
+            <li>Clear Copy of NRIC (Front & Back)</li>
+            <li>Authorization Form To Check Full Settlement (if Vehicle Is Still Under Financing)</li>
+          </ul>
+          <p><strong>Guarantor (Must be a Singaporean)</strong></p>
+          <ul>
+            <li>Page 2 of Loan Application Form (1 Copy – Signed, Filled & Completed)</li>
+            <li>Clear Copy of NRIC (Front & Back)</li>
+            <li>Income Documents (Any of the Following):
+              <ul>
+                <li>Latest 12 Months CPF Contribution Assessment</li>
+                <li>Last 2 Years Notice of Assessment (NOA)</li>
+                <li>Latest 6 Months Computerised Payslip or Latest 3 Months Bank Statement if Self-Employed</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- COLLAPSIBLE ITEM 3 -->
+      <div class="req-collapse">
+        <div class="req-title">
+          <span>Company</span>
+          <span class="toggle">+</span>
+        </div>
+        <div class="req-body">
+          <p><strong>Buyer</strong></p>
+          <ul>
+            <li>Page 1 of Loan Application Form (1 Copy With Company Chop – Signed, Filled & Completed)</li>
+            <li>Clear Copy of ACRA Document (Within 3 Months)</li>
+            <li>Latest 3 Months Bank Statement</li>
+            <li>Sales & Purchase Agreement of Purchased Vehicle</li>
+          </ul>
+          <p><strong>Seller</strong></p>
+          <ul>
+            <li>Vehicle Log Card / Acknowledgement</li>
+            <li>Clear Copy of NRIC (Front & Back)</li>
+            <li>Authorisation Form To Check Full Settlement (if Vehicle Is Still Under Financing)</li>
+          </ul>
+          <p><strong>Guarantor (Director of Company)</strong></p>
+          <ul>
+            <li>Page 2 of Loan Application Form (1 Copy – Signed, Filled & Completed)</li>
+            <li>Copy of NRIC (Front & Back)</li>
+            <li>Income Documents (Any of the Following):
+              <ul>
+                <li>Latest 12 Months CPF Contribution Assessment</li>
+                <li>Last 2 Years Notice of Assessment (NOA)</li>
+                <li>Latest 6 Months Computerised Payslip or Latest 3 Months Bank Statement if Self-Employed</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- BUTTONS BELOW -->
+    <div class="procedure-buttons">
+        <a href="#" class="btn apply-btn" data-bs-toggle="modal" data-bs-target="#applyNowModal">Apply Now</a>
+        <a href="#" class="btn enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
+    </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="container rate">
+  <!-- Heading -->
+  <div class="text-center">
+    <h2 class="rate-heading">COE Car Loan Interest Rate</h2>
+    <div class="mx-auto my-3" style="width: 150px; height: 3.5px; background: linear-gradient(90deg, #960000ff, #a80000ff);"></div>
+    <p class="rate-subheading">Compare our rates with other companies</p>
+  </div>
+
+  <!-- Cards with vertical line -->
+  <div class="d-flex justify-content-center align-items-stretch gap-4 flex-wrap">
+
+    {% with rate=loan_rates.coe_car %}
+    <!-- Card 1 -->
+    <div class="rate-card text-center p-4 ">
+      <h6 class="txt-hd text-secondary mb-2">Exclusive at AutoMotoCredit</h6>
+      <p class="txt-from text-muted mb-1">From*</p>
+      <h1 class="fw-bold mb-2 text-primary">{{ rate.interest_rate }}%</h2>
+      <p class="txt-rate text-muted mb-0">Interest Rate</p>
+    </div>
+    {% endwith %}
+
+    <!-- Vertical Divider -->
+    <div class="vertical-divider d-none d-md-block"></div>
+
+    <!-- Card 2 -->
+    <div class="rate-card text-center p-4 ">
+      <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
+      <p class="txt-from text-muted mb-1">From</p>
+      <h1 class="fw-bold mb-2 text-danger">2.88%</h2>
+      <p class="txt-rate text-muted mb-0">Interest Rate</p>
+    </div>
+
+  </div>
+
+  <!-- Terms & Conditions -->
+  <div class="terms-rate text-center mt-4">
+    <p class="small text-muted">
+      *Terms & Conditions apply. 
+      <i class="fas fa-info-circle" data-bs-toggle="tooltip" title="Car loan interest rate offers at AutoMotoCredit range from 1.68% - 6.68% and may vary based on vehicle type, loan type, loan amount, repayment period, past and present financial or credit status and other eligibility criteria."></i>
+    </p>
+  </div>
+</div>
+
+
+  <!-- Heading -->
+<div class="text-center mb-5">
+  <h2 class="calc-heading">Car & Motorcycle Loan Calculator (Monthly Repayment)</h2>
+    <div class="mx-auto my-3" style="width: 150px; height: 3.5px; background: linear-gradient(90deg, #960000ff, #a80000ff);"></div>
+  <p class="calc-subheading">Use our Used Car Loan Calculator to calculate or get an estimate of your monthly instalment repayments for your used car.</p>
+</div>
+
+<div class="container my-5">
+  <div class="row justify-content-center gx-0"> <!-- remove gutter -->
+    <!-- CAR LOAN -->
+    <div class="col-md-6 px-0 d-flex justify-content-end"> <!-- remove column padding -->
+      <div class="loan-box">
+        <h3>Car Loan</h3>
+        <div class="slider-group">
+          <label>Loan Amount ($) <span id="carLoanAmountDisplay" class="slider-value">15000</span></label>
+          <div class="button-row" style="position:relative; width:100%; margin-bottom:30px;">
+            <span class="btn-decrement" data-target="carLoanAmount" 
+                  style="position:absolute; left:0; cursor:pointer; user-select:none;">-</span>
+            <span class="btn-increment" data-target="carLoanAmount" 
+                  style="position:absolute; right:0; cursor:pointer; user-select:none;">+</span>
+          </div>
+          <input type="range" min="1000" max="100000" step="500" id="carLoanAmount" value="15000" class="form-range">
+        </div>
+        <div class="slider-group">
+          <label>Interest Rate (%) <span id="carInterestRateDisplay" class="slider-value">3.5</span></label>
+          <div class="button-row" style="position:relative; width:100%; margin-bottom:30px;">
+            <span class="btn-decrement" data-target="carInterestRate" 
+                  style="position:absolute; left:0; cursor:pointer; user-select:none;">-</span>
+            <span class="btn-increment" data-target="carInterestRate" 
+                  style="position:absolute; right:0; cursor:pointer; user-select:none;">+</span>
+          </div>
+          <input type="range" min="0" max="20" step="0.1" id="carInterestRate" value="3.5" class="form-range">
+        </div>
+        <div class="slider-group">
+          <label>Tenure (Months) <span id="carLoanMonthsDisplay" class="slider-value">60</span></label>
+          <div class="button-row" style="position:relative; width:100%; margin-bottom:30px;">
+            <span class="btn-decrement" data-target="carLoanMonths" 
+                  style="position:absolute; left:0; cursor:pointer; user-select:none;">-</span>
+            <span class="btn-increment" data-target="carLoanMonths" 
+                  style="position:absolute; right:0; cursor:pointer; user-select:none;">+</span>
+          </div>
+          <input type="range" min="1" max="120" step="1" id="carLoanMonths" value="60" class="form-range">
+        </div>
+        <div class="loan-result">
+          <h2 id="carMonthlyRepayment">$0</h2>
+          <p>Monthly Repayment</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOTORCYCLE LOAN -->
+    <div class="col-md-6 px-0 d-flex justify-content-start"> <!-- remove column padding -->
+      <div class="loan-box">
+        <h3>Motorcycle Loan</h3>
+        <div class="slider-group">
+          <label>Loan Amount ($) <span id="motoLoanAmountDisplay" class="slider-value">5000</span></label>
+          <div class="button-row" style="position:relative; width:100%; margin-bottom:30px;">
+            <span class="btn-decrement" data-target="motoLoanAmount" 
+                  style="position:absolute; left:0; cursor:pointer; user-select:none;">-</span>
+            <span class="btn-increment" data-target="motoLoanAmount" 
+                  style="position:absolute; right:0; cursor:pointer; user-select:none;">+</span>
+          </div>
+          <input type="range" min="500" max="50000" step="250" id="motoLoanAmount" value="5000" class="form-range">
+        </div>
+        <div class="slider-group">
+          <label>Interest Rate (%) <span id="motoInterestRateDisplay" class="slider-value">4.0</span></label>
+          <div class="button-row" style="position:relative; width:100%; margin-bottom:30px;">
+            <span class="btn-decrement" data-target="motoInterestRate" 
+                  style="position:absolute; left:0; cursor:pointer; user-select:none;">-</span>
+            <span class="btn-increment" data-target="motoInterestRate" 
+                  style="position:absolute; right:0; cursor:pointer; user-select:none;">+</span>
+          </div>
+          <input type="range" min="0" max="20" step="0.1" id="motoInterestRate" value="4.0" class="form-range">
+        </div>
+        <div class="slider-group">
+          <label>Tenure (Months) <span id="motoLoanMonthsDisplay" class="slider-value">36</span></label>
+          <div class="button-row" style="position:relative; width:100%; margin-bottom:30px;">
+            <span class="btn-decrement" data-target="motoLoanMonths" 
+                  style="position:absolute; left:0; cursor:pointer; user-select:none;">-</span>
+            <span class="btn-increment" data-target="motoLoanMonths" 
+                  style="position:absolute; right:0; cursor:pointer; user-select:none;">+</span>
+          </div>
+          <input type="range" min="1" max="120" step="1" id="motoLoanMonths" value="36" class="form-range">
+        </div>
+        <div class="loan-result">
+          <h2 id="motoMonthlyRepayment">$0</h2>
+          <p>Monthly Repayment</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="text-center mb-5">
+  <h2 class="procedure-heading">Procedure & Online Application for COE Car Loan</h2>
+    <div class="mx-auto my-3" style="width: 150px; height: 3.5px; background: linear-gradient(90deg, #960000ff, #a80000ff);"></div>
+  <p class="procedure-subheading">Get a Used Car & Motorcycle Loan in 3 Easy Steps!</p>
+</div>
+
+<div class="steps-container">
+
+  <!-- STEP 1 -->
+  <div class="card card-proc">
+    <div class="card__body">
+      <div class="card__icon">
+        <svg height="32" width="32" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+          fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 4.5h18M3 9.5h18M3 14.5h18M3 19.5h18" stroke-linecap="round"></path>
+        </svg>
+      </div>
+
+      <p class="card__title">Step 1 – Fill Application</p>
+      <p class="card__paragraph">
+        Fill out our online form or contact us at (+65) 1111 2222 / (+65) 2222 1111.
+      </p>
+    </div>
+
+    <div class="card__ribbon">
+      <label class="card__ribbon-label">01</label>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card card-proc">
+    <div class="card__body">
+      <div class="card__icon">
+        <svg height="32" width="32" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+          fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4h16v6H4zM4 14h16v6H4z" stroke-linecap="round"></path>
+        </svg>
+      </div>
+
+      <p class="card__title">Step 2 – Submit Documents</p>
+      <p class="card__paragraph">
+        Email your required documents to credit@automoto.com.sg.
+      </p>
+    </div>
+
+    <div class="card__ribbon">
+      <label class="card__ribbon-label">02</label>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="card card-proc">
+    <div class="card__body">
+      <div class="card__icon">
+        <svg height="32" width="32" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+          fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12l5 5L20 7" stroke-linecap="round"></path>
+        </svg>
+      </div>
+
+      <p class="card__title">Step 3 – Approval</p>
+      <p class="card__paragraph">
+        Our team will notify you via email or call regarding your application result.
+      </p>
+    </div>
+
+    <div class="card__ribbon">
+      <label class="card__ribbon-label">03</label>
+    </div>
+  </div>
+
+</div>
+
+<!-- BUTTONS BELOW -->
+<div class="procedure-buttons">
+  <a href="#" class="btn apply-btn" data-bs-toggle="modal" data-bs-target="#applyNowModal">Apply Now</a>
+  <a href="#" class="btn enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
+</div>
+
+
+{% get_faqs "coe_car_loan" as faqs %}
+{% include "apploan/content/faq.html" with faqs=faqs faq_title="COE Car Loan FAQ" %}
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'apploan/js/loan.js' %}"></script>
+{% endblock %}

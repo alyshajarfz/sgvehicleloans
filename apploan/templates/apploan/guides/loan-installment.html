@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load faq_tags %}
+
+{% block title %}Guides - Installment{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'apploan/css/loan-installment.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+  <h1>Car Installment Submission</h1>
+  <p>Submit your monthly instalment details quickly and securely.</p>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="container my-5">
+  <div class="row g-4">
+
+    <!-- FORM LEFT -->
+    <div class="col-lg-6">
+      <div class="card">
+        <h2 class="mb-4">Submit Installment</h2>
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Full Name / Company Name *</label>
+            <input type="text" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">IC / ACRA Number *</label>
+            <input type="text" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Contact Number *</label>
+            <input type="tel" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email Address *</label>
+            <input type="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Vehicle Registration Number *</label>
+            <input type="text" class="form-control" required>
+          </div>
+          <div class="row g-3 mb-3">
+            <div class="col">
+              <label class="form-label">Instalment Amount *</label>
+              <input type="number" class="form-control" required>
+              <div class="form-text">Your monthly instalment to be paid to us.</div>
+            </div>
+            <div class="col">
+              <label class="form-label">Transferred Amount *</label>
+              <input type="number" class="form-control" required>
+              <div class="form-text">The amount you transferred to us.</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Reference Number *</label>
+            <input type="text" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">File Upload *</label>
+            <input type="file" class="form-control" required>
+            <div class="form-text">Click or drag a file to this area to upload.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Message / Remarks</label>
+            <textarea class="form-control" rows="3"></textarea>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="privacyCheck" required>
+            <label class="form-check-label" for="privacyCheck">
+              By submitting this form, you agree to our Privacy Policy and agree to receive sales and/or marketing communication from Speed Credit Pte Ltd. Rest assured that any personal information you send will remain strictly private and confidential.
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- INFO CARD RIGHT -->
+    <div class="col-lg-6">
+      <div class="info-card">
+        <h3>Important Information</h3>
+        <p>Due to high volume of monthly instalment submissions, this form helps speed up the processing and verification of your payment.</p>
+        <p>After submitting, you will receive an email acknowledging your submission. Please ensure your payment has been transferred and debited from your bank.</p>
+        <p>We will only contact you if we detect any discrepancies between the payment and the details provided.</p>
+        <div class="highlight">
+          <strong>Tip:</strong> For a smoother experience, consider setting up a GIRO instruction for automated monthly payments.
+        </div>
+      </div>
+
+      <div class="info-card mt-4">
+        <h3>What is a Car Installment?</h3>
+        <p>A car installment is a method of buying a car where you pay for it gradually over time instead of paying the full price upfront. This is usually done through a loan or financing plan from a bank, financial institution, or dealership.</p>
+        <ul>
+          <li><strong>Down Payment:</strong> An initial amount paid upfront (usually 10–30% of the car price).</li>
+          <li><strong>Monthly Installments:</strong> Smaller payments made every month over an agreed period (e.g., 12, 24, 36 months).</li>
+          <li><strong>Interest:</strong> Extra money paid to the lender as a fee for borrowing the money.</li>
+        </ul>
+      </div>
+
+      <div class="info-card mt-4">
+        <h3>Benefits of Car Installments</h3>
+        <ul>
+          <li>Makes expensive cars more affordable.</li>
+          <li>Allows you to buy a car without saving the full price upfront.</li>
+          <li>Can help build credit history if payments are made on time.</li>
+        </ul>
+      </div>
+
+      <div class="info-card mt-4">
+        <h3>Things to Keep in Mind</h3>
+        <ul>
+          <li>Total payment is usually higher than the car’s cash price because of interest.</li>
+          <li>Late payments can incur penalties and affect your credit score.</li>
+          <li>Some financing plans may require a guarantor or proof of income.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

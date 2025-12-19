@@ -1,0 +1,474 @@
+/* =========================
+   HERO SECTION
+========================= */
+.hero-glass {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.hero-glass .carousel,
+.hero-glass .carousel-inner,
+.hero-glass .carousel-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-glass .carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+.hero-card {
+  position: relative;
+  z-index: 3;
+  max-width: 700px;
+  padding: 55px;
+  height: 40vh;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.hero-card h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.hero-card p {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  color: #eee;
+}
+
+.hero-card .btn-secondary {
+  padding: 12px 30px;
+  border-radius: 50px;
+  background: #960000ff;
+  color: #ffffff;
+  font-weight: bold;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.hero-card .btn-secondary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(255, 0, 0, 0.6);
+}
+
+/* =========================
+   CATEGORY ITEMS
+========================= */
+.category{
+    max-width: 1200px; 
+    margin: 30px auto; 
+    border: 1px solid #ecececff; 
+    border-radius: 10px;
+    padding: 30px 20px; /* adjust padding */
+    box-sizing: border-box; /* include padding in width */
+}
+
+.category-item i {
+  color: #960000ff;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.category-item:hover i {
+  color: rgb(90, 90, 90);
+  transform: scale(1.2);
+}
+
+.category-item div {
+  font-weight: 500;
+  margin-top: 5px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.category-item:hover div {
+  color: #8a8a8a;
+}
+
+/* =========================
+   FLEX CONTAINER FIX
+========================= */
+.d-flex.justify-content-around.flex-wrap {
+  flex-wrap: wrap; /* allow wrapping */
+  justify-content: center; /* center items on mobile */
+}
+
+/* =========================
+   MEDIA QUERIES FOR RESPONSIVENESS
+========================= */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .hero-card {
+    padding: 40px;
+    height: auto; /* let it expand */
+  }
+
+  .hero-card h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-card p {
+    font-size: 1rem;
+  }
+
+  .category-item i {
+    font-size: 2.5rem;
+  }
+}
+
+/* Phones */
+@media (max-width: 768px) {
+
+    .category {
+        max-width: 90%;  /* mobile narrower card */
+        padding: 20px 15px;
+    }
+
+  .hero-glass {
+    height: 70vh;
+  }
+
+  .hero-card {
+    padding: 30px 20px;
+    max-width: 90%;
+    height: auto; /* allow auto height */
+  }
+
+  .hero-card h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-card p {
+    font-size: 0.95rem;
+  }
+
+    .category-item {
+        flex: 0 0 45%; /* two per row */
+        margin: 15px;
+        text-align: center;
+    }
+
+    .category-item i {
+        font-size: 3.5rem; /* bigger icon */
+    }
+
+    .category-item div {
+        font-size: 1.1rem; /* bigger text */
+    }
+}
+
+
+/* Extra small phones */
+@media (max-width: 576px) {
+    .category {
+        max-width: 85%;  /* prevent full width */
+        padding: 15px 10px;
+    }
+
+  .hero-glass {
+    height: 60vh;
+  }
+
+  .hero-card {
+    padding: 20px 15px;
+  }
+
+  .hero-card h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-card p {
+    font-size: 0.9rem;
+  }
+
+  .category-item {
+    flex: 0 0 100%; /* stack items */
+    margin: 10px 0;
+  }
+
+  .category-item i {
+    font-size: 3.8rem;
+  }
+
+  .category-item div {
+        font-size: 1.3rem; /* bigger text */
+    }
+}
+
+
+.loan-section-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.loan-section-title::before {
+    content: '';
+    position: absolute;
+    width: 100px;          /* Line length */
+    height: 4px;           /* Line thickness */
+    background: linear-gradient(to right, #960000, #ff4d4d); /* Gradient line */
+    bottom: -15px;         /* Distance from text */
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.card-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* Medium gap between cards */
+    margin: 40px auto;
+    max-width: 1300px; /* Medium container width */
+}
+
+/* Individual loan card */
+.loan-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 5px 14px rgba(0,0,0,0.08); /* Medium shadow */
+    padding: 2.5rem 1.5rem 1.5rem; /* Medium padding */
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    flex: 0 0 280px; /* Medium card width */
+    text-align: center;
+}
+
+/* Hover effect */
+.loan-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+/* Circle for icon */
+.loan-card .icon-circle {
+    width: 70px;  /* Medium circle */
+    height: 70px;
+    border-radius: 50%;
+    background-color: #960000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -55px auto 18px; /* Medium pull-up */
+    font-size: 32px;  /* Medium icon */
+    color: #ffffffff; 
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.loan-card .icon-circle:hover {
+    color: rgb(185, 185, 185);
+    transform: scale(1.2);
+}
+
+/* Card title */
+.loan-card h5 {
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 1.15rem; /* Medium title */
+}
+
+/* Card content */
+.loan-card p {
+    font-size: 0.98rem; /* Medium text */
+    color: #555;
+}
+
+/* ---- LOAN-TYPE ---- */
+.loan-type-row, .cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* space between cards */
+    margin: 40px auto;
+    max-width: 1200px; /* fits 3 cards per row */
+}
+
+/* Bigger Loan Cards 
+.loan-type {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 380px; 
+    height: 450px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+    padding: 40px;
+    overflow: hidden;
+    border-radius: 12px;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+}*/
+
+.loan-type {
+    position: relative;
+    width: 380px;       /* card width */
+    height: 450px;      /* card height */
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    cursor: pointer;
+
+    /* Background image settings */
+    background-size: cover;        /* makes image cover entire card */
+    background-position: center;   /* centers image */
+    background-repeat: no-repeat;  /* no repeating */
+}
+
+/* Overlay on top of image */
+.loan-type .overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    background-color: rgba(0,0,0,0.7); /* static overlay */
+    transition: background 0.4s ease;
+}
+
+
+/* Content stays above overlay */
+.loan-type .content-type {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+
+/* Content inside card */
+.content-type {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px; /* bigger gap */
+    color: #000000ff;
+    position: relative;
+    z-index: 2;
+}
+
+.content-type .heading {
+    font-weight: 700;
+    font-size: 32px; /* bigger heading */
+}
+
+.content-type .para {
+    font-size: 1.05rem; /* slightly bigger text */
+    line-height: 1.5;
+}
+
+/* Button */
+.btn-learn {
+    color: #e8e8e8;
+    text-decoration: none;
+    padding: 12px 20px; /* bigger button */
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(-45deg, #b40000 0%, #000000ff 100%);
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.loan-type:hover .btn-learn {
+    color: #212121;
+    background: #c7c7c7;
+}
+
+.btn-learn:hover {
+    outline: 2px solid #e8e8e8;
+    background: transparent;
+    color: #e8e8e8;
+}
+
+.btn-learn:active {
+    box-shadow: none;
+}
+
+/* Gradient line / hover effect */
+.loan-type::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(-45deg, rgba(0,0,0,0.8) 0%, rgba(255,0,0,0.8) 100%);
+    z-index: 1;
+    transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
+}
+
+.loan-type:hover::before {
+    width: 100%;
+}
+
+/* Overlay Image */
+.overlay-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0;
+    transition: all 0.5s ease;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Show overlay on hover */
+.loan-type:hover .overlay-image {
+    opacity: 0.4;
+}
+
+/* Criss-cross overlay colors */
+.overlay-red .overlay-image {
+    background-color: rgba(255,0,0,0.4);
+}
+
+.overlay-black .overlay-image {
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+
+
+@media (max-width: 768px) {
+    .carousel-inner {
+        height: 250px;
+    }
+}

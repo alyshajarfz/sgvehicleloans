@@ -1,0 +1,409 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Car Insurance{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'apploan/css/ins-car.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include 'apploan/modals/quote-c.html' with form=form %}
+
+<!-- HERO -->
+<div class="hero-banner video-hero">
+  <!-- Video background 
+  <video autoplay muted loop class="hero-video">
+    <source src="{{ video.video.url }}" type="video/mp4">
+    <source src="{% static 'apploan/videos/ins-car.mp4' %}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video> -->
+
+  <video autoplay muted loop class="hero-video">
+    {% if video %}
+        <source src="{{ video.video.url }}" type="video/mp4">
+    {% else %}
+        <p>Your browser does not support the video tag.</p>
+    {% endif %}
+  </video>
+
+
+  <!-- Overlay -->
+  <div class="hero-overlay"></div>
+
+  <!-- Glass-like card -->
+  <div class="hero-card">
+    <h1>Choose Wisely. <br> Save Instantly. Drive Securely.</h1>
+    <p>Secure the right policy today and drive with confidence.</p>
+    <a href="#" data-bs-toggle="modal" data-bs-target="#cquoteModal">Get Car Quote</a>
+  </div>
+</div>
+
+
+<!-- FEATURES -->
+<div class="container my-5">
+  <h2 class="text-center mb-5">Why Drivers Choose Us</h2>
+
+  <div class="row g-4">
+    <div class="col-lg-3 col-md-6">
+      <div class="card modern-card h-100 text-center border-0">
+        <div class="icon-circle mx-auto mb-3">
+          <i class="fas fa-bolt fa-2x text-white"></i>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Fast, Simple and <br> Convenient</h5>
+          <p class="card-text">With just one easy form, you can get multiple car insurance quotes in minutes. No more spending hours filling out repetitive paperwork. We streamline the process so you can focus on what matters most getting the coverage you need without the hassle.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+      <div class="card modern-card h-100 text-center border-0">
+        <div class="icon-circle mx-auto mb-3">
+          <i class="fas fa-user-check fa-2x text-white"></i>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Free Service with Expert Analysis</h5>
+          <p class="card-text">Our service is completely free no hidden charges. Beyond simply comparing prices, we analyze each policy’s benefits and coverage to help you make an informed decision. This ensures you get a policy that’s not only affordable but also reliable to your driving needs.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+      <div class="card modern-card h-100 text-center border-0">
+        <div class="icon-circle mx-auto mb-3">
+          <i class="fas fa-coins fa-2x text-white"></i>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Save Money with Competitive Quotes</h5>
+          <p class="card-text">By comparing multiple insurers at once, you could save 10%-15% off regular rates. Whether you’re insuring a new car or renewing your existing policy, we help you find the most cost-effective options without compromising on coverage.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+      <div class="card modern-card h-100 text-center border-0">
+        <div class="icon-circle mx-auto mb-3">
+          <i class="fas fa-building fa-2x text-white"></i>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Access to Top Insurance Providers</h5>
+          <p class="card-text">We work with most of the largest insurers in Singapore, giving you access to a wide range of policies and benefits. This means you can choose a plan that perfectly fits your budget, driving habits, and level of experience, all in one place.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="how-it-works container">
+  <h2 class="section-title">Get Your Car Insurance in 4 Easy Steps</h2>
+
+  <div class="flow-part">
+    <div class="part">
+      <div class="part-icon">1</div>
+      <h4>Provide Your Details</h4>
+      <p>Enter information about yourself, your car, driving history, and named drivers for accurate quotes.</p>
+      <div class="arrow">→</div>
+    </div>
+
+    <div class="part">
+      <div class="part-icon">2</div>
+      <h4>Compare Quotes</h4>
+      <p>We search the market to find the best car insurance that offers the coverage you need.</p>
+      <div class="arrow">→</div>
+    </div>
+
+    <div class="part">
+      <div class="part-icon">3</div>
+      <h4>Review Quotations</h4>
+      <p>Receive up to 5 tailored quotes with insights on where you can save the most.</p>
+      <div class="arrow">→</div>
+    </div>
+
+    <div class="part">
+      <div class="part-icon">4</div>
+      <h4>Pick & Get Covered</h4>
+      <p>Choose your preferred policy. We handle the rest, including processing and approval.</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="why-choose-circle container my-5">
+  <h2 class="section-title text-center mb-5">Why Choose Speed Credit for Your Car Insurance?</h2>
+
+  <div class="circle-grid">
+    <div class="circle-item">
+      <div class="circle-icon">
+        <i class="fas fa-lightbulb"></i>
+      </div>
+      <h5>Free & Competitive Quotes</h5>
+      <p>Partnered with Singapore’s top insurance providers, Speed Credit delivers the best prices and comprehensive coverage—all at zero cost to you. Get multiple quotes tailored to your car and budget in minutes.</p>
+    </div>
+
+    <div class="circle-item">
+      <div class="circle-icon">
+        <i class="fas fa-bolt"></i>
+      </div>
+      <h5>Fast, Simple & Convenient</h5>
+      <p>From comparing quotes to finalizing your policy and making payments, the entire process can be done online. No need to visit offices or make endless phone calls—insurance has never been this easy.</p>
+    </div>
+
+    <div class="circle-item">
+      <div class="circle-icon">
+        <i class="fas fa-handshake"></i>
+      </div>
+      <h5>Personalized Insurance Support</h5>
+      <p>Your dedicated car insurance advisor will guide you every step of the way, answering questions, explaining options, and ensuring you choose the policy that fits your needs perfectly.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CAR INSURANCE TYPES -->
+<section class="types">
+    <h2 class="section-title text-center mb-4">Types of Car Insurance in Singapore</h2>
+    <div class="type-grid">
+      <div class="type-card">Comprehensive</div>
+      <div class="type-card">Third Party, Fire & Theft</div>
+      <div class="type-card">Third Party Only</div>
+    </div>
+</section>
+
+
+<div id="car-ins-cov" class="container mt-5">
+  <h2 class="section-title text-center mb-4">Summary of Car Insurance Coverage</h2>
+    <div class="row g-4">
+
+        <!-- Comprehensive -->
+        <div class="col-md-6 col-lg-4">
+            <div class="coverage-card p-4 h-100">
+                <h4 class="text-center mb-4 text-uppercase strong">Comprehensive</h4>
+
+                <div class="coverage-list">
+
+                    <div class="coverage-row">
+                        <span class="text">Loss Or Damage To Car By Accident Or Theft</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Taxi Reimbursement</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Towing Costs**</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Authorised Repair Limit</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Damage To Third-party Property*</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Death Or Injury To Third-party</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Legal Representation And Defense</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">'New For Old' Replacement Car</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Daily Transport Allowance*</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">24/7 Roadside Assistance**</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Lifetime Warranty On Repairs</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Unlimited Windscreen Cover</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Third-Party Fire & Theft -->
+        <div class="col-md-6 col-lg-4">
+            <div class="coverage-card p-4 h-100">
+                <h4 class="text-center mb-4 text-uppercase strong">Third-Party, Fire And Theft</h4>
+
+                <div class="coverage-list">
+                    <div class="coverage-row">
+                        <span class="text">Loss Or Damage To Car By Accident, Fire Or Theft</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Taxi Reimbursement</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Towing Costs**</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Authorised Repair Limit</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Damage To Third-party Property*</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Death Or Injury To Third-party</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Legal Representation And Defense</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">'New For Old' Replacement Car</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Daily Transport Allowance*</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">24/7 Roadside Assistance**</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Lifetime Warranty On Repairs</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Unlimited Windscreen Cover</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Third-Party Only -->
+        <div class="col-md-6 col-lg-4">
+            <div class="coverage-card p-4 h-100">
+                <h4 class="text-center mb-4 text-uppercase strong">Third-Party Only</h4>
+
+                <div class="coverage-list">
+                    <div class="coverage-row">
+                        <span class="text">Loss Or Damage To Car By Accident Or Theft</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Taxi Reimbursement</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Towing Costs**</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Authorised Repair Limit</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Damage To Third-party Property*</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Death Or Injury To Third-party</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Legal Representation And Defense</span>
+                        <span class="symbol yes">✓</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">'New For Old' Replacement Car</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Daily Transport Allowance*</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">24/7 Roadside Assistance**</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Lifetime Warranty On Repairs</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+
+                    <div class="coverage-row">
+                        <span class="text">Unlimited Windscreen Cover</span>
+                        <span class="symbol no">✗</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="coverage-notes-card mt-3 p-2 border-top">
+          <p class="mb-1"><strong>*</strong> Customer can only claim one of either “Daily Transport Allowance” or “Damage To Third-party Property” (if applicable)</p>
+          <p class="mb-0"><strong>**</strong> Towing and 24/7 Roadside Assistance subject to policy terms.
+              <i class="fas fa-info-circle" data-bs-toggle="tooltip" title="Policy Terms: Towing and 24/7 roadside assistance &#8211; 
+              Are provided subject to policy limits, service availability, and approved providers.
+              Coverage includes towing, jump-start, lockout help, fuel delivery, and flat-tire service, unless otherwise excluded."></i>
+          </p>
+        </div>
+
+    </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <h2>Start Saving on Car Insurance Today</h2>
+  <a href="#" data-bs-toggle="modal" data-bs-target="#cquoteModal">Get Started</a>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'apploan/js/loan.js' %}"></script>
+{% endblock %}

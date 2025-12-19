@@ -1,0 +1,375 @@
+.hero-gradient {
+    position: relative;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('../images/automoto.jpg') center/cover no-repeat;
+    padding: 200px 20px;
+    height: 65vh;
+    color: #fff;
+}
+
+.hero-gradient::after {
+    content: "";
+    position: absolute;
+    top:0; left:0; width:100%; height:100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+    z-index: 1;
+}
+
+.hero-gradient-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-gradient h1 
+{ 
+    font-size: 3rem; 
+    font-weight: 700; 
+    margin-bottom: 20px; 
+}
+
+.hero-gradient p 
+{ 
+    font-size: 1.2rem; 
+    margin-bottom: 30px; 
+}
+
+.hero-gradient .cta {
+    background: #ad2020;
+    color: #ffffff;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.3s;
+
+}
+
+.hero-gradient .cta:hover 
+{ 
+    transform: scale(1.05); 
+}
+
+/* Section Title */
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1d3557;
+}
+
+.cta { 
+    margin-top:20px;
+    display:inline-block;
+    padding:12px 30px;
+    background:#e63946;
+    color:#fff;
+    border-radius:6px;
+    font-weight:600; 
+    text-decoration:none;
+    transition:0.3s; 
+}
+
+.cta:hover { 
+    background:#d62828; 
+}
+
+/* About Us */
+.about-us h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #960000ff;
+}
+
+.about-us p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #555;
+    line-height: 1.7;
+}
+
+.about-us .image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: none;    
+    background: none;
+    margin-left: 150px;
+}
+
+@media (max-width: 576px) {
+    .about-us .image img {
+        margin-left: 0px;
+    }
+
+    .hero-gradient h1 
+    { 
+        font-size: 2.75rem; 
+        font-weight: 700; 
+        margin-bottom: 5px; 
+    }
+}
+
+
+
+/* Why Choose Section */
+.section-title { 
+    font-size:2.5rem;
+    font-weight:700;
+    color:#960000ff; 
+    margin-bottom:2rem; 
+}
+
+.feature-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+.feature-card h5 {
+    font-weight: 700;
+    color: #960000ff;
+    margin-bottom: 10px;
+}
+.feature-card p {
+    font-size: 0.95rem;
+    color: #555;
+}
+.feature-icon {
+    font-size: 3rem;
+    color: #e63946;
+}
+
+/* Stats */
+.stat-card {
+    background: linear-gradient(135deg, #6A0D0D, #D32F2F, #FF8A80);
+
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+.stat-card:hover { 
+    transform: translateY(-8px); 
+}
+
+.stat-card h3 { 
+    font-size: 2.5rem; 
+    font-weight: 700; 
+    margin-bottom: 5px; 
+}
+
+.stat-card p { 
+    font-size: 1.1rem; 
+    margin: 0; 
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .hero h1 { font-size: 2rem; }
+    .hero p { font-size: 1rem; }
+}
+
+
+/* Services */
+.services { 
+    padding:80px 20px; 
+}
+
+.services h2 { 
+    font-size:2rem; 
+    font-weight:700; 
+    color:#1d3557; 
+    margin-bottom:50px; 
+    text-align:center; 
+}
+
+.service-card {
+    background:#fff; 
+    padding:20px; 
+    border-radius:12px; 
+    box-shadow:0 6px 20px rgba(0,0,0,0.05); 
+    display:flex; 
+    align-items:center;
+    gap:15px; 
+    cursor:pointer; 
+    transition:transform 0.3s;
+}
+
+.service-card:hover 
+{ 
+    transform: translateY(-5px); 
+}
+
+.service-card i { 
+    font-size:1.8rem; 
+    color:#e63946; 
+}
+
+.service-card span { 
+    font-weight:600; 
+    color:#1d3557; 
+    flex-grow:1; 
+    text-align:left; 
+}
+
+/* Testimonials */
+.testimonials-chat-alt h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #960000ff;
+}
+
+/* Chat Container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Chat Bubbles */
+.chat-bubble {
+    padding: 15px 20px;
+    border-radius: 25px;
+    position: relative;
+    width: fit-content;
+    max-width: 80%;
+    font-size: 1rem;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;  /* smaller gap */
+    max-width: 100%;
+    transition: transform 0.3s, box-shadow 0.3s; /* Add smooth transition */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Hover effect for chat bubbles */
+.chat-bubble:hover {
+    transform: scale(1.05);                   /* Slightly enlarge bubble */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);  /* Deeper shadow on hover */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+
+/* Left Bubbles */
+.chat-bubble.left {
+    background-color: #f1f1f1;
+    align-self: flex-start;
+    border-top-left-radius: 5px;
+}
+
+/* Right Bubbles */
+.chat-bubble.right {
+    background-color: #e63946;
+    color: #fff;
+    align-self: flex-end;
+    border-top-right-radius: 5px;
+}
+
+/* Customer Name */
+.chat-bubble .customer {
+    display: block;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    font-weight: 600;
+    opacity: 0.8;
+    text-align: right;
+}
+
+/* Avatar size */
+.chat-bubble .avatar {
+    width: 40px;    /* smaller than before */
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+/* Message box */
+.chat-bubble .message {
+    background: #e7e5e5;
+    color: #333;
+    padding: 12px 18px;  /* slightly smaller padding */
+    border-radius: 20px;
+    font-size: 0.95rem;   /* slightly smaller font for balance */
+    line-height: 1.4;
+    max-width: 450px;     /* smaller max width */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Right message box */
+.chat-bubble.right .message {
+    background: #e04e5a;
+    color: #fff;
+}
+
+/* Customer name */
+.chat-bubble .customer {
+    font-size: 0.8rem;  /* smaller text for the name */
+    margin-top: 6px;
+    opacity: 0.8;
+}
+
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .chat-bubble {
+        max-width: 100%;
+    }
+}
+
+/* Call-to-Action */
+.cta-section {
+    background: linear-gradient(135deg, #330000, #ad2020, #FF5252);
+    color: #fff;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+.cta-btn {
+    background: #db2837;
+    color: #fff;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    margin: 5px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.cta-btn:hover {
+    background: #e76d6d;
+    transform: scale(1.05);
+}
+
+.cta-btn-outline {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    margin: 5px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.cta-btn-outline:hover {
+    background: #fff;
+    color: #1d3557;
+    transform: scale(1.05);
+}

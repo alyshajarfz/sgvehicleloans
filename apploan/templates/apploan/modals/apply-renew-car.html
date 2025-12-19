@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load faq_tags %}
+
+{% block title %}Form - COE Car Renewal{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'apploan/css/form-car.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<header class="hero-header">
+    <div class="hero-content">
+        <h1>Get Instant Approval for Your COE Renewal Car Loan in Less Than a Minute</h1>
+    </div>
+</header>
+
+<section class="card-container mb-5">
+    <div class="card">
+
+        <!-- LEFT IMAGE -->
+        <div class="card-image">
+            <img src="{% static 'apploan/images/cars-form.jpg' %}" alt="Car Image">
+        </div>
+
+        <!-- RIGHT FORM -->
+        <div class="card-content">
+            <h2>Renew Your Car COE Now!</h2>
+
+            <form method="POST" action="{% url 'formCar' %}">
+                {% csrf_token %}
+
+                <label>Full Name *</label>
+                {{ form.full_name }}
+
+                <label>Contact Number *</label>
+                {{ form.contact_number }}
+
+                <label>Email Address *</label>
+                {{ form.email }}
+
+                <div class="checkbox-container">
+                    {{ form.consent }}
+                    <label for="{{ form.consent.id_for_label }}">
+                        I agree to be contacted via email, phone call and/or SMS for any purpose in connection with my loan application and other vehicle transactions
+                        by AutoMotoCredit Pte Ltd, in accordance with the Personal Data Protection Act of 2012.
+                    </label>
+                </div>
+
+                <button type="submit">RENEW MY COE</button>
+            </form>
+            
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+
+.carousel-inner {
+    height: 500px; 
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.carousel-item img {
+    max-width: 100%;   /* don't overflow horizontally */
+    max-height: 500px; /* optional: max height for very tall images */
+    object-fit: cover; /* show entire image without cropping */
+}
+
+.carousel-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1; 
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: #fff;
+    text-align: center;
+}
+
+
+@media (max-width: 768px) {
+    .carousel-inner {
+        height: 250px;
+    }
+}

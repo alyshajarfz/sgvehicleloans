@@ -1,0 +1,251 @@
+
+/* HERO */
+.hero-landing {
+  position: relative;
+  height: 500px;
+  background: url("/static/apploan/images/cash-rates.jpg") no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+  position: relative;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.hero-content h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.hero-btn {
+  padding: 16px 50px;
+  background: #4a90e2;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.hero-btn:hover {
+  background: #3bb9a4;
+}
+
+/* SECTION TITLES */
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4a90e2;
+  margin-bottom: 40px;
+}
+
+
+/* FEATURES SECTION */
+.features-alt {
+  background: #fff;
+  padding: 60px 10%;
+}
+
+.features-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.feature {
+  width: 300px;
+  background: #f9f9f9;
+  border-radius: 20px;
+  padding: 35px 25px;
+  text-align: center;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+}
+
+.feature i {
+  font-size: 2.2em;
+  color: #4a90e2;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature i:hover {
+  transform: translateY(-5px);
+}
+
+.feature h3 {
+  font-size: 1.2rem;
+  color: #4a90e2;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+
+
+.rate-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Title on the left */
+.rate-header {
+  text-align: left;
+  min-width: 250px;
+  flex-shrink: 0;
+}
+
+.rate-heading{
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4a90e2;
+  margin: 15px 0;
+}
+
+.rate-subheading{
+  font-size: 1rem;
+  margin-bottom: -10px;
+  margin-top: -30px;
+  color: #555;
+  text-align: center;
+}
+
+/* Cards container on the right */
+.rate-row > .d-flex {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.rate-section {
+  display: flex;
+  justify-content: center; 
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.rate-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+/* Title styling */
+.rate-header {
+  text-align: left;
+  min-width: 250px;
+  flex-shrink: 0;
+}
+
+/* Cards container */
+.rate-cards {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Card styling */
+.rate-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 25px 20px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.rate-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* Buttons */
+.btn-apply {
+  display: inline-block;
+  padding: 12px 28px;
+  background: linear-gradient(90deg, #4a90e2, #50e3c2);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 50px;
+  text-decoration: none;
+  margin-top: 15px;
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+.btn-apply:hover {
+  background: #fff;   
+  color: #444444;  
+  border: 1px solid #424242;
+}
+
+.enquire-btn {
+  background: #555;
+}
+
+.enquire-btn:hover {
+  background: #fff;   
+  color: #444444;  
+  border: 1px solid #424242;
+}
+
+
+/* Responsive */
+@media (max-width: 992px) {
+  .rate-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rate-header, 
+  .rate-cards {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .vertical-divider {
+    display: none;
+  }
+
+  .rate-card {
+    width: 90%;
+  }
+}

@@ -1,0 +1,329 @@
+<div class="modal fade" id="mquoteModal" tabindex="-1" aria-labelledby="mquoteLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content apply-card">
+
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold text-navy">Get a Quotation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Progress Bar -->
+        <div class="progress-wrapper mb-4">
+          <div class="progress-outer">
+            <div id="formProgressBar" class="progress-inner"></div>
+          </div>
+          <div class="step-labels">
+            <span class="step-label">Vehicle Details</span>
+            <span class="step-label">Owner Details</span>
+            <span class="step-label">Experience</span>
+            <span class="step-label">Remarks</span>
+          </div>
+        </div>
+
+        <!-- Step Indicators -->
+        <div class="step-indicator-wrapper mb-3">
+          <div class="step-dot active">1</div>
+          <div class="step-dot">2</div>
+          <div class="step-dot">3</div>
+          <div class="step-dot">4</div>
+        </div>
+
+        <!-- Form -->
+        <form method="post" action="{% url 'mQuote' %}">
+          {% csrf_token %}
+
+          <!-- STEP 1: Vehicle Details -->
+          <div class="step step-1 active">
+            <h6 class="step-title">Vehicle Details</h6>
+
+            <div class="mb-3">
+              <label class="form-label">Motorcycle Brand *</label>
+              {{ form.brand }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Motorcycle Model *</label>
+              {{ form.model }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Year Of Registration *</label>
+              {{ form.year_reg }}
+            </div>
+
+            <button type="button" class="btn btn-primary next-btn">Next</button>
+          </div>
+
+          <!-- STEP 2: Owner Details -->
+          <div class="step step-2">
+            <h6 class="step-title">Owner Details</h6>
+
+            <div class="mb-3">
+              <label class="form-label">Full Name *</label>
+              {{ form.name }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Gender *</label>
+              {{ form.gender }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Marital Status *</label>
+              {{ form.status }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Mobile Number *</label>
+              {{ form.number }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Date of Birth *</label>
+              {{ form.dob }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Occupation *</label>
+              {{ form.occupation }}
+            </div>
+
+            <button type="button" class="btn btn-secondary back-btn">Previous</button>
+            <button type="button" class="btn btn-primary next-btn">Next</button>
+          </div>
+
+          <!-- STEP 3: Riding Experience -->
+          <div class="step step-3">
+            <h6 class="step-title">Riding Experience</h6>
+
+            <div class="mb-3">
+              <label class="form-label">Riding Experience *</label>
+              {{ form.ride_exp }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">NCD Discount *</label>
+              {{ form.ncd_disc }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Years of Motorcycle Licence *</label>
+              {{ form.licence }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Named Rider *</label>
+              {{ form.named_rider }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Number of Claims *</label>
+              {{ form.claims }}
+            </div>
+
+            <button type="button" class="btn btn-secondary back-btn">Previous</button>
+            <button type="button" class="btn btn-primary next-btn">Next</button>
+          </div>
+
+          <!-- STEP 4: Remarks -->
+          <div class="step step-4">
+            <h6 class="step-title">Remarks</h6>
+
+            <div class="mb-3">
+              <label class="form-label">Policy Start Date *</label>
+              {{ form.start_date }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Policy End Date *</label>
+              {{ form.end_date }}
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Remarks</label>
+              {{ form.remarks }}
+            </div>
+
+            <div class="form-check mb-3">
+              {{ form.privacy_policy }}
+              <label class="form-check-label">
+                I agree to the Privacy Policy and consent to communication.
+              </label>
+            </div>
+
+            <button type="button" class="btn btn-secondary back-btn">Previous</button>
+            <button type="submit" class="btn btn-success submit-btn">Submit Application</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+
+  :root {
+  --navy: #0a2c35ff;
+  --blue: #1b8dc2ff;
+  --light-blue: #d9e6f8;
+}
+
+/* Modal Card */
+.apply-card {
+  border-radius: 14px;
+  padding: 10px 20px;
+  animation: fadeIn .35s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.text-navy { color: var(--navy); }
+
+.modal-dialog-scrollable .modal-body {
+  overflow-y: auto;
+  overflow-x: hidden; /* force no horizontal scroll */
+}
+
+/* Progress Bar */
+.progress-outer {
+  height: 10px;
+  background: #e8f0fb;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-inner {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+  border-radius: 20px;
+  transition: width .5s ease;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 4px var(--blue); }
+  to { box-shadow: 0 0 12px var(--blue); }
+}
+
+.step-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+/* Step Indicators */
+.step-indicator-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--light-blue);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  transition: .25s;
+}
+
+.step-dot.active {
+  background: var(--blue);
+  color: white;
+  transform: scale(1.2);
+}
+
+/* Step animation */
+.step {
+  display: none;
+  animation: slideIn .35s ease;
+}
+
+.step.active { display: block; }
+
+@keyframes slideIn {
+  from { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Buttons */
+.next-btn, .submit-btn {
+  background: var(--blue);
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  width: 100%;
+  padding: 12px;
+}
+
+.back-btn {
+  background: var(--light-blue);
+  color: var(--navy);
+  font-weight: 600;
+  border-radius: 10px;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+</style>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const steps = document.querySelectorAll(".step");
+  const dots = document.querySelectorAll(".step-dot");
+  const progress = document.getElementById("formProgressBar");
+
+  let currentStep = 0;
+
+  function updateUI() {
+    steps.forEach((step, i) => step.classList.toggle("active", i === currentStep));
+    dots.forEach((dot, i) => dot.classList.toggle("active", i === currentStep));
+
+    progress.style.width = ((currentStep + 1) / steps.length) * 100 + "%";
+  }
+
+  function validateStep(step) {
+    const inputs = steps[step].querySelectorAll("[required]");
+    for (let input of inputs) {
+      if (!input.value.trim()) {
+        input.classList.add("is-invalid");
+        return false;
+      }
+      input.classList.remove("is-invalid");
+    }
+    return true;
+  }
+
+  document.querySelectorAll(".next-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (!validateStep(currentStep)) return;
+      currentStep++;
+      updateUI();
+    });
+  });
+
+  document.querySelectorAll(".back-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentStep--;
+      updateUI();
+    });
+  });
+
+  updateUI();
+});
+
+</script>
