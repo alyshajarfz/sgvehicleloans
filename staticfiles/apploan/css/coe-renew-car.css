@@ -255,6 +255,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
 }
 
 .coe-card {
@@ -294,9 +295,10 @@
   box-shadow: 0 10px 20px rgba(0,0,0,0.12);
 }
 
-/* Buttons */
-.btn-group {
-  margin-top: 10px;
+.coe-buttons {
+    display: flex;
+    justify-content: center; 
+    gap: 15px;       
 }
 
 .btn-apply, .btn-enquire {

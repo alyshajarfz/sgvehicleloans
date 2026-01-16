@@ -18,13 +18,13 @@ def get_faqs(page):
             {"question": "Will you do the transfer of car ownership for me?",
              "answer": "Yes, the transfer of car ownership is done at no charge."},
             {"question": "Is there an application fee for used car loans?",
-             "answer": "At AutoMotoCredit, we do not charge any application fee for used car loans."},
+             "answer": "At SGVehicleLoans, we do not charge any application fee for used car loans."},
             {"question": "How can I check the status of my loan application?",
              "answer": "You can follow up via phone, email, or by visiting the branch where you submitted your application."},
         ],
 
         "new": [
-            {"question": "Can I get a loan from AutoMotoCredit if I buy a car from a car dealer?",
+            {"question": "Can I get a loan from SGVehicleLoans if I buy a car from a car dealer?",
              "answer": "Yes, you can. However, please check first with your car dealer if you are allowed to source or secure a car loan from a different company."},
             {"question": "What will be the minimum downpayment if I were to buy a car?",
              "answer": "The minimum downpayment is 30% of the car’s purchase price if its OMV is $20,000 or less – otherwise, it would be 40%."},
@@ -33,7 +33,7 @@ def get_faqs(page):
                        "<li>A stable income to support monthly repayments</li>"
                        "<li>Meeting the bank or financial institution’s credit requirements</li></ul>"},
             {"question": "Can I get a new car loan if I have bad credit?",
-             "answer": "Yes. While approval may be more challenging with a poor credit history, AutoMotoCredit works with multiple banks and lenders to help you get approved."},
+             "answer": "Yes. While approval may be more challenging with a poor credit history, SGVehicleLoans works with multiple banks and lenders to help you get approved."},
             {"question": "Can I repay my loan early?",
              "answer": "Yes. Most lenders allow early repayment, although some may charge a small penalty. Paying early can save you on interest over the loan term."},
             {"question": "Can foreigners apply for a new car or motorcycle loan?",
@@ -43,7 +43,7 @@ def get_faqs(page):
         "direct": [
             {"question": "Who will find this Direct Buyer → Seller useful?",
              "answer": "Both car buyers and private sellers will benefit—buyers get tailored financing, and sellers enjoy a smoother resale process."},
-            {"question": "Why should I engage with AutoMotoCredit?",
+            {"question": "Why should I engage with SGVehicleLoans?",
              "answer": "Buying a used car involves many steps. We verify rightful ownership, handle financing, and simplify the entire process, saving you time and ensuring peace of mind."},
             {"question": "What does the Direct Buyer → Seller include?",
              "answer": "<ul><li>Car loan application and processing</li>"
@@ -70,7 +70,7 @@ def get_faqs(page):
         "coe_car_loan": [
              {"question": "What is a COE car loan?", 
              "answer": "A COE car loan is a financing option that covers the cost of a car’s Certificate of Entitlement (COE) and/or the vehicle itself, helping you spread payments over time instead of paying upfront."},
-            {"question": "Can I get a loan from AutoMotoCredit if I buy a car from a car dealer?", 
+            {"question": "Can I get a loan from SGVehicleLoans if I buy a car from a car dealer?", 
              "answer": "Yes, you can. However, please check first with your car dealer if you are allowed to source for or secure a car loan from a different company."},
             {"question": "What documents are required for approval?", 
              "answer": "<ul><li>NRIC or passport</li>"
@@ -87,12 +87,12 @@ def get_faqs(page):
              {"question": "Can I refinance my car if my car is no longer under any financing?", 
              "answer": "Yes, refinancing is available for cars that are fully owned with no existing loans."},
             {"question": "Can I refinance my car loan if I want to convert my car to drive for Grab?", 
-             "answer": "Yes, AutoMotoCredit allows refinancing for cars you want to use for ride-hailing services like Grab."},
+             "answer": "Yes, SGVehicleLoans allows refinancing for cars you want to use for ride-hailing services like Grab."},
             {"question": "What is the interest rate for car refinancing?", 
              "answer": "The interest rate depends on factors such as car age, market value, car condition, loan amount, and loan period."},
             {"question": "Can I refinance my car loan without affecting my TDSR or housing loan eligibility?", 
-             "answer": "Yes, refinancing with AutoMotoCredit can be structured so it does not impact your TDSR or housing loan."},
-            {"question": "What types of refinancing does AutoMotoCredit offer?", 
+             "answer": "Yes, refinancing with SGVehicleLoans can be structured so it does not impact your TDSR or housing loan."},
+            {"question": "What types of refinancing does SGVehicleLoans offer?", 
              "answer": "<ul><li>Cash out</li>"
                         "<li>Lower your interest rate</li>"
                         "<li>Reduce your monthly payments</li>"
@@ -212,7 +212,7 @@ def get_faqs(page):
             {"question": "Any difference between 5-year and 10-year COE renewal?", 
              "answer": "5-year COE renewal: Motorcycle must be deregistered at the end of 5 years<br>10-year COE renewal: Motorcycle is eligible for a second COE renewal"},
             {"question": "Can I submit my application via email or walk-in?", 
-             "answer": "Either is acceptable, but we prefer online submission via our website or corporate email (credit@automoto.com.sg)."},
+             "answer": "Either is acceptable, but we prefer online submission via our website or corporate email (loans@sgvehicle.com)."},
             {"question": "Can I do early COE renewal?", 
              "answer": "Yes, but LTA will forfeit the remaining PARF & COE rebate if renewed early.<br>Example: COE expiry: 15 April 2021, Early renewal in January 2021, New COE expiry: 31 January 2031"},
             {"question": "Will you bid the COE for me?", 

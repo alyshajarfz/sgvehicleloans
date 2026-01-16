@@ -1,0 +1,21 @@
+.btn-enq {
+    background: linear-gradient(135deg, #007bff, #00b4ff);
+    color: #fff;
+    padding: 12px 26px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-enq:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 140, 255, 0.35);
+}
+
+.btn-enq:active {
+    transform: translateY(0);
+}

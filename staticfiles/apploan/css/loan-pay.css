@@ -1,0 +1,91 @@
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      text-align: center;
+      padding: 240px 20px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('../images/pay.jpg') center/cover no-repeat;
+      height: 65vh;
+      color: #ffffff;
+      border-radius: 15px;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    /* ===== PAYMENT SECTION ===== */
+    .payment-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+    .payment-text {
+      flex: 1 1 500px;
+    }
+    .payment-text h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #111827;
+    }
+    .payment-text p {
+      font-size: 1rem;
+      margin-bottom: 15px;
+      color: #4b5563;
+    }
+    .payment-text .highlight {
+      background: #eff6ff;
+      border-left: 5px solid #3b82f6;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 15px;
+      font-weight: 500;
+      color: #1e40af;
+    }
+    .payment-text ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+    .payment-text ul li {
+      margin-bottom: 10px;
+      list-style: disc;
+      color: #4b5563;
+    }
+
+    .payment-qr {
+      flex: 0 0 250px;
+      text-align: center;
+    }
+    .payment-qr img {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+        .hero{
+            padding: 180px 10px;
+            text-align: center;
+        }
+      .payment-section {
+        flex-direction: column;
+        text-align: center;
+      }
+      .payment-text, .payment-qr {
+        flex: 1 1 100%;
+      }
+      .payment-qr img {
+        margin-top: 20px;
+      }
+    }

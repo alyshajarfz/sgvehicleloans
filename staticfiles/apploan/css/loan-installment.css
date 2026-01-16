@@ -1,0 +1,138 @@
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('../images/install-car.jpg') center/cover no-repeat;
+  text-align: center;
+  color: #fff;
+  padding: 235px 20px;
+  height: 65vh;
+  border-radius: 15px;
+}
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+.hero p {
+  font-size: 1.2rem;
+  color: #e0e7ff;
+}
+
+/* ===== FORM ELEMENTS ===== */
+.form-control {
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  padding: 12px 15px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-control:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+}
+
+/* ===== BUTTON ===== */
+.btn-primary {
+  background: #3b82f6;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+.btn-primary:hover {
+  background: #2563eb;
+}
+
+/* ===== CARDS ===== */
+.card, .info-card {
+  background: linear-gradient(145deg, #ffffff, #f7f9fc);
+  border-radius: 20px;
+  padding: 25px 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  border-left: 4px solid #3b82f6; /* subtle accent */
+}
+
+/* ===== HOVER EFFECT ===== */
+.info-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* ===== CARD HEADERS ===== */
+.info-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.info-card h3::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #3b82f6;
+  margin-top: 6px;
+  border-radius: 2px;
+}
+
+/* ===== PARAGRAPHS & LISTS ===== */
+.info-card p, .info-card li {
+  color: #374151;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.info-card ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.info-card ul li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 10px;
+  list-style: none;
+}
+
+.info-card ul li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #3b82f6;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* ===== HIGHLIGHT BOX ===== */
+.highlight {
+  background: #eff6ff;
+  padding: 12px 15px;
+  border-left: 4px solid #2563eb;
+  border-radius: 12px;
+  margin-top: 15px;
+  font-weight: 500;
+  color: #1e3a8a;
+  font-size: 0.95rem;
+}
+
+/* ===== FORM CHECKBOX LABEL ===== */
+.form-check-label {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .hero{
+        padding: 185px 20px;
+    }
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+    .hero p {
+        font-size: 1.1rem;
+    }
+}

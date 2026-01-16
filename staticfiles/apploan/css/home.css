@@ -1,61 +1,226 @@
-.carousel-inner {
-    height: 500px; 
+/* =========================
+   HERO SECTION
+========================= */
+.hero-glass {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
 }
 
-.carousel-inner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+.hero-glass .carousel,
+.hero-glass .carousel-inner,
+.hero-glass .carousel-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.carousel-item img {
-    max-width: 100%;   
-    max-height: 500px;
-    object-fit: cover;
+.hero-glass .carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
 }
 
-.carousel-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1; 
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 2;
 }
 
-.carousel-caption {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    color: #fff;
-    text-align: center;
+.hero-card {
+  position: relative;
+  z-index: 3;
+  max-width: 700px;
+  padding: 55px;
+  height: 40vh;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.hero-card h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.hero-card p {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  color: #eee;
+}
+
+.hero-card .btn-secondary {
+  padding: 12px 30px;
+  border-radius: 50px;
+  background: #960000ff;
+  color: #ffffff;
+  font-weight: bold;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.hero-card .btn-secondary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(255, 0, 0, 0.6);
+}
+
+/* =========================
+   CATEGORY ITEMS
+========================= */
+.category{
+    max-width: 1200px; 
+    margin: 30px auto; 
+    border: 1px solid #ecececff; 
+    border-radius: 10px;
+    padding: 30px 20px; /* adjust padding */
+    box-sizing: border-box; /* include padding in width */
 }
 
 .category-item i {
-    color: #960000ff;
-    transition: color 0.3s ease, transform 0.3s ease;
+  color: #960000ff;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .category-item:hover i {
-    color: black;
-    transform: scale(1.2); /* Slight zoom on hover */
+  color: rgb(90, 90, 90);
+  transform: scale(1.2);
 }
 
 .category-item div {
-    font-weight: 500;
-    margin-top: 5px;
-    color: #333;
-    transition: color 0.3s ease;
+  font-weight: 500;
+  margin-top: 5px;
+  color: #333;
+  transition: color 0.3s ease;
 }
 
 .category-item:hover div {
-    color: #000;
+  color: #8a8a8a;
 }
+
+/* =========================
+   FLEX CONTAINER FIX
+========================= */
+.d-flex.justify-content-around.flex-wrap {
+  flex-wrap: wrap; /* allow wrapping */
+  justify-content: center; /* center items on mobile */
+}
+
+/* =========================
+   MEDIA QUERIES FOR RESPONSIVENESS
+========================= */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .hero-card {
+    padding: 40px;
+    height: auto; /* let it expand */
+  }
+
+  .hero-card h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-card p {
+    font-size: 1rem;
+  }
+
+  .category-item i {
+    font-size: 2.5rem;
+  }
+}
+
+/* Phones */
+@media (max-width: 768px) {
+
+    .category {
+        max-width: 90%;  /* mobile narrower card */
+        padding: 20px 15px;
+    }
+
+  .hero-glass {
+    height: 70vh;
+  }
+
+  .hero-card {
+    padding: 30px 20px;
+    max-width: 90%;
+    height: auto; /* allow auto height */
+  }
+
+  .hero-card h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-card p {
+    font-size: 0.95rem;
+  }
+
+    .category-item {
+        flex: 0 0 45%; /* two per row */
+        margin: 15px;
+        text-align: center;
+    }
+
+    .category-item i {
+        font-size: 3.5rem; /* bigger icon */
+    }
+
+    .category-item div {
+        font-size: 1.1rem; /* bigger text */
+    }
+}
+
+
+/* Extra small phones */
+@media (max-width: 576px) {
+    .category {
+        max-width: 85%;  /* prevent full width */
+        padding: 15px 10px;
+    }
+
+  .hero-glass {
+    height: 60vh;
+  }
+
+  .hero-card {
+    padding: 20px 15px;
+  }
+
+  .hero-card h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-card p {
+    font-size: 0.9rem;
+  }
+
+  .category-item {
+    flex: 0 0 100%; /* stack items */
+    margin: 10px 0;
+  }
+
+  .category-item i {
+    font-size: 3.8rem;
+  }
+
+  .category-item div {
+        font-size: 1.3rem; /* bigger text */
+    }
+}
+
 
 .loan-section-title {
     text-align: center;
@@ -122,7 +287,7 @@
 }
 
 .loan-card .icon-circle:hover {
-    color: black;
+    color: rgb(185, 185, 185);
     transform: scale(1.2);
 }
 
@@ -226,7 +391,7 @@
 }
 
 /* Button */
-.btn {
+.btn-learn {
     color: #e8e8e8;
     text-decoration: none;
     padding: 12px 20px; /* bigger button */
@@ -239,18 +404,18 @@
     transition: all 0.3s ease;
 }
 
-.loan-type:hover .btn {
+.loan-type:hover .btn-learn {
     color: #212121;
     background: #c7c7c7;
 }
 
-.btn:hover {
+.btn-learn:hover {
     outline: 2px solid #e8e8e8;
     background: transparent;
     color: #e8e8e8;
 }
 
-.btn:active {
+.btn-learn:active {
     box-shadow: none;
 }
 

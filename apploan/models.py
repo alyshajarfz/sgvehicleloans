@@ -371,7 +371,7 @@ class HeaderVideo(models.Model):
     ]
 
     insurance_type = models.CharField(max_length=20, choices=INS_CHOICES, unique=True)
-    video = models.FileField(upload_to='header_videos/')
+    video = models.FileField(upload_to='header_videos/', help_text="Maximum file size: 20 MB. Please Trim or Compress on (https://www.freeconvert.com/video-compressor) before uploading.")
 
     def __str__(self):
         return f"{self.get_insurance_type_display()} Video"
@@ -386,7 +386,7 @@ class HeaderImage(models.Model):
     ]
     
     template_type = models.CharField(max_length=50, choices=TEMP_CHOICES, unique=True)
-    image = models.ImageField(upload_to='header_images/')
+    image = models.ImageField(upload_to='header_images/', help_text="Supported formats: PNG, JPG. Maximum upload size: 20 MB.")
 
     def __str__(self):
         return f"{self.get_template_type_display()} Image"
