@@ -2,15 +2,16 @@ import requests
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import HeaderVideo, HeaderImage
+from .models import HeaderVideo, HeaderImage, FooterSetting
 from django.contrib import messages
 from .forms import QuoteMotorForm, QuoteCarForm, EnquiryForm, EnquiryRenewCarForm, EnquiryRenewMotorcycleForm, ApplyForm, ApplyCOEForm
 from datetime import datetime
 
-
 def home(request):
     apply_form = ApplyForm()
     context = {
+        'title': 'Car & Motorcycle Loan Singapore | Fast Approval | SGVehicleLoans',
+        'description': 'Apply for car and motorcycle loans in Singapore with fast approval. Low interest hire purchase, refinancing, and flexible repayment options. Get a free quote today.',
         'apply_form': apply_form,
     }
     return render(request, 'apploan/home.html', context)
@@ -21,12 +22,13 @@ def financeUsed(request):
     enquiry_form = EnquiryForm()
 
     context = {
+        'title': 'Used Car & Motorcycle Loan Singapore | Fast Approval | SGVehicleLoans',
+        'description': 'Get used car and motorcycle financing in Singapore with fast approval. Flexible hire purchase plans, refinancing options, and competitive rates. Request a free quote today.',
         'header_image': header_image,
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
     }
     return render(request, 'apploan/financing/used-cm-loan.html', context)
-
 
 def financeDirect(request):
     header_image = HeaderImage.objects.filter(template_type='direct_bs').first()
@@ -34,6 +36,8 @@ def financeDirect(request):
     enquiry_form = EnquiryForm()
 
     context = {
+        'title': 'Direct Car & Motorcycle Loan Singapore | Fast Approval | SG Vehicle Loans',
+        'description': 'Get direct car and motorcycle financing in Singapore with fast approval. Low interest hire purchase options, flexible repayment plans, and quick quotations. Apply today.',
         'header_image': header_image,
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
@@ -46,6 +50,8 @@ def financeNew(request):
     enquiry_form = EnquiryForm()
 
     context = {
+        'title': 'New Car & Motorcycle Loan Singapore | Fast Approval | SGVehicleLoans',
+        'description': 'Apply for new car and motorcycle loans in Singapore with fast approval. Low interest hire purchase packages, flexible repayment plans, and quick quotations. Get a free quote today.',
         'header_image': header_image,
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
@@ -58,6 +64,8 @@ def financeCOECar(request):
     enquiry_form = EnquiryForm()
 
     context = {
+        'title': 'COE Car Loan Singapore | COE Renewal Financing | Fast Approval',
+        'description': 'Need COE car financing in Singapore? Get COE renewal loan options with fast approval support, flexible instalment plans, and competitive rates. Request a free quote today.',
         'header_image': header_image,
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
@@ -68,6 +76,8 @@ def financeRefinance(request):
     apply_form = ApplyForm()
 
     context = {
+        'title': 'Car & Motorcycle Loan Refinancing Singapore | Lower Instalments Fast',
+        'description': 'Refinance your car or motorcycle loan in Singapore to lower monthly instalments or get better rates. Fast approval support, flexible plans, and quick quotation. Apply now.',
         'apply_form': apply_form,
     }
     
@@ -78,20 +88,28 @@ def financeInHouse(request):
     enquiry_form = EnquiryForm()
 
     context = {
+        'title': 'In-House Car & Motorcycle Loan Singapore | Fast Approval | SGVehicleLoans',
+        'description': 'Get in-house car and motorcycle financing in Singapore with fast approval support. Flexible instalment plans, competitive rates, and quick quotation. Apply online today.',
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
     }
+    
     return render(request, 'apploan/financing/in-house.html', context)
+
 
 def financePHVCar(request):
     apply_form = ApplyForm()
     enquiry_form = EnquiryForm()
 
     context = {
+        'title': 'PHV Car Loan Singapore | Grab & Private Hire Financing | Fast Approval',
+        'description': 'Apply for PHV car loans in Singapore with fast approval support. Financing options for Grab and private hire vehicles, flexible instalments, and competitive rates. Get a free quote today.',
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
     }
+    
     return render(request, 'apploan/financing/phv-car-loan.html', context)
+
 
 # COE Renewal
 def COERenewCar(request):
@@ -102,7 +120,15 @@ def COERenewCar(request):
             return redirect(f"{request.path}?submitted=true")
     else:
         form = EnquiryRenewCarForm(initial={'loan_type': 'car'})
-    return render(request, "apploan/coe/coe-renew-car.html", {"form": form, "loan_type": "car"})
+
+    context = {
+        "form": form,
+        "loan_type": "car",
+        "title": "COE Renewal Car Singapore | COE Renewal Loan & Financing | Fast Approval",
+        "description": "Renew your car COE in Singapore with flexible COE renewal financing. Fast approval support, competitive rates, and easy instalment plans. Request a free quote today.",
+    }
+
+    return render(request, "apploan/coe/coe-renew-car.html", context)
 
 
 def COERenewMoto(request):
@@ -113,18 +139,45 @@ def COERenewMoto(request):
             return redirect(f"{request.path}?submitted=true")
     else:
         form = EnquiryRenewMotorcycleForm(initial={'loan_type': 'motorcycle'})
-    return render(request, "apploan/coe/coe-renew-motor.html", {"form": form, "loan_type": "motorcycle"})
+
+    context = {
+        "form": form,
+        "loan_type": "motorcycle",
+        "title": "Motorcycle COE Renewal Singapore | COE Renewal Loan & Financing Fast",
+        "description": "Renew your motorcycle COE in Singapore with flexible COE renewal financing. Fast approval support, easy instalment plans, and competitive rates. Get a free quote today.",
+    }
+
+    return render(request, "apploan/coe/coe-renew-motor.html", context)
+
 
 # Insurance
 def insCar(request):
     video = HeaderVideo.objects.filter(insurance_type='car').first()
     form = QuoteCarForm()
-    return render(request, 'apploan/insurance/ins-car.html', {'video': video, 'form': form})
+
+    context = {
+        'title': 'Car Insurance Singapore | Fast Quote & Competitive Rates | SGVehicleLoans',
+        'description': 'Get car insurance in Singapore with fast quotation support. Competitive rates, flexible coverage options, and easy renewal. Request a free quote today.',
+        'video': video,
+        'form': form,
+    }
+
+    return render(request, 'apploan/insurance/ins-car.html', context)
+
 
 def insMotor(request):
     video = HeaderVideo.objects.filter(insurance_type='motorcycle').first()
     form = QuoteMotorForm()
-    return render(request, 'apploan/insurance/ins-motor.html', {'video': video, 'form': form})
+
+    context = {
+        'title': 'Motorcycle Insurance Singapore | Fast Quote & Competitive Rates',
+        'description': 'Get motorcycle insurance in Singapore with fast quotation support. Competitive rates, flexible coverage options, and easy renewal. Request a free quote today.',
+        'video': video,
+        'form': form,
+    }
+
+    return render(request, 'apploan/insurance/ins-motor.html', context)
+
 
 # Rates
 def rates(request):
@@ -132,23 +185,73 @@ def rates(request):
     enquiry_form = EnquiryForm()
 
     context = {
+        'title': 'Car & Motorcycle Loan Interest Rates Singapore | Updated Financing Rates',
+        'description': 'View car and motorcycle loan interest rates in Singapore. Compare hire purchase, refinancing, COE renewal financing rates, and flexible repayment options. Get a free quote today.',
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
     }
+
     return render(request, 'apploan/rates.html', context)
+
 
 # Guides
 def guidesCalc(request):
-    return render(request, 'apploan/guides/loan-calc.html')
+    context = {
+        'title': 'Car & Motorcycle Loan Calculator Singapore | Instalment Guide & Rates',
+        'description': 'Use our car and motorcycle loan calculator in Singapore to estimate monthly instalments. Learn about interest rates, hire purchase terms, and financing options. Calculate now.',
+    }
+    return render(request, 'apploan/guides/loan-calc.html', context)
+
 
 def guidesFaq(request):
-    return render(request, 'apploan/guides/loan-faq.html')
+    context = {
+        'title': 'Vehicle Loan FAQ Singapore | Car & Motorcycle Financing Guide | SGVL',
+        'description': 'Find answers to common vehicle loan questions in Singapore. Learn about car and motorcycle loans, hire purchase, refinancing, COE renewal financing, and approvals. Read our FAQ guide.',
+    }
+    return render(request, 'apploan/guides/loan-faq.html', context)
+
 
 def guidesInstall(request):
-    return render(request, 'apploan/guides/loan-installment.html')
+    context = {
+        'title': 'Car & Motorcycle Loan Instalment Guide Singapore | Monthly Repayment Help',
+        'description': 'Learn how car and motorcycle loan instalments work in Singapore. Understand monthly repayments, interest rates, tenure, and hire purchase terms. Use our guide to plan better.',
+    }
+    return render(request, 'apploan/guides/loan-installment.html', context)
+
 
 def guidesPay(request):
-    return render(request, 'apploan/guides/loan-pay.html')
+    context = {
+        'title': 'Vehicle Loan Payment Guide Singapore | Car & Motorcycle Hire Purchase Tips',
+        'description': 'Learn how vehicle loan payments work in Singapore. Understand car and motorcycle hire purchase payments, instalment schedules, fees, and early settlement options. Read the guide now.',
+    }
+    return render(request, 'apploan/guides/loan-pay.html', context)
+
+# About
+def about(request):
+    context = {
+        'title': 'About SG Vehicle Loans | Car & Motorcycle Financing Singapore',
+        'description': 'SG Vehicle Loans helps drivers in Singapore get car and motorcycle financing with fast approval support. Explore our loan solutions including hire purchase, refinancing, and COE renewal financing.',
+    }
+    return render(request, 'apploan/about.html', context)
+
+# Contact
+def contact(request):
+    if request.method == 'POST':
+        # Handle form submission
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        # For now, just print to console (or save to DB later)
+        print(f"{name}, {email}, {message}")
+        return HttpResponse("Thank you for contacting us!")
+
+    context = {
+        'title': 'Contact SG Vehicle Loans | Car & Motorcycle Loan Quote Singapore',
+        'description': 'Contact SG Vehicle Loans for car and motorcycle financing in Singapore. Fast quotation support for hire purchase, refinancing, and COE renewal loans. WhatsApp us today.',
+    }
+    return render(request, 'apploan/contact.html', context)
+
+
 
 def formCar(request):
     if request.method == 'POST':
@@ -185,9 +288,6 @@ def formMotor(request):
 
     return render(request, 'apploan/modals/apply-renew-motor.html', {'form': form})
 
-# About
-def about(request):
-    return render(request, 'apploan/about.html')
 
 def apply(request):
     if request.method == 'POST':
@@ -240,15 +340,9 @@ def cQuote(request):
     
     return render(request, "quote-c.html", {"form": form})
 
-def contact(request):
-    if request.method == 'POST':
-        # Handle form submission
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
-        # For now, just print to console (or save to DB later)
-        print(f"{name}, {email}, {message}")
-        return HttpResponse("Thank you for contacting us!")
-    return render(request, 'apploan/contact.html')
+
+def footerSettings(request):
+    footer = FooterSetting.objects.first()
+    return {"footer": footer}
 
 

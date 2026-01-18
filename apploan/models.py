@@ -562,3 +562,32 @@ class MotorCOE(ApplyCOE):
         proxy = True
         verbose_name = "Application COE Renewal Motorcycle"
         verbose_name_plural = "Application COE Renewal Motorcycle"
+
+
+class FooterSetting(models.Model):
+    address = models.TextField(default="400 Balestier Road,\nBalestier Plaza #02-23,\nSingapore 329802")
+    google_map_embed = models.TextField(
+        default="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.750498216391!2d103.8478215758166!3d1.3256235616514813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19d8ad2a9e11%3A0x1b8c2cdaf63e0fbb!2sBalestier%20Plaza!5e0!3m2!1sen!2smy!4v1764923928289!5m2!1sen!2smy"
+    )
+    
+    # Contact info
+    hotline = models.CharField(max_length=50, default="(+65) 6444 4400")
+    office = models.CharField(max_length=50, default="+65 6681 6778")
+    fax = models.CharField(max_length=50, default="+65 6256 1229")
+    
+    # Operating hours
+    op_hours_weekdays = models.CharField(max_length=100, default="Mon–Fri: 10am–6pm")
+    op_hours_sat = models.CharField(max_length=100, default="Sat: 12pm–4pm")
+    
+    # Social media
+    facebook_url = models.URLField(default="https://www.facebook.com/login", help_text="Please put your Facebook page link here.")
+    instagram_url = models.URLField(default="https://www.instagram.com/accounts/login/", blank=True, help_text="Please put your Instagram profile link here.")
+    whatsapp_url = models.URLField(default="https://api.whatsapp.com/send?phone=6589259233&text=Hi%2C%20SGVehicleLoans", blank=True, help_text="Please put your WhatsApp link here.")
+    tiktok_url = models.URLField(default="https://www.tiktok.com/login", blank=True, help_text="Please put your TikTok profile link here.")
+    
+    class Meta:
+        verbose_name = "Footer Setting"
+        verbose_name_plural = "Footer Settings"
+
+    def __str__(self):
+        return "Footer Settings"

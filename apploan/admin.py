@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 from unfold.admin import ModelAdmin 
-from .models import MenuSetting, LoanRate, Enquiry, QuoteMotor, QuoteCar, HeaderVideo, HeaderImage, CarEnquiry, MotorcycleEnquiry, Application, CarCOE, MotorCOE
+from .models import MenuSetting, LoanRate, Enquiry, QuoteMotor, QuoteCar, HeaderVideo, HeaderImage, CarEnquiry, MotorcycleEnquiry, Application, CarCOE, MotorCOE, FooterSetting
 
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User, Group
@@ -173,3 +173,26 @@ class MotorCOEAdmin(ModelAdmin):
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         return qs.filter(vehicle_type='motor')
+    
+@admin.register(FooterSetting)
+class FooterSettingAdmin(ModelAdmin):
+    list_display = ('address', 'hotline', 'office', 'fax')
+    
+    fieldsets = (
+        ("Company Info", {
+            "fields": ("address", "google_map_embed")
+        }),
+        ("Contact Info", {
+            "fields": ("hotline", "office", "fax")
+        }),
+        ("Operating Hours", {
+            "fields": ("op_hours_weekdays", "op_hours_sat")
+        }),
+        ("Social Media", {
+            "fields": ("facebook_url", "instagram_url", "whatsapp_url", "tiktok_url")
+        }),
+    )
+
+    # Only allow one row
+    def has_add_permission(self, request):
+        return not FooterSetting.objects.exists()

@@ -68,6 +68,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'apploan.context_processors.menu_setting',
                 'apploan.context_processors.loan_rates',
+                'apploan.views.footerSettings',
             ],
         },
     },
@@ -86,18 +87,40 @@ WSGI_APPLICATION = 'loanpro.wsgi.application'
     #}
 #}
 
+#from decouple import config
+
+#DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': config('DB_NAME'),
+        #'USER': config('DB_USER'),
+        #'PASSWORD': config('DB_PASSWORD'),
+        #'HOST': config('DB_HOST', default='localhost'),
+        #'PORT': config('DB_PORT', default='5432'),
+    #}
+#}
+
 from decouple import config
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
+if os.getenv('DJANGO_ENV') == 'PRODUCTION':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST', default='localhost'),
+            'PORT': config('DB_PORT', default='5432'),
+        }
     }
-}
+else:
+    # Local development: SQLite
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 
 #DATABASES = {
@@ -193,8 +216,8 @@ UNFOLD = {
         {
             "rel": "icon",
             "sizes": "32x32",
-            "type": "image/svg+xml",
-            "href": lambda request: static("apploan/images/logo-2.png"),
+            "type": "image/png",
+            "href": lambda request: static("apploan/images/sgvlogo.png"), 
         },
     ],
     
@@ -266,6 +289,12 @@ UNFOLD = {
                         "icon": "add_photo_alternate",
                         "link": reverse_lazy("admin:apploan_headerimage_changelist"), 
                     },
+                    {
+                        "title": _("Footer"),
+                        "icon": "add_photo_alternate",
+                        "link": reverse_lazy("admin:apploan_footersetting_changelist"), 
+                    },
+
                 ],
             },
             {

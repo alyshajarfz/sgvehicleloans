@@ -4,9 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{{ title|default:"SGVehicleLoans" }}</title>
+    <meta name="description" content="{{ description|default:'' }}">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512‑..." crossorigin="anonymous" referrerpolicy="no-referrer" />  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'apploan/images/sgvlogo.png' %}" type="image/png" sizes="32x32">
 
 
     {% block extra_css %}{% endblock %}
@@ -94,166 +99,8 @@ class COEchartView(MobileViewMixin, TemplateView):
 
         return context
 
-
-
-        from django.contrib import messages
-from django.contrib.contenttypes.models import ContentType
-from django.http.response import Http404
-from django.http.response import HttpResponse
-from django.shortcuts import render, redirect, reverse
-from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView, TemplateView, CreateView, View, RedirectView
-
-from advertisement.models import Banner
-from advertisement.models import Carousel
-from cms.forms import InstallmentCalculatorForm
-from common.mixins import MobileViewMixin
-from dfp.models import GoogleAd
-from directory.forms import DirectorySearchForm
-from directory.models import Category as DirCat, Directory
-from libs.django_user_agents.utils import get_and_set_user_agent
-from listing.choices import ListingStatus
-from listing.settings import *
-from listing.forms import UsedBikesSearchForm, AccessoriesSearchForm, NewBikesSearchForm
-from listing.models import *
-from rental.forms import RentalBikeSearch
-from rental.models import RentalBike
-from .forms import ContactModelForm
-from .models import Blog, Event, Page, Faq, Contact, Coe, AboutSale
-from django.contrib.contenttypes.models import ContentType
-from billing.models import Price
-from alert.models import ShortList
-from django.db.models import Count, OuterRef, Exists, Value, IntegerField, Subquery, CharField, Q, Case, When
-from django.db.models import Manager
-from django.contrib.contenttypes.models import ContentType
-from django.db.models.functions import Coalesce, Concat
-from urllib.parse import urlencode, parse_qs
-from time import perf_counter
-
-class Home(MobileViewMixin, TemplateView):
-    template_name = 'cms/home.html'
-
-    def get_context_data(self, **kwargs):
-        cd = super(Home, self).get_context_data(**kwargs)
-        # Search forms
-        cd['page_name'] = 'HOME'
-        # title
-        cd['title'] = 'SGBikeMart - New & Used Bikes/MotorCycles for Sale in Singapore. Accessories,Reviews & Price.'
-
-        user_agent = get_and_set_user_agent(self.request)
-        if user_agent.is_mobile or user_agent.is_tablet:
-            cd['latest_allbikes'] = ListIndex.objects.filter(live=True).order_by('-refresh_date')[:10]
-            cd['latest_blogs'] = Blog.objects.filter(published=True)[:6]
-            cd['carousel'] = Carousel.objects.for_mobile().all()
-            cd['coe'] = Coe.get_latest()
-        else:
-            cd['directory_categories'] = DirCat.objects.values('name', 'slug')
-            cd['accessories'] = Accessory.objects.filter(status=ListingStatus.live).order_by('-date_start')[:12]
-            cd['latest_allbikes'] = ListIndex.objects.filter(live=True).order_by('-refresh_date')[:10]
-            cd['featured_usedbikes'] = UsedBike.objects.filter(status=ListingStatus.live).prefetch_related("bike_model").order_by("?").all()[:10]
-            cd['newbikes'] = NewBikeDealer.objects.prefetch_related(
-                'new_bike', 'new_bike__bike_model', 'new_bike__bike_model__brand'
-            ).live().order_by_ad_type_and_refresh().all()[:10]
-            cd['dealers'] = Directory.objects.filter(featured_in_homepage=True).order_by('?')[:6]
-            cd['accessories_count'] = Accessory.objects.filter(status=ListingStatus.live).count()
-            cd['usedbikes_count'] = UsedBike.objects.filter(status=ListingStatus.live).count()
-            cd['latest_update'] = Blog.objects.filter(published=True).order_by('-featured', '-created').first()
-            cd['latest_blogs'] = Blog.objects.filter(published=True)[1:6]
-        return cd
-
-
-class Sell(MobileViewMixin, TemplateView):
-    template_name = 'cms/sell.html'
-
-    def get_context_data(self, **kwargs):
-        cd = super(Sell, self).get_context_data(**kwargs)
-        # cd['title'] = 'Sell Your Used Bike/MotorCycle & Accessories Online - SGBikemart'
-        cd['title'] = 'Sell Motorcycle Singapore Fast | SGBikeMart Motorcycle Sale'
-        cd['description'] = 'Post your used motorcycle for sale in Singapore. Reach thousands of riders & dealers. Free or upgraded listings available. Sell your bike fast with SGBikeMart.'
-        return cd
-
-
-class SellBikes(TemplateView):
-    template_name = 'cms/sell_bikes.html'
-
-    def get_context_data(self, **kwargs):
-        cd = super(SellBikes, self).get_context_data(**kwargs)
-        cd['title'] = 'Sell Your USed Bike/MotorCycle Online - SGBikemart'
-        return cd
-
-class SellMotorcycle(MobileViewMixin, TemplateView):
-    template_name = 'cms/sell_motorcycle.html'
-
-    def get_context_data(self, **kwargs):
-        cd = super(SellMotorcycle, self).get_context_data(**kwargs)
-        cd['title'] = 'Sell Your Used Motorcycle Online - SGBikemart'
-        paid_price = Price.objects.filter(content_type=ContentType.objects.get_for_model(UsedBike), listing_type=PAID_AD).first()
-        hot_price = Price.objects.filter(content_type=ContentType.objects.get_for_model(UsedBike), listing_type=HOT_AD).first()
-        cd.update({
-            "FREE_AD": FREE_AD,
-            "PAID_AD": PAID_AD,
-            "PAID_AD_PRICE": paid_price.advertiser_price if paid_price else 0,
-            "HOT_AD_PRICE": hot_price.advertiser_price + paid_price.advertiser_price if hot_price else 0,
-            "HOT_AD": HOT_AD,
-        })
-        return cd
-
-
-class SellAccessories(MobileViewMixin, TemplateView):
-    template_name = 'cms/sell_accessories.html'
-
-    def get_context_data(self, **kwargs):
-        cd = super(SellAccessories, self).get_context_data(**kwargs)
-        cd['title'] = 'Sell Your Used MotorCycle/Bike Accessories Online - SGBikemart'
-        paid_price = Price.objects.filter(content_type=ContentType.objects.get_for_model(Accessory), listing_type=PAID_AD).first()
-        hot_price = Price.objects.filter(content_type=ContentType.objects.get_for_model(Accessory), listing_type=HOT_AD).first()
-        
-        cd.update({
-            "FREE_AD": FREE_AD,
-            "PAID_AD": PAID_AD,
-            "PAID_AD_PRICE": paid_price.advertiser_price if paid_price else 0,
-            "HOT_AD": HOT_AD,
-            "HOT_AD_PRICE": hot_price.advertiser_price + paid_price.advertiser_price if hot_price else 0,
-            
-        })
-        return cd
-
-class AboutView(MobileViewMixin, TemplateView):
-    template_name = 'cms/about.html' 
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        stats = AboutSale.objects.first()
-        context["total_sales"] = (
-            stats.total_sales_display() if stats else "0"
-        )
-        context["completed"] = (
-            stats.completed_transactions() if stats else "0"
-        )
-
-        return context
-
-
-class BlogLisView(MobileViewMixin, ListView):
-    template_name = 'cms/blog.html'
-    model = Blog
-    paginate_by = 10
-    context_object_name = 'entries'
-    queryset = Blog.objects.filter(published=True)
-
-    def get_context_data(self, **kwargs):
-        cd = super(BlogLisView, self).get_context_data(**kwargs)
-        cd['page_name'] = 'ARTICLES'
-        # cd['title'] = 'Latest MotorCycle/Bike News, New MotorCycle Models & Specs - SGBikemart'
-        cd['title'] = 'Motorcycle News & Reviews Singapore | SGBikeMart'
-        cd['description'] = 'Latest motorcycle news, bike reviews, and rider updates in Singapore. Stay informed on new models, COE changes, gear launches and event coverage.'
-        cd['keywords'] = 'motorcycle reviews, motorcycle Road test, motorcycle news, Vehicle news, Vehicle review, Motoring advice, motorcycle tips, motorbike advice, motorcycle guide, motorcycle tips, Motoring guide, automotive news, automotive advice'
-        return cd
-         
 {% endcomment %}
     
-    <title>{% block title %}SGVehicleLoans{% endblock %}</title>
 </head>
 <body>
     
@@ -479,33 +326,31 @@ class BlogLisView(MobileViewMixin, ListView):
             <!-- Company Info + Social Media -->
             <div class="col-12 col-md-4 mb-4">
                 <h4 class="footer-title mb-3">SGVehicleLoans</h4>
-                <p>400 Balestier Road,<br>
-                Balestier Plaza #02-23,<br>
-                Singapore 329802</p>
+                <p>{{ footer.address|linebreaksbr }}</p>
                 <p><strong>Operating Hours:</strong><br>
-                Mon–Fri: 10am–6pm<br>
-                Sat: 12pm–4pm</p>
+                {{ footer.op_hours_weekdays }}<br>
+                {{ footer.op_hours_sat }}</p>
 
                 <!-- Social Media -->
                 <div class="mb-3">
                     <h6 class="footer-title">Follow Us</h6>
-                    <a href="https://www.facebook.com/login" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="Facebook">
+                    <a href="{{ footer.facebook_url }}" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="https://www.instagram.com/accounts/login/" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="Instagram">
+                    <a href="{{ footer.instagram_url }}" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://api.whatsapp.com/send?phone=6589259233&text=Hi%2C%20SGVehicleLoans" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="WhatsApp">
+                    <a href="{{ footer.whatsapp_url }}" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                     </a>
-                    <a href="https://www.tiktok.com/login" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="TikTok">
+                    <a href="{{ footer.tiktok_url }}" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="TikTok">
                         <i class="fab fa-tiktok"></i>
                     </a>
                 </div>
 
                 <!-- Mini Map -->
                 <div class="map-container rounded overflow-hidden shadow-sm">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.750498216391!2d103.8478215758166!3d1.3256235616514813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19d8ad2a9e11%3A0x1b8c2cdaf63e0fbb!2sBalestier%20Plaza!5e0!3m2!1sen!2smy!4v1764923928289!5m2!1sen!2smy"
+                    <iframe src="{{ footer.google_map_embed }}"
                     width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
@@ -551,9 +396,9 @@ class BlogLisView(MobileViewMixin, ListView):
             <div class="col-8 col-md-2 mb-4">
                 <h5 class="footer-title mb-3">Contact Us</h5>
                 <ul class="list-unstyled">
-                <li class="mb-2"><strong>Hotline:</strong> (+65) 6444 4400</li>
-                <li class="mb-2"><strong>Office:</strong> +65 6681 6778</li>
-                <li class="mb-2"><strong>Fax:</strong> +65 6256 1229</li>
+                <li class="mb-2"><strong>Hotline:</strong> {{ footer.hotline }}</li>
+                <li class="mb-2"><strong>Office:</strong> {{ footer.office }}</li>
+                <li class="mb-2"><strong>Fax:</strong> {{ footer.fax }}</li>
                 </ul>
             </div>
 
@@ -563,16 +408,16 @@ class BlogLisView(MobileViewMixin, ListView):
             <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top border-secondary">
                 <p class="mb-0">&copy; 2025 SGVehicleLoans Inc. All rights reserved.</p>
                 <div>
-                    <a href="https://www.facebook.com/login" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="Facebook">
+                    <a href="{{ footer.facebook_url }}" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="https://www.instagram.com/accounts/login/" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="Instagram">
+                    <a href="{{ footer.instagram_url }}" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://api.whatsapp.com/send?phone=6589259233&text=Hi%2C%20SGVehicleLoans" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="WhatsApp">
+                    <a href="{{ footer.whatsapp_url }}" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                     </a>
-                    <a href="https://www.tiktok.com/login" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="TikTok">
+                    <a href="{{ footer.tiktok_url }}" class="text-light me-3 fs-5 social-icon" target="_blank" aria-label="TikTok">
                         <i class="fab fa-tiktok"></i>
                     </a>
                 </div>
