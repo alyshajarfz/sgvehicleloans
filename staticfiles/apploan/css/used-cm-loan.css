@@ -323,7 +323,7 @@
   margin: 40px 0 20px;
   color: #111;
   text-align: left;
-  border-left: 4px solid #960000ff;
+  border-left: 4px solid #1970c7;
   padding-left: 10px;
 }
 
@@ -357,7 +357,7 @@
 /* Icon */
 .info-card .icon {
   font-size: 2rem;
-  color: #960000ff;
+  color: #1970c7;
 }
 
 /* Text */
@@ -415,7 +415,7 @@
 .eligibility-heading {
   font-size: 2rem;
   color: #111;
-  border-left: 4px solid #960000ff;
+  border-left: 4px solid #1970c7;
   padding-left: 10px;
   margin: 0;
   flex: 1 1 250px; 
@@ -444,23 +444,20 @@
 
 
 .check-icon {
-  color: #960000ff;
+  color: #1970c7;
   font-weight: bold;
   margin-right: 10px;
   font-size: 1.4rem; 
 }
 
-
-
 .req-heading {
   font-size: 2rem;
   text-align: center;
-  border-left: 4px solid #960000ff;
+  border-left: 4px solid #1970c7;
   padding-left: 10px;
   width: fit-content;
   margin: 0 auto 25px;
 }
-
 
 .req-item {
   display: flex;
@@ -525,8 +522,6 @@
 }
 
 
-
-
 .rate-subheading {
   font-size: 1.2rem;
   color: #555;
@@ -559,7 +554,7 @@
 
 .vertical-divider {
   width: 2px;
-  background: linear-gradient(to bottom, #960000ff, #9b9b9b);
+  background: linear-gradient(to bottom, #1970c7, #9b9b9b);
   align-self: stretch; /* important: fill height of flex container */
 }
 
@@ -585,7 +580,7 @@
 }
 
 .loan-box h3 {
-  color: #960000ff;
+  color: #1970c7;
   text-align: center;
   margin-bottom: 15px;
 }
@@ -608,28 +603,28 @@
 .slider-value {
   font-weight: 700;
   font-size: 1.8rem;
-  color: rgb(145, 0, 0);
+  color: rgb(0, 68, 145);
   display: block;       /* move value to its own line */
 }
 
 /* Chrome, Safari, Opera */
 input[type="range"].form-range::-webkit-slider-thumb {
-    background-color: #960000ff;
+    background-color: #0c4d99;
 }
 
 /* Firefox */
 input[type="range"].form-range::-moz-range-thumb {
-    background-color: #960000ff;
+    background-color: #0c4d99;
 }
 
 /* IE / Edge */
 input[type="range"].form-range::-ms-thumb {
-    background-color: #960000ff; 
+    background-color: #0c4d99;
 }
 
 
 .loan-result {
-  background: rgb(255, 228, 228);
+  background: rgb(228, 241, 255);
   border-radius: 15px;
   padding: 15px 10px;
   text-align: center;
@@ -637,7 +632,7 @@ input[type="range"].form-range::-ms-thumb {
 }
 
 .loan-result h2 {
-  color: #960000ff;
+  color: #1950c7;
   font-weight: 800;
   font-size: 1.8rem;
   margin-bottom: 5px;
@@ -702,7 +697,7 @@ input[type="range"].form-range::-ms-thumb {
   position: absolute;
   height: 30px;
   width: 120px;
-  background-color: #960000ff;
+  background-color: #1970c7;
   top: 32px;
   right: -2.5px;
   clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
@@ -720,7 +715,7 @@ input[type="range"].form-range::-ms-thumb {
 }
 
 .card__icon svg {
-  color: #960000ff;
+  color: #1970c7;
 }
 
 .card__title {
@@ -741,7 +736,7 @@ input[type="range"].form-range::-ms-thumb {
   display: grid;
   place-items: center;
   height: 50px;
-  background-color: #960000ff;
+  background-color: #1970c7;
   width: 110%;
   left: -5%;
   top: 10px;
@@ -758,7 +753,7 @@ input[type="range"].form-range::-ms-thumb {
   aspect-ratio: 1/1;
   bottom: 100%;
   z-index: -2;
-  background-color: #960000ff;
+  background-color: #1970c7;
   transition: none;
 }
 
@@ -784,7 +779,7 @@ input[type="range"].form-range::-ms-thumb {
   background-color: #fff;
   transform: translateY(-50%);
   border-radius: 50%;
-  border: 8px solid #960000ff;
+  border: 8px solid #1970c7;
   font-weight: 900;
   line-height: 1;
   font-size: 1.5rem;
@@ -803,13 +798,13 @@ input[type="range"].form-range::-ms-thumb {
 .card__ribbon-label::before {
   right: calc(100% + 4px);
   border-bottom-right-radius: 20px;
-  box-shadow: 5px 5px 0 #960000ff;
+  box-shadow: 5px 5px 0 #1970c7;
 }
 
 .card__ribbon-label::after {
   left: calc(100% + 4px);
   border-bottom-left-radius: 20px;
-  box-shadow: -5px 5px 0 #960000ff;
+  box-shadow: -5px 5px 0 #1970c7;
 }
 
 
@@ -832,7 +827,7 @@ input[type="range"].form-range::-ms-thumb {
 }
 
 .apply-btn {
-  background: #960000ff;
+  background: #1970c7;
   color: white;
 }
 

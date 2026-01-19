@@ -66,7 +66,7 @@
 .hero-card .btn-secondary {
   padding: 12px 30px;
   border-radius: 50px;
-  background: #960000ff;
+  background: #0c4d99;
   color: #ffffff;
   font-weight: bold;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -74,7 +74,7 @@
 
 .hero-card .btn-secondary:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(255, 0, 0, 0.6);
+  box-shadow: 0 10px 20px rgba(0, 162, 255, 0.6);
 }
 
 /* =========================
@@ -90,7 +90,7 @@
 }
 
 .category-item i {
-  color: #960000ff;
+  color: #1970c7;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -236,7 +236,7 @@
     position: absolute;
     width: 100px;          /* Line length */
     height: 4px;           /* Line thickness */
-    background: linear-gradient(to right, #960000, #ff4d4d); /* Gradient line */
+    background: linear-gradient(to right, #1970c7, #4da0ff); /* Gradient line */
     bottom: -15px;         /* Distance from text */
     left: 50%;
     transform: translateX(-50%);
@@ -276,7 +276,7 @@
     width: 70px;  /* Medium circle */
     height: 70px;
     border-radius: 50%;
-    background-color: #960000;
+    background-color: #1970c7;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -398,7 +398,7 @@
     font-weight: 600;
     border: none;
     cursor: pointer;
-    background: linear-gradient(-45deg, #b40000 0%, #000000ff 100%);
+    background: linear-gradient(-45deg, #006cb4 0%, #000000ff 100%);
     border-radius: 5px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
@@ -427,7 +427,7 @@
     bottom: 0;
     width: 5px;
     height: 100%;
-    background: linear-gradient(-45deg, rgba(0,0,0,0.8) 0%, rgba(255,0,0,0.8) 100%);
+    background: linear-gradient(-45deg, rgba(0,0,0,0.8) 0%, rgba(0, 140, 255, 0.8) 100%);
     z-index: 1;
     transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
 }
@@ -457,7 +457,7 @@
 
 /* Criss-cross overlay colors */
 .overlay-red .overlay-image {
-    background-color: rgba(255,0,0,0.4);
+    background-color: rgba(0, 140, 255, 0.4);
 }
 
 .overlay-black .overlay-image {
