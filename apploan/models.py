@@ -41,7 +41,7 @@ class MenuSetting(models.Model):
         return "Navbar Menu"
     
 
-
+# Loan Rates
 class LoanRate(models.Model):
     loan_name = models.CharField(max_length=50)
     loan_display = models.CharField(max_length=100, blank=True, null=True)
@@ -50,7 +50,8 @@ class LoanRate(models.Model):
 
     def __str__(self):
         return self.loan_display or self.loan_name
-
+    
+# Quotation
 class QuoteMotor(models.Model):
 
     # --- CHOICES ---
@@ -364,6 +365,7 @@ class QuoteCar(models.Model):
         return f"{self.name}"
 
 
+# Header Media
 class HeaderVideo(models.Model):
     INS_CHOICES = [
         ('car', 'Car Insurance'),
@@ -390,8 +392,34 @@ class HeaderImage(models.Model):
 
     def __str__(self):
         return f"{self.get_template_type_display()} Image"
+    
 
+# Enquiry Models
+class Enquiry(models.Model):
+    ENQUIRY_CHOICES = [
+        ('used_cm', 'Used Car & Motorcycle'),
+        ('new_cm', 'New Car & Motorcycle'),
+        ('direct_bs', 'Direct Buyer - Seller'),
+        ('coe_car', 'COE Car'),
+        # Add more 
+    ]
 
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    mobile = models.CharField(max_length=50)
+    email = models.EmailField()
+    enquiry_type = models.CharField(max_length=50, choices=ENQUIRY_CHOICES, default='used_cm',)
+    privacy_policy = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} ({self.email}) - {self.get_enquiry_type_display()}"
+    
+class GeneralEnquiry(Enquiry):  # proxy model
+    class Meta:
+        proxy = True
+        verbose_name = "General Enquiry"
+        verbose_name_plural = "General Enquiries"
 
 class EnquiryRenew(models.Model):
     LOAN_TYPE_CHOICES = [
@@ -433,8 +461,6 @@ class EnquiryRenew(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.loan_type})"
 
-
-# Proxy models for admin separation
 class CarEnquiry(EnquiryRenew):
     class Meta:
         proxy = True
@@ -449,24 +475,7 @@ class MotorcycleEnquiry(EnquiryRenew):
         verbose_name_plural = 'Enquiries COE Renew Motorcycle'
 
 
-class Enquiry(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    mobile = models.CharField(max_length=50)
-    email = models.EmailField()
-    privacy_policy = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name} ({self.email})"
-    
-class GenEnquiry(Enquiry):  # proxy model
-    class Meta:
-        proxy = True
-        verbose_name = "General Enquiries"
-        verbose_name_plural = "General Enquiries"
-
-
+# Application Models
 class Apply(models.Model):
     LOAN_TYPE_CHOICES = [
         ('used_car', 'Used Car Loan'),
@@ -564,6 +573,7 @@ class MotorCOE(ApplyCOE):
         verbose_name_plural = "Application COE Renewal Motorcycle"
 
 
+# Footer S
 class FooterSetting(models.Model):
     address = models.TextField(default="400 Balestier Road,\nBalestier Plaza #02-23,\nSingapore 329802")
     google_map_embed = models.TextField(
@@ -591,3 +601,49 @@ class FooterSetting(models.Model):
 
     def __str__(self):
         return "Footer Settings"
+
+
+# Installment
+class InstallmentSubmit(models.Model):
+    full_name = models.CharField(max_length=255)
+    nric = models.CharField(max_length=50)
+    contact = models.CharField(max_length=20)
+    email = models.EmailField()
+
+    vehicle_reg = models.CharField(max_length=20)
+    install_amount = models.DecimalField(max_digits=10, decimal_places=2, help_text="Monthly instalment amount")
+    transfer_amount = models.DecimalField(max_digits=10, decimal_places=2, help_text="Amount transferred")
+
+    reference = models.CharField(max_length=100)
+    proof_pay = models.FileField(upload_to='installments/', help_text="Upload transfer receipt")
+    remarks = models.TextField(blank=True, null=True)
+
+    privacy_policy = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.full_name} - {self.vehicle_reg}"
+    
+# Contact
+class Contact(models.Model):
+    ENQUIRY_CHOICES = [
+        ('Car Loan', 'Car Loan'),
+        ('Motorcycle Loan', 'Motorcycle Loan'),
+        ('Insurance', 'Insurance'),
+        ('Other', 'Other'),
+    ]
+
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=20)
+    email = models.EmailField()
+    enquiry_type = models.CharField(max_length=50, choices=ENQUIRY_CHOICES)
+    message = models.TextField(blank=True, null=True)
+    privacy_policy = models.BooleanField(default=False)
+    captcha = models.CharField(max_length=10, help_text="Simple math captcha")
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.enquiry_type}"

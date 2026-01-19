@@ -71,47 +71,42 @@
       <div class="card shadow-sm h-100 p-4">
         <h4 class="mb-3">Send Us a Message</h4>
         <p class="mb-4">Let us know how we can help you and we will contact you within 1-2 business days.</p>
-        <form>
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
           <div class="row g-3 mb-3">
             <div class="col-md-6">
               <label class="form-label">First Name *</label>
-              <input type="text" class="form-control" required>
+              {{ form.first_name }}
             </div>
             <div class="col-md-6">
               <label class="form-label">Last Name *</label>
-              <input type="text" class="form-control" required>
+              {{ form.last_name }}
             </div>
           </div>
 
           <div class="row g-3 mb-3">
             <div class="col-md-6">
               <label class="form-label">Mobile Number *</label>
-              <input type="tel" class="form-control" required>
+               {{ form.phone }}
             </div>
             <div class="col-md-6">
               <label class="form-label">Email Address *</label>
-              <input type="email" class="form-control" required>
+              {{ form.email }}
             </div>
           </div>
 
           <div class="mb-3">
             <label class="form-label">Enquiry Type *</label>
-            <select class="form-select" required>
-              <option value="">Please select...</option>
-              <option>Car Loan</option>
-              <option>Motorcycle Loan</option>
-              <option>Insurance</option>
-              <option>Other</option>
-            </select>
+            {{ form.enquiry_type }}
           </div>
 
           <div class="mb-3">
             <label class="form-label">Message</label>
-            <textarea class="form-control" rows="5"></textarea>
+            {{ form.message }}
           </div>
 
           <div class="mb-3 form-check">
-            <input class="form-check-input" type="checkbox" required>
+            {{ form.privacy_policy }}
             <label class="form-check-label">
               I agree to the Privacy Policy and receive communication from SGVehicleLoans.
             </label>
@@ -119,7 +114,10 @@
 
           <div class="mb-3">
             <label class="form-label">CAPTCHA *</label>
-            <input type="text" class="form-control" placeholder="5 + 4 = ?" required>
+            {{ form.captcha_answer }}
+            {% if form.captcha_answer.errors %}
+              <div class="text-danger">{{ form.captcha_answer.errors.0 }}</div>
+            {% endif %}
           </div>
 
           <button type="submit" class="btn btn-primary">Submit</button>

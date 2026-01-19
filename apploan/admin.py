@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 from unfold.admin import ModelAdmin 
-from .models import MenuSetting, LoanRate, Enquiry, QuoteMotor, QuoteCar, HeaderVideo, HeaderImage, CarEnquiry, MotorcycleEnquiry, Application, CarCOE, MotorCOE, FooterSetting
+from .models import MenuSetting, LoanRate, GeneralEnquiry, QuoteMotor, QuoteCar, HeaderVideo, HeaderImage, CarEnquiry, MotorcycleEnquiry, Application, CarCOE, MotorCOE, FooterSetting, InstallmentSubmit, Contact
 
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User, Group
@@ -102,30 +102,11 @@ class ApplicationAdmin(ModelAdmin):
 
 
 # Enquiry
-@admin.register(Enquiry)
-class EnquiryAdmin(ModelAdmin):
-    list_display = ('first_name', 'last_name', 'email', 'mobile', 'created_at')
-    search_fields = ('first_name', 'last_name', 'email', 'mobile')
+@admin.register(GeneralEnquiry)
+class GeneralEnquiryAdmin(ModelAdmin):
+    list_display = ('first_name', 'last_name', 'email', 'mobile', 'enquiry_type', 'created_at')
+    search_fields = ('first_name', 'last_name', 'email', 'mobile', 'enquiry_type',)
     ordering = ('-created_at',)
-
-
-@admin.register(QuoteMotor)
-class QuoteMotorAdmin(ModelAdmin):
-    # Columns to display in admin list view
-    list_display = ('name', 'number', 'brand', 'model', 'created_at')
-    
-    # Fields to search in admin
-    search_fields = ('name', 'number', 'brand', 'model')
-    
-    # Default ordering
-    ordering = ('-created_at',)
-
-@admin.register(QuoteCar)
-class QuoteCarAdmin(ModelAdmin):
-    list_display = ('name', 'number', 'brand', 'model', 'created_at')
-    search_fields = ('name', 'number', 'brand', 'model')
-    ordering = ('-created_at',)
-
 
 @admin.register(CarEnquiry)
 class CarEnquiryAdmin(ModelAdmin):
@@ -151,6 +132,24 @@ class MotorcycleEnquiryAdmin(ModelAdmin):
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         return qs.filter(loan_type='motorcycle')  # ONLY show motorcycles
+
+
+@admin.register(QuoteMotor)
+class QuoteMotorAdmin(ModelAdmin):
+    # Columns to display in admin list view
+    list_display = ('name', 'number', 'brand', 'model', 'created_at')
+    
+    # Fields to search in admin
+    search_fields = ('name', 'number', 'brand', 'model')
+    
+    # Default ordering
+    ordering = ('-created_at',)
+
+@admin.register(QuoteCar)
+class QuoteCarAdmin(ModelAdmin):
+    list_display = ('name', 'number', 'brand', 'model', 'created_at')
+    search_fields = ('name', 'number', 'brand', 'model')
+    ordering = ('-created_at',)
     
 
 @admin.register(CarCOE)
@@ -173,6 +172,33 @@ class MotorCOEAdmin(ModelAdmin):
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         return qs.filter(vehicle_type='motor')
+
+@admin.register(InstallmentSubmit)
+class InstallmentSubmitAdmin(ModelAdmin):
+    list_display = ('full_name', 'nric', 'contact', 'email', 'vehicle_reg', 'install_amount', 'transfer_amount', 'reference', 'created_at')
+    list_filter = ('created_at', 'install_amount', 'transfer_amount')
+    search_fields = ('full_name', 'nric', 'contact', 'email', 'vehicle_reg', 'reference')
+    
+    # Order by newest first
+    ordering = ('-created_at',)
+    readonly_fields = ('created_at',)
+    
+    # Optional: customize field layout in detail view
+    fieldsets = (
+        ('Personal Info', {
+            'fields': ('full_name', 'nric', 'contact', 'email')
+        }),
+        ('Vehicle & Payment', {
+            'fields': ('vehicle_reg', 'install_amount', 'transfer_amount', 'reference', 'proof_pay')
+        }),
+        ('Remarks & Privacy', {
+            'fields': ('remarks', 'privacy_policy')
+        }),
+        ('Meta', {
+            'fields': ('created_at',)
+        }),
+    )
+
     
 @admin.register(FooterSetting)
 class FooterSettingAdmin(ModelAdmin):
@@ -196,3 +222,11 @@ class FooterSettingAdmin(ModelAdmin):
     # Only allow one row
     def has_add_permission(self, request):
         return not FooterSetting.objects.exists()
+
+
+@admin.register(Contact)
+class ContactAdmin(ModelAdmin):
+    list_display = ('first_name', 'last_name', 'email', 'enquiry_type', 'created_at')
+    list_filter = ('enquiry_type', 'created_at')
+    search_fields = ('first_name', 'last_name', 'email', 'phone', 'message')
+    readonly_fields = ('created_at',)

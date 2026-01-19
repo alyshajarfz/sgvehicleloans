@@ -1,5 +1,5 @@
 from django import forms
-from .models import QuoteMotor, QuoteCar, Enquiry, EnquiryRenew, Apply, ApplyCOE
+from .models import QuoteMotor, QuoteCar, Enquiry, EnquiryRenew, Apply, ApplyCOE, InstallmentSubmit, Contact
 
 class QuoteMotorForm(forms.ModelForm):
     # Generate year choices dynamically (2025 down to 1930)
@@ -72,12 +72,13 @@ class EnquiryForm(forms.ModelForm):
 
     class Meta:
         model = Enquiry
-        fields = ['first_name', 'last_name', 'mobile', 'email', 'privacy_policy']
+        fields = ['first_name', 'last_name', 'mobile', 'email', 'enquiry_type', 'privacy_policy']
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
             'mobile': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile Number'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
+            'enquiry_type': forms.Select(attrs={'class': 'form-select'}),
             "privacy_policy": forms.CheckboxInput(attrs={"class": "form-check-input"}),
         }
 
@@ -156,3 +157,55 @@ class ApplyCOEForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control','placeholder': 'Email Address','required': True}),
             'consent': forms.CheckboxInput(attrs={'class': 'form-check-input','required': True}),
         }
+
+
+
+class InstallmentSubmitForm(forms.ModelForm):
+    class Meta:
+        model = InstallmentSubmit
+        fields = ['full_name', 'nric', 'contact', 'email', 'vehicle_reg','install_amount','transfer_amount','reference','proof_pay',
+                'remarks','privacy_policy',
+        ]
+
+        widgets = {
+            'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name'}),
+            'nric': forms.TextInput(attrs={'class': 'form-control'}),
+            'contact': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'vehicle_reg': forms.TextInput(attrs={'class': 'form-control'}),
+            'install_amount': forms.NumberInput(attrs={'class': 'form-control'}),
+            'transfer_amount': forms.NumberInput(attrs={'class': 'form-control'}),
+            'reference': forms.TextInput(attrs={'class': 'form-control'}),
+            'remarks': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'privacy_policy': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }
+
+
+from django import forms
+
+class ContactForm(forms.ModelForm):
+    captcha_answer = forms.IntegerField(
+        label="CAPTCHA: 5 + 4 = ?", required=True,widget=forms.NumberInput(attrs={
+            'class': 'form-control',  
+            'placeholder': 'CAPTCHA: 5 + 4 = ?'
+        })
+    )
+
+    class Meta:
+        model = Contact
+        fields = ['first_name', 'last_name', 'phone', 'email', 'enquiry_type', 'message', 'privacy_policy', 'captcha_answer']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile Number'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
+            'enquiry_type': forms.Select(attrs={'class': 'form-select'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Your message'}),
+            'privacy_policy': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }
+
+    def clean_captcha_answer(self):
+        answer = self.cleaned_data.get('captcha_answer')
+        if answer != 9:  # 5 + 4 = 9
+            raise forms.ValidationError("Incorrect CAPTCHA answer.")
+        return answer

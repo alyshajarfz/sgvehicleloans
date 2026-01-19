@@ -40,4 +40,5 @@ urlpatterns = [
     
     path('formCar/', views.formCar, name='formCar'),
     path('formMotor/', views.formMotor, name='formMotor'),
+
 ]

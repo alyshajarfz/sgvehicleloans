@@ -1,6 +1,6 @@
 .hero-gradient {
     position: relative;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('../images/automoto.jpg') center/cover no-repeat;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('../images/about.jpg') center/cover no-repeat;
     padding: 200px 20px;
     height: 65vh;
     color: #fff;
@@ -33,7 +33,7 @@
 }
 
 .hero-gradient .cta {
-    background: #ad2020;
+    background: #1970c7;
     color: #ffffff;
     padding: 15px 35px;
     border-radius: 50px;
@@ -59,7 +59,7 @@
     margin-top:20px;
     display:inline-block;
     padding:12px 30px;
-    background:#e63946;
+    background:#1970c7;
     color:#fff;
     border-radius:6px;
     font-weight:600; 
@@ -68,7 +68,7 @@
 }
 
 .cta:hover { 
-    background:#d62828; 
+    background:#1950c7; 
 }
 
 /* About Us */
@@ -76,7 +76,7 @@
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 20px;
-    color: #960000ff;
+    color: #1970c7;
 }
 
 .about-us p {
@@ -114,7 +114,7 @@
 .section-title { 
     font-size:2.5rem;
     font-weight:700;
-    color:#960000ff; 
+    color:#1970c7; 
     margin-bottom:2rem; 
 }
 
@@ -131,7 +131,7 @@
 }
 .feature-card h5 {
     font-weight: 700;
-    color: #960000ff;
+    color: #1970c7;
     margin-bottom: 10px;
 }
 .feature-card p {
@@ -140,12 +140,12 @@
 }
 .feature-icon {
     font-size: 3rem;
-    color: #e63946;
+    color: #1970c7;
 }
 
 /* Stats */
 .stat-card {
-    background: linear-gradient(135deg, #6A0D0D, #D32F2F, #FF8A80);
+    background: linear-gradient(135deg, #1970c7, #4da0ff, #80c6ff);
 
     color: #fff;
     box-shadow: 0 6px 20px rgba(0,0,0,0.1);
@@ -205,7 +205,7 @@
 
 .service-card i { 
     font-size:1.8rem; 
-    color:#e63946; 
+    color:#1970c7; 
 }
 
 .service-card span { 
@@ -219,7 +219,7 @@
 .testimonials-chat-alt h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #960000ff;
+    color: #1970c7;
 }
 
 /* Chat Container */
@@ -265,7 +265,7 @@
 
 /* Right Bubbles */
 .chat-bubble.right {
-    background-color: #e63946;
+    background-color: #1970c7;
     color: #fff;
     align-self: flex-end;
     border-top-right-radius: 5px;
@@ -304,7 +304,7 @@
 
 /* Right message box */
 .chat-bubble.right .message {
-    background: #e04e5a;
+    background: #1970c7;
     color: #fff;
 }
 
@@ -325,7 +325,7 @@
 
 /* Call-to-Action */
 .cta-section {
-    background: linear-gradient(135deg, #330000, #ad2020, #FF5252);
+    background: linear-gradient(135deg, #003b75, #176ed1, #80c6ff);
     color: #fff;
 }
 
@@ -341,7 +341,7 @@
 }
 
 .cta-btn {
-    background: #db2837;
+    background: #5eafff;
     color: #fff;
     padding: 15px 35px;
     border-radius: 50px;
@@ -352,7 +352,7 @@
 }
 
 .cta-btn:hover {
-    background: #e76d6d;
+    background: #1970c7;
     transform: scale(1.05);
 }
 

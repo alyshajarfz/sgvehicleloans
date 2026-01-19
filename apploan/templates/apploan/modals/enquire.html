@@ -37,6 +37,12 @@
             {{ enquiry_form.email.errors }}
           </div>
 
+          <div class="mb-3">
+            {{ enquiry_form.enquiry_type.label_tag }}
+            {{ enquiry_form.enquiry_type }}
+            {{ enquiry_form.enquiry_type.errors }}
+          </div>
+
           <div class="form-check mb-3">
               {{ enquiry_form.privacy_policy }}
               <label class="form-check-label">

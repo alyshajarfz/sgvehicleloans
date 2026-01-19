@@ -23,54 +23,55 @@
     <div class="col-lg-6">
       <div class="card">
         <h2 class="mb-4">Submit Installment</h2>
-        <form>
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
           <div class="mb-3">
             <label class="form-label">Full Name / Company Name *</label>
-            <input type="text" class="form-control" required>
+            {{ form.full_name }}
           </div>
           <div class="mb-3">
-            <label class="form-label">IC / ACRA Number *</label>
-            <input type="text" class="form-control" required>
+            <label class="form-label">IC Number *</label>
+            {{ form.nric }}
           </div>
           <div class="mb-3">
             <label class="form-label">Contact Number *</label>
-            <input type="tel" class="form-control" required>
+            {{ form.contact }}
           </div>
           <div class="mb-3">
             <label class="form-label">Email Address *</label>
-            <input type="email" class="form-control" required>
+            {{ form.email }}
           </div>
           <div class="mb-3">
             <label class="form-label">Vehicle Registration Number *</label>
-            <input type="text" class="form-control" required>
+            {{ form.vehicle_reg }}
           </div>
           <div class="row g-3 mb-3">
             <div class="col">
               <label class="form-label">Instalment Amount *</label>
-              <input type="number" class="form-control" required>
+              {{ form.install_amount }}
               <div class="form-text">Your monthly instalment to be paid to us.</div>
             </div>
             <div class="col">
               <label class="form-label">Transferred Amount *</label>
-              <input type="number" class="form-control" required>
+              {{ form.transfer_amount }}
               <div class="form-text">The amount you transferred to us.</div>
             </div>
           </div>
           <div class="mb-3">
             <label class="form-label">Reference Number *</label>
-            <input type="text" class="form-control" required>
+            {{ form.reference }}
           </div>
           <div class="mb-3">
-            <label class="form-label">File Upload *</label>
-            <input type="file" class="form-control" required>
+            <label class="form-label">Receipt File Upload *</label>
+            {{ form.proof_pay }}
             <div class="form-text">Click or drag a file to this area to upload.</div>
           </div>
           <div class="mb-3">
             <label class="form-label">Message / Remarks</label>
-            <textarea class="form-control" rows="3"></textarea>
+            {{ form.remarks }}
           </div>
           <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="privacyCheck" required>
+            {{ form.privacy_policy }}
             <label class="form-check-label" for="privacyCheck">
               By submitting this form, you agree to our Privacy Policy and agree to receive sales and/or marketing communication from Speed Credit Pte Ltd. Rest assured that any personal information you send will remain strictly private and confidential.
             </label>

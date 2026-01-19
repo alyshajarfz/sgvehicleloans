@@ -44,20 +44,20 @@
 .hero-btn {
   display: inline-block;
   padding: 16px 45px;
-  background: linear-gradient(90deg, #b40000, #ff1f1f);
+  background: linear-gradient(90deg, #1970c7, #4da0ff);
   color: #fff;
   border-radius: 50px;
   font-size: 1.2rem;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 140, 255, 0.4);
   transition: 0.3s ease;
 }
 
 .hero-btn:hover {
-  background: linear-gradient(90deg, #ff1f1f, #b40000);
+  background: linear-gradient(90deg, #1970c7, #4da0ff);
   transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(255, 0, 0, 0.6);
+  box-shadow: 0 15px 30px rgba(0, 162, 255, 0.6);
 }
 
 /* HERO STATS */
@@ -120,7 +120,7 @@
 }
 
 .loan-box h3 {
-  color: #960000ff;
+  color: #1950c7;
   text-align: center;
   margin-bottom: 15px;
 }
@@ -143,28 +143,28 @@
 .slider-value {
   font-weight: 700;
   font-size: 1.8rem;
-  color: rgb(145, 0, 0);
+  color: rgb(0, 68, 145);
   display: block;       /* move value to its own line */
 }
 
 /* Chrome, Safari, Opera */
 input[type="range"].form-range::-webkit-slider-thumb {
-    background-color: #960000ff;
+    background-color: #0c4d99;
 }
 
 /* Firefox */
 input[type="range"].form-range::-moz-range-thumb {
-    background-color: #960000ff;
+    background-color: #0c4d99;
 }
 
 /* IE / Edge */
 input[type="range"].form-range::-ms-thumb {
-    background-color: #960000ff; 
+    background-color: #0c4d99;
 }
 
 
 .loan-result {
-  background: rgb(255, 228, 228);
+  background: rgb(228, 241, 255);
   border-radius: 15px;
   padding: 15px 10px;
   text-align: center;
@@ -172,7 +172,7 @@ input[type="range"].form-range::-ms-thumb {
 }
 
 .loan-result h2 {
-  color: #960000ff;
+  color: #1950c7;
   font-weight: 800;
   font-size: 1.8rem;
   margin-bottom: 5px;

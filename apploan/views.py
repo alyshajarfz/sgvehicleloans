@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import HeaderVideo, HeaderImage, FooterSetting
 from django.contrib import messages
-from .forms import QuoteMotorForm, QuoteCarForm, EnquiryForm, EnquiryRenewCarForm, EnquiryRenewMotorcycleForm, ApplyForm, ApplyCOEForm
+from .forms import QuoteMotorForm, QuoteCarForm, EnquiryForm, EnquiryRenewCarForm, EnquiryRenewMotorcycleForm, ApplyForm, ApplyCOEForm, InstallmentSubmitForm, ContactForm
 from datetime import datetime
 
 def home(request):
@@ -74,11 +74,13 @@ def financeCOECar(request):
 
 def financeRefinance(request):
     apply_form = ApplyForm()
+    enquiry_form = EnquiryForm()
 
     context = {
         'title': 'Car & Motorcycle Loan Refinancing Singapore | Lower Instalments Fast',
         'description': 'Refinance your car or motorcycle loan in Singapore to lower monthly instalments or get better rates. Fast approval support, flexible plans, and quick quotation. Apply now.',
         'apply_form': apply_form,
+        'enquiry_form': enquiry_form,
     }
     
     return render(request, 'apploan/financing/car-refinancing.html', context)
@@ -154,12 +156,14 @@ def COERenewMoto(request):
 def insCar(request):
     video = HeaderVideo.objects.filter(insurance_type='car').first()
     form = QuoteCarForm()
+    enquiry_form = EnquiryForm()
 
     context = {
         'title': 'Car Insurance Singapore | Fast Quote & Competitive Rates | SGVehicleLoans',
         'description': 'Get car insurance in Singapore with fast quotation support. Competitive rates, flexible coverage options, and easy renewal. Request a free quote today.',
         'video': video,
         'form': form,
+        'enquiry_form': enquiry_form,
     }
 
     return render(request, 'apploan/insurance/ins-car.html', context)
@@ -168,12 +172,14 @@ def insCar(request):
 def insMotor(request):
     video = HeaderVideo.objects.filter(insurance_type='motorcycle').first()
     form = QuoteMotorForm()
+    enquiry_form = EnquiryForm()
 
     context = {
         'title': 'Motorcycle Insurance Singapore | Fast Quote & Competitive Rates',
         'description': 'Get motorcycle insurance in Singapore with fast quotation support. Competitive rates, flexible coverage options, and easy renewal. Request a free quote today.',
         'video': video,
         'form': form,
+        'enquiry_form': enquiry_form,
     }
 
     return render(request, 'apploan/insurance/ins-motor.html', context)
@@ -212,9 +218,21 @@ def guidesFaq(request):
 
 
 def guidesInstall(request):
+    if request.method == 'POST':
+        form = InstallmentSubmitForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/?submitted=true')
+        else:
+            print(form.errors)
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = InstallmentSubmitForm()
+
     context = {
         'title': 'Car & Motorcycle Loan Instalment Guide Singapore | Monthly Repayment Help',
         'description': 'Learn how car and motorcycle loan instalments work in Singapore. Understand monthly repayments, interest rates, tenure, and hire purchase terms. Use our guide to plan better.',
+        'form': form,
     }
     return render(request, 'apploan/guides/loan-installment.html', context)
 
@@ -237,19 +255,23 @@ def about(request):
 # Contact
 def contact(request):
     if request.method == 'POST':
-        # Handle form submission
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
-        # For now, just print to console (or save to DB later)
-        print(f"{name}, {email}, {message}")
-        return HttpResponse("Thank you for contacting us!")
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Thank you for contacting us!")
+            return redirect(request.path)
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = ContactForm()
 
     context = {
-        'title': 'Contact SG Vehicle Loans | Car & Motorcycle Loan Quote Singapore',
-        'description': 'Contact SG Vehicle Loans for car and motorcycle financing in Singapore. Fast quotation support for hire purchase, refinancing, and COE renewal loans. WhatsApp us today.',
+        'title': 'Contact SGVehicleLoans | Car & Motorcycle Loan Quote Singapore',
+        'description': 'Contact SGVehicleLoans for car and motorcycle financing in Singapore.',
+        'form': form,
     }
     return render(request, 'apploan/contact.html', context)
+
 
 
 
@@ -344,5 +366,3 @@ def cQuote(request):
 def footerSettings(request):
     footer = FooterSetting.objects.first()
     return {"footer": footer}
-
-

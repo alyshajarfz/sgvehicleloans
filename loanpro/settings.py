@@ -252,14 +252,60 @@ UNFOLD = {
                         #"permission": lambda request: request.user.is_superuser,
                     },
                     {
-                        "title": _("Application"),
+                        "title": _("General Application"),
                         "icon": "data_table",
                         "link": reverse_lazy("admin:apploan_application_changelist"), #admin:<app_label>_<model_name>_changelist
                     },
                     {
+                        "title": _("Application COE Renewal Car"),
+                        "icon": "autorenew",
+                        "link": reverse_lazy("admin:apploan_carcoe_changelist"), 
+                    },
+                    {
+                        "title": _("Application COE Renewal Motorcycle"),
+                        "icon": "cached",
+                        "link": reverse_lazy("admin:apploan_motorcoe_changelist"), 
+                    },
+                    {
+                        "title": _("Application"),
+                        "icon": "data_table",
+                        "link": reverse_lazy("admin:apploan_application_changelist"),
+                    },
+                    {
+                        "title": _("General Enquiries"),
+                        "icon": "tooltip_2",
+                        "link": reverse_lazy("admin:apploan_generalenquiry_changelist"),
+                    },
+                    {
+                        "title": _("Enquiry COE Renew Car"),
+                        "icon": "autorenew",
+                        "link": reverse_lazy("admin:apploan_carenquiry_changelist"),
+                    },
+                    {
+                        "title": _("Enquiry COE Renew Motorcycle"),
+                        "icon": "cached",
+                        "link": reverse_lazy("admin:apploan_motorcycleenquiry_changelist"),
+                    },
+                    {
                         "title": _("Enquiries"),
                         "icon": "tooltip_2",
-                        "link": reverse_lazy("admin:apploan_enquiry_changelist"),
+                        "link": reverse_lazy("admin:apploan_generalenquiry_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": _("Quotations"),
+                "collapsible": True,  # Collapsible group of links
+                "items": [
+                    {
+                        "title": _("Qoute Car"),
+                        "icon": "request_quote",
+                        "link": reverse_lazy("admin:apploan_quotecar_changelist"),
+                    },
+                    {
+                        "title": _("Qoute Motorcycle"),
+                        "icon": "draft",
+                        "link": reverse_lazy("admin:apploan_quotemotor_changelist"),
                     },
                 ],
             },
@@ -291,7 +337,7 @@ UNFOLD = {
                     },
                     {
                         "title": _("Footer"),
-                        "icon": "add_photo_alternate",
+                        "icon": "edit_location_alt",
                         "link": reverse_lazy("admin:apploan_footersetting_changelist"), 
                     },
 
