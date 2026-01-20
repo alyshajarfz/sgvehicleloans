@@ -15,22 +15,22 @@ class QuoteMotorForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             "brand": forms.Select(attrs={"class": "form-select"}),
-            "model": forms.TextInput(attrs={"class": "form-control","placeholder": "Enter motorcycle model"}),
-            "name": forms.TextInput(attrs={"class": "form-control","placeholder": "Enter your full name"}),
-            "gender": forms.Select(attrs={"class": "form-select"}),
-            "status": forms.Select(attrs={"class": "form-select"}),
-            "number": forms.TextInput(attrs={"class": "form-control","placeholder": "Enter your mobile number"}),
-            "dob": forms.DateInput(attrs={"type": "date","class": "form-control"}),
-            "occupation": forms.Select(attrs={"class": "form-select"}),
-            "ride_exp": forms.Select(attrs={"class": "form-select"}),
-            "ncd_disc": forms.Select(attrs={"class": "form-select"}),
-            "licence": forms.Select(attrs={"class": "form-select"}),
-            "named_rider": forms.Select(attrs={"class": "form-select"}),
-            "claims": forms.Select(attrs={"class": "form-select"}),
-            "start_date": forms.DateInput(attrs={"type": "date","class": "form-control"}),
-            "end_date": forms.DateInput(attrs={"type": "date","class": "form-control"}),
+            "model": forms.TextInput(attrs={"class": "form-control","placeholder": "Enter motorcycle model", 'required': True}),
+            "name": forms.TextInput(attrs={"class": "form-control","placeholder": "Enter your full name", 'required': True}),
+            "gender": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "status": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "number": forms.TextInput(attrs={"class": "form-control","placeholder": "Enter your mobile number", 'required': True}),
+            "dob": forms.DateInput(attrs={"type": "date","class": "form-control", 'required': True}),
+            "occupation": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "ride_exp": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "ncd_disc": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "licence": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "named_rider": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "claims": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "start_date": forms.DateInput(attrs={"type": "date","class": "form-control", 'required': True}),
+            "end_date": forms.DateInput(attrs={"type": "date","class": "form-control", 'required': True}),
             "remarks": forms.Textarea(attrs={"class": "form-control","rows": 4, "placeholder": "Any additional remarks"}),
-            "privacy_policy": forms.CheckboxInput(attrs={"class": "form-check-input"}),
+            "privacy_policy": forms.CheckboxInput(attrs={"class": "form-check-input", 'required': True}),
         }
 
 
@@ -47,24 +47,24 @@ class QuoteCarForm(forms.ModelForm):
         model = QuoteCar
         fields = "__all__"
         widgets = {
-            "brand": forms.Select(attrs={"class": "form-select"}),
-            "model": forms.TextInput(attrs={ "class": "form-control","placeholder": "Enter Car Model"}),
-            "scheme": forms.Select(attrs={"class": "form-select"}),
-            "name": forms.TextInput(attrs={"class": "form-control","placeholder": "Enter Full Name"}),
-            "gender": forms.Select(attrs={"class": "form-select"}),
-            "status": forms.Select(attrs={"class": "form-select"}),
-            "number": forms.TextInput(attrs={"class": "form-control","placeholder": "Enter Mobile Number"}),
-            "dob": forms.DateInput(attrs={"type": "date", "class": "form-control"}),
-            "occupation": forms.Select(attrs={"class": "form-select"}),
-            "vec_number": forms.TextInput(attrs={"class": "form-control","placeholder": "Enter Vehicle Number"}),
-            "ncd_disc": forms.Select(attrs={"class": "form-select"}),
-            "licence": forms.Select(attrs={"class": "form-select"}),
-            "driver": forms.Select(attrs={"class": "form-select"}),
-            "claims": forms.Select(attrs={"class": "form-select"}),
-            "start_date": forms.DateInput(attrs={"type": "date","class": "form-control"}),
-            "end_date": forms.DateInput(attrs={"type": "date","class": "form-control"}),
+            "brand": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "model": forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter Car Model", 'required': True}),
+            "scheme": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter Full Name", 'required': True}),
+            "gender": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "status": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "number": forms.TextInput(attrs={"class": "form-control","placeholder": "Enter Mobile Number", 'required': True}),
+            "dob": forms.DateInput(attrs={"type": "date", "class": "form-control", 'required': True}),
+            "occupation": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "vec_number": forms.TextInput(attrs={"class": "form-control","placeholder": "Enter Vehicle Number", 'required': True}),
+            "ncd_disc": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "licence": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "driver": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "claims": forms.Select(attrs={"class": "form-select", 'required': True}),
+            "start_date": forms.DateInput(attrs={"type": "date","class": "form-control", 'required': True}),
+            "end_date": forms.DateInput(attrs={"type": "date","class": "form-control", 'required': True}),
             "remarks": forms.Textarea(attrs={"class": "form-control","rows": 4,"placeholder": "Any Remarks"}),
-            "privacy_policy": forms.CheckboxInput(attrs={"class": "form-check-input"}),
+            "privacy_policy": forms.CheckboxInput(attrs={"class": "form-check-input", 'required': True}),
         }
 
 
@@ -74,12 +74,12 @@ class EnquiryForm(forms.ModelForm):
         model = Enquiry
         fields = ['first_name', 'last_name', 'mobile', 'email', 'enquiry_type', 'privacy_policy']
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
-            'mobile': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile Number'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
-            'enquiry_type': forms.Select(attrs={'class': 'form-select'}),
-            "privacy_policy": forms.CheckboxInput(attrs={"class": "form-check-input"}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name', 'required': True}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name', 'required': True}),
+            'mobile': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile Number', 'required': True}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address', 'required': True}),
+            'enquiry_type': forms.Select(attrs={'class': 'form-select', 'required': True}),
+            "privacy_policy": forms.CheckboxInput(attrs={"class": "form-check-input", 'required': True}),
         }
 
 
@@ -91,14 +91,14 @@ class EnquiryRenewCarForm(forms.ModelForm):
             'loan_type', 'coe_category_type', 'is_phv', 'coe_renewal_period', 'privacy_policy'
         ]
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
-            'mobile': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile Number'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
-            'coe_category_type': forms.Select(attrs={'class': 'form-select'}),
-            'is_phv': forms.Select(attrs={'class': 'form-select'}),
-            'coe_renewal_period': forms.Select(attrs={'class': 'form-select'}),
-            'privacy_policy': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name', 'required': True}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name', 'required': True}),
+            'mobile': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile Number', 'required': True}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address', 'required': True}),
+            'coe_category_type': forms.Select(attrs={'class': 'form-select', 'required': True}),
+            'is_phv': forms.Select(attrs={'class': 'form-select', 'required': True}),
+            'coe_renewal_period': forms.Select(attrs={'class': 'form-select', 'required': True}),
+            'privacy_policy': forms.CheckboxInput(attrs={'class': 'form-check-input', 'required': True}),
             'loan_type': forms.HiddenInput(),
         }
 
@@ -110,12 +110,12 @@ class EnquiryRenewMotorcycleForm(forms.ModelForm):
             'loan_type', 'coe_renewal_period', 'privacy_policy'
         ]
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
-            'mobile': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile Number'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
-            'coe_renewal_period': forms.Select(attrs={'class': 'form-select'}),
-            'privacy_policy': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name', 'required': True}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name', 'required': True}),
+            'mobile': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile Number', 'required': True}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address', 'required': True}),
+            'coe_renewal_period': forms.Select(attrs={'class': 'form-select', 'required': True}),
+            'privacy_policy': forms.CheckboxInput(attrs={'class': 'form-check-input', 'required': True}),
             'loan_type': forms.HiddenInput(),
         }
 
@@ -168,16 +168,16 @@ class InstallmentSubmitForm(forms.ModelForm):
         ]
 
         widgets = {
-            'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name'}),
-            'nric': forms.TextInput(attrs={'class': 'form-control'}),
-            'contact': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'vehicle_reg': forms.TextInput(attrs={'class': 'form-control'}),
-            'install_amount': forms.NumberInput(attrs={'class': 'form-control'}),
-            'transfer_amount': forms.NumberInput(attrs={'class': 'form-control'}),
-            'reference': forms.TextInput(attrs={'class': 'form-control'}),
-            'remarks': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'privacy_policy': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name', 'required': True}),
+            'nric': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'NRIC', 'required': True}),
+            'contact': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Contact Number', 'required': True}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address', 'required': True}),
+            'vehicle_reg': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Vehicle Registration Number', 'required': True}),
+            'install_amount': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Installment Amount', 'required': True}),
+            'transfer_amount': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Transfer Amount', 'required': True}),
+            'reference': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Reference', 'required': True}),
+            'remarks': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Remarks'}),
+            'privacy_policy': forms.CheckboxInput(attrs={'class': 'form-check-input', 'required': True}),
         }
 
 
@@ -195,13 +195,13 @@ class ContactForm(forms.ModelForm):
         model = Contact
         fields = ['first_name', 'last_name', 'phone', 'email', 'enquiry_type', 'message', 'privacy_policy', 'captcha_answer']
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
-            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile Number'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
-            'enquiry_type': forms.Select(attrs={'class': 'form-select'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name', 'required': True}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name', 'required': True}),
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile Number', 'required': True}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email Address', 'required': True}),
+            'enquiry_type': forms.Select(attrs={'class': 'form-select', 'required': True}),
             'message': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Your message'}),
-            'privacy_policy': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'privacy_policy': forms.CheckboxInput(attrs={'class': 'form-check-input', 'required': True}),
         }
 
     def clean_captcha_answer(self):

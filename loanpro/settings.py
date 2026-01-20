@@ -176,7 +176,7 @@ UNFOLD = {
     "SHOW_LANGUAGES": True,
 }
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Singapore'
 
 USE_I18N = True
 
@@ -209,8 +209,9 @@ from django.utils.translation import gettext_lazy as _
 
 UNFOLD = {
     "SHOW_LANGUAGES": True,
-    "SITE_TITLE": "AutoMotoCredit Admin",
-    "SITE_HEADER": "AutoMotoCredit Admin",
+    "SITE_TITLE": "SGVehicleLoans Admin",
+    "SITE_HEADER": "SGVehicleLoans Admin",
+    "DASHBOARD_CALLBACK": "apploan.views.dashboard_callback",
 
     "SITE_FAVICONS": [
         {
@@ -245,13 +246,6 @@ UNFOLD = {
                 "collapsible": True,  # Collapsible group of links
                 "items": [
                     {
-                        "title": _("List"),
-                        "icon": "event_list",  # Supported icon set: https://fonts.google.com/icons
-                        #"link": reverse_lazy(""),
-                        #"badge": "Admin",
-                        #"permission": lambda request: request.user.is_superuser,
-                    },
-                    {
                         "title": _("General Application"),
                         "icon": "data_table",
                         "link": reverse_lazy("admin:apploan_application_changelist"), #admin:<app_label>_<model_name>_changelist
@@ -267,11 +261,6 @@ UNFOLD = {
                         "link": reverse_lazy("admin:apploan_motorcoe_changelist"), 
                     },
                     {
-                        "title": _("Application"),
-                        "icon": "data_table",
-                        "link": reverse_lazy("admin:apploan_application_changelist"),
-                    },
-                    {
                         "title": _("General Enquiries"),
                         "icon": "tooltip_2",
                         "link": reverse_lazy("admin:apploan_generalenquiry_changelist"),
@@ -285,11 +274,6 @@ UNFOLD = {
                         "title": _("Enquiry COE Renew Motorcycle"),
                         "icon": "cached",
                         "link": reverse_lazy("admin:apploan_motorcycleenquiry_changelist"),
-                    },
-                    {
-                        "title": _("Enquiries"),
-                        "icon": "tooltip_2",
-                        "link": reverse_lazy("admin:apploan_generalenquiry_changelist"),
                     },
                 ],
             },

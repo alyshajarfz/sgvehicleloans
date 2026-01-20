@@ -401,7 +401,13 @@ class Enquiry(models.Model):
         ('new_cm', 'New Car & Motorcycle'),
         ('direct_bs', 'Direct Buyer - Seller'),
         ('coe_car', 'COE Car'),
-        # Add more 
+        ('coe_ref', 'COE Refinancing Loan'),
+        ('in_house', 'In-House Financing Loan'),
+        ('phv_car', 'PHV Car Loan'),
+        ('renew_car', 'COE Renewal Car'),
+        ('renew_motor', 'COE Renewal Motorcycle'),
+        ('ins_car', 'Car Insurance'),
+        ('ins_motor', 'Motorcycle Insurance'),
     ]
 
     first_name = models.CharField(max_length=255)
@@ -480,8 +486,12 @@ class Apply(models.Model):
     LOAN_TYPE_CHOICES = [
         ('used_car', 'Used Car Loan'),
         ('new_car', 'New Car Loan'),
-        ('coe_car', 'COE Car Loan'),
         ('direct_buyer', 'Direct Buyer → Seller Loan'),
+        ('coe_car', 'COE Car Loan'),
+        ('coe_ref', 'COE Refinancing Loan'),
+        ('in_house', 'In-House Financing Loan'),
+        ('phv_car', 'PHV Car Loan'),
+        
     ]
 
     BANK_CHOICES = [
@@ -573,7 +583,7 @@ class MotorCOE(ApplyCOE):
         verbose_name_plural = "Application COE Renewal Motorcycle"
 
 
-# Footer S
+# Footer
 class FooterSetting(models.Model):
     address = models.TextField(default="400 Balestier Road,\nBalestier Plaza #02-23,\nSingapore 329802")
     google_map_embed = models.TextField(
@@ -630,7 +640,9 @@ class Contact(models.Model):
     ENQUIRY_CHOICES = [
         ('Car Loan', 'Car Loan'),
         ('Motorcycle Loan', 'Motorcycle Loan'),
+        ('COE Renewal', 'COE Renewal'),
         ('Insurance', 'Insurance'),
+        ('Payment', 'Payment'),
         ('Other', 'Other'),
     ]
 

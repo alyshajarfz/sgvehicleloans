@@ -1,0 +1,90 @@
+{% extends "admin/login.html" %}
+{% load static %}
+
+{% block content %}
+<div class="custom-login-logo">
+    <img src="{% static 'apploan/images/sgvlogo.png' %}" 
+         alt="SGVehicleLoans Logo">
+</div>
+
+<!-- Login form -->
+{{ block.super }}
+
+<!-- Inline styles -->
+<style>
+/* Center logo */
+.custom-login-logo {
+    margin-left: 80px;
+    margin-bottom: 20px;
+}
+
+.custom-login-logo img {
+    width: 200px;
+    height: auto;
+    display: inline-block;
+}
+
+/* Login page background */
+body.login {
+    background-color: #1E40AF; 
+}
+
+/* Login box */
+body.login #content {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Labels (Username, Password) */
+body.login label {
+    color: #1D4ED8 !important; 
+    font-weight: 600;
+}
+
+/* Login title "SGVehicleLoans Admin" */
+body.login h1 span.text-primary-600 {
+    color: #1D4ED8 !important; 
+}
+
+/* "Welcome back to" text */
+body.login h1 span.text-font-important-light {
+    color: #3B82F6 !important;
+}
+
+/* Input fields */
+body.login input {
+    border-color: #3B82F6 !important;
+    color: #1E40AF !important;
+}
+
+/* Focus input fields */
+body.login input:focus {
+    border-color: #2563EB !important;
+    outline-color: #2563EB !important;
+}
+
+/* Login button */
+body.login button[type="submit"] {
+    background-color: #3B82F6 !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+body.login button[type="submit"]:hover {
+    background-color: #2563EB !important; 
+}
+
+/* "Return to site" link */
+body.login a {
+    color: #3B82F6 !important; 
+    font-weight: 600;
+}
+
+body.login a:hover {
+    color: #1D4ED8 !important; /
+}
+</style>
+
+{% endblock %}

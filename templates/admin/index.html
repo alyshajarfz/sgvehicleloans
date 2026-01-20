@@ -1,0 +1,251 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block title %}
+    {{ title }} | {{ site_title|default:_("Django site admin") }}
+{% endblock %}
+
+{% block branding %}
+    {% include "unfold/helpers/site_branding.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container space-y-10">
+
+    <!-- Dashboard Title -->
+    <h1 class="title-admin font-extrabold text-gray-900 dark:text-white">
+        SGVehicleLoans Admin Dashboard
+    </h1>
+
+    <!-- TRENDING LOANS -->
+    <section class="dashboard-section mt-10">
+        <h2>Most Trending Loans in Last 2 Weeks</h2>
+        <div class="dashboard-grid md-3">
+            {% for loan in trending_loans %}
+            <div class="dashboard-card">
+                <p class="label">{{ loan.loan_type_display }}</p>
+                <p class="value text-blue">{{ loan.total }}</p>
+            </div>
+            {% empty %}
+            <p>No loan applications in the last 2 weeks.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+
+    <!-- APPLICATIONS -->
+    <section class="dashboard-section mt-5">
+        <h2>Applications</h2>
+        <div class="dashboard-grid md-3">
+            <a href="{% url 'admin:apploan_application_changelist' %}" class="dashboard-card block hover:shadow-lg transition duration-300">
+                <p class="label">General Application</p>
+                <p class="value text-blue">{{ app_general_total }}</p>
+            </a>
+            <a href="{% url 'admin:apploan_carcoe_changelist' %}" class="dashboard-card block hover:shadow-lg transition duration-300">
+                <p class="label">COE Renewal Car</p>
+                <p class="value text-green">{{ app_coe_car_total }}</p>
+            </a>
+            <a href="{% url 'admin:apploan_motorcoe_changelist' %}" class="dashboard-card block hover:shadow-lg transition duration-300">
+                <p class="label">COE Renewal Motorcycle</p>
+                <p class="value text-yellow">{{ app_coe_motor_total }}</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- ENQUIRIES -->
+    <section class="dashboard-section mt-5">
+        <h2>Enquiries</h2>
+        <div class="dashboard-grid md-3">
+            <a href="{% url 'admin:apploan_generalenquiry_changelist' %}" class="dashboard-card block hover:shadow-lg transition duration-300">
+                <p class="label">General Enquiries</p>
+                <p class="value text-purple">{{ enquiry_general_total }}</p>
+            </a>
+            <a href="{% url 'admin:apploan_carenquiry_changelist' %}" class="dashboard-card block hover:shadow-lg transition duration-300">
+                <p class="label">COE Renew Car</p>
+                <p class="value text-indigo">{{ enquiry_coe_car_total }}</p>
+            </a>
+            <a href="{% url 'admin:apploan_motorcycleenquiry_changelist' %}" class="dashboard-card block hover:shadow-lg transition duration-300">
+                <p class="label">COE Renew Motorcycle</p>
+                <p class="value text-pink">{{ enquiry_coe_motor_total }}</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- QUOTES -->
+    <section class="dashboard-section mt-5">
+        <h2>Quotations</h2>
+        <div class="dashboard-grid sm-2">
+            <a href="{% url 'admin:apploan_quotecar_changelist' %}" class="dashboard-card block hover:shadow-lg transition duration-300">
+                <p class="label">Quote Car</p>
+                <p class="value text-red">{{ quote_car_total }}</p>
+            </a>
+            <a href="{% url 'admin:apploan_quotemotor_changelist' %}" class="dashboard-card block hover:shadow-lg transition duration-300">
+                <p class="label">Quote Motorcycle</p>
+                <p class="value text-teal">{{ quote_motor_total }}</p>
+            </a>
+        </div>
+    </section>
+
+
+    <!-- APPLICATION TREND CHART -->
+    <section class="dashboard-section mt-5">
+        <h2>Application Chart (Last 7 Days)</h2>
+        <div class="dashboard-card">
+            <canvas id="applicationsChart" class="w-full h-64"></canvas>
+        </div>
+    </section>
+
+    <!-- RECENT SUBMISSIONS -->
+    <section class="dashboard-section mt-5">
+        <h2>Recent Loan Applications</h2>
+        <div class="dashboard-card overflow-x-auto">
+            <table class="min-w-full text-left border-collapse">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 border-b">Name</th>
+                        <th class="px-4 py-2 border-b">Loan Type</th>
+                        <th class="px-4 py-2 border-b">Amount</th>
+                        <th class="px-4 py-2 border-b">Date Submitted</th>
+                        <th class="px-4 py-2 border-b">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for submission in recent_submissions %}
+                    <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <td class="px-4 py-2">{{ submission.full_name }}</td>
+                        <td class="px-4 py-2">{{ submission.get_loan_type_display }}</td>
+                        <td class="px-4 py-2">{{ submission.loan_amount }}</td>
+                        <td class="px-4 py-2">{{ submission.created_at }}</td>
+                        <td class="px-4 py-2">{{ submission.status }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="px-4 py-2 text-center text-gray-500">No recent submissions</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- TOTAL USERS -->
+    <section class="dashboard-section mt-5">
+        <div class="dashboard-card">
+            <p class="label">Total Users</p>
+            <p class="value text-gray-800 dark:text-gray-200">{{ users_total }}</p>
+        </div>
+    </section>
+
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('applicationsChart').getContext('2d');
+const applicationsChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ applications_trend.labels|safe }},
+        datasets: [{
+            label: 'Applications',
+            data: {{ applications_trend.data|safe }},
+            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+            borderColor: 'rgba(59, 130, 246, 1)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { display: false }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: { precision:0 }
+            }
+        }
+    }
+});
+</script>
+
+<!-- Custom CSS -->
+<style>
+
+.title-admin{
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Section Titles */
+.dashboard-section h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #4B5563;
+    margin-bottom: 16px;
+}
+
+/* Card Base Style */
+.dashboard-card {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Dark Mode */
+.dark .dashboard-card {
+    background-color: #1F2937;
+    color: #F9FAFB;
+}
+
+/* Hover Effect */
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+}
+
+/* Card Label & Value */
+.dashboard-card p.label {
+    font-size: 0.875rem;
+    color: #6B7280;
+    margin-bottom: 8px;
+}
+.dashboard-card p.value {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* Color Variants */
+.text-blue { color: #3B82F6; }
+.text-green { color: #10B981; }
+.text-yellow { color: #F59E0B; }
+.text-purple { color: #8B5CF6; }
+.text-pink { color: #EC4899; }
+.text-red { color: #EF4444; }
+.text-teal { color: #14B8A6; }
+.text-indigo { color: #6366F1; }
+
+/* Grid Layouts */
+.dashboard-grid { display: grid; gap: 24px; }
+@media (min-width: 640px) { .dashboard-grid.sm-2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 768px) { .dashboard-grid.md-3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* Table Styles */
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 0.75rem; border-bottom: 1px solid #E5E7EB; }
+.dark th, .dark td { border-color: #374151; }
+</style>
+
+{% endblock %}

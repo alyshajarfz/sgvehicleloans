@@ -2,10 +2,76 @@ import requests
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import HeaderVideo, HeaderImage, FooterSetting
+from .models import HeaderVideo, HeaderImage, FooterSetting, Application, CarCOE, MotorCOE, GeneralEnquiry, CarEnquiry, MotorcycleEnquiry, QuoteCar, QuoteMotor
 from django.contrib import messages
 from .forms import QuoteMotorForm, QuoteCarForm, EnquiryForm, EnquiryRenewCarForm, EnquiryRenewMotorcycleForm, ApplyForm, ApplyCOEForm, InstallmentSubmitForm, ContactForm
 from datetime import datetime
+
+from django.contrib.auth.models import User
+from django.utils.timezone import now
+from datetime import timedelta
+from django.db.models import Count
+
+def dashboard_callback(request, context):
+
+    recent_submissions_queryset = Application.objects.order_by('-created_at')  # latest first
+
+    # Applications Chart
+    applications_trend = {
+        "labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        "data": [5, 7, 6, 8, 10, 12, 9] # Example data
+    }
+
+    # Last 2 weeks
+    two_weeks_ago = now() - timedelta(days=14)
+
+    LOAN_TYPE_DISPLAY = dict(Application.LOAN_TYPE_CHOICES)
+
+    # Most trending loan types in the last 2 weeks
+    trending_loans = (
+        Application.objects.filter(created_at__gte=two_weeks_ago)
+        .values('loan_type')
+        .annotate(total=Count('id'))
+        .order_by('-total')[:3]
+    )
+
+    for loan in trending_loans:
+        loan['loan_type_display'] = LOAN_TYPE_DISPLAY[loan['loan_type']]
+
+    # Update context for dashboard
+    context.update({
+        # Users
+        "users_total": User.objects.count(),
+        "users_today": User.objects.filter(date_joined__date=now().date()).count(),
+
+        "custom_variable": "Hello from callback",
+
+        # Applications trend
+        "applications_trend": applications_trend,
+
+        # Latest submissions
+        "recent_submissions": recent_submissions_queryset[:10],
+
+        # APPLICATIONS
+        "app_general_total": Application.objects.count(),
+        "app_coe_car_total": CarCOE.objects.count(),
+        "app_coe_motor_total": MotorCOE.objects.count(),
+
+        # ENQUIRIES
+        "enquiry_general_total": GeneralEnquiry.objects.count(),
+        "enquiry_coe_car_total": CarEnquiry.objects.count(),
+        "enquiry_coe_motor_total": MotorcycleEnquiry.objects.count(),
+
+        # QUOTES
+        "quote_car_total": QuoteCar.objects.count(),
+        "quote_motor_total": QuoteMotor.objects.count(),
+
+        # TRENDING LOANS
+        "trending_loans": trending_loans,
+    })
+
+    return context
+
 
 def home(request):
     apply_form = ApplyForm()
@@ -111,45 +177,6 @@ def financePHVCar(request):
     }
     
     return render(request, 'apploan/financing/phv-car-loan.html', context)
-
-
-# COE Renewal
-def COERenewCar(request):
-    if request.method == "POST":
-        form = EnquiryRenewCarForm(request.POST, initial={'loan_type': 'car'})
-        if form.is_valid():
-            form.save()
-            return redirect(f"{request.path}?submitted=true")
-    else:
-        form = EnquiryRenewCarForm(initial={'loan_type': 'car'})
-
-    context = {
-        "form": form,
-        "loan_type": "car",
-        "title": "COE Renewal Car Singapore | COE Renewal Loan & Financing | Fast Approval",
-        "description": "Renew your car COE in Singapore with flexible COE renewal financing. Fast approval support, competitive rates, and easy instalment plans. Request a free quote today.",
-    }
-
-    return render(request, "apploan/coe/coe-renew-car.html", context)
-
-
-def COERenewMoto(request):
-    if request.method == "POST":
-        form = EnquiryRenewMotorcycleForm(request.POST, initial={'loan_type': 'motorcycle'})
-        if form.is_valid():
-            form.save()
-            return redirect(f"{request.path}?submitted=true")
-    else:
-        form = EnquiryRenewMotorcycleForm(initial={'loan_type': 'motorcycle'})
-
-    context = {
-        "form": form,
-        "loan_type": "motorcycle",
-        "title": "Motorcycle COE Renewal Singapore | COE Renewal Loan & Financing Fast",
-        "description": "Renew your motorcycle COE in Singapore with flexible COE renewal financing. Fast approval support, easy instalment plans, and competitive rates. Get a free quote today.",
-    }
-
-    return render(request, "apploan/coe/coe-renew-motor.html", context)
 
 
 # Insurance
@@ -273,7 +300,36 @@ def contact(request):
     return render(request, 'apploan/contact.html', context)
 
 
+# Apply
+def apply(request):
+    if request.method == 'POST':
+        form = ApplyForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Redirect with submitted flag for success modal
+            next_url = request.POST.get('next', '/')
+            return redirect(f"{next_url}?submitted=true")
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = ApplyForm()
+    return render(request, 'apply.html', {'form': form})
 
+
+def enquire(request):
+    if request.method == "POST":
+        form = EnquiryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Redirect with submitted flag for success modal
+            next_url = request.POST.get('next', '/')
+            return redirect(f"{next_url}?submitted=true")
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = EnquiryForm()
+
+    return render(request, 'enquire.html', {'form': form})
 
 def formCar(request):
     if request.method == 'POST':
@@ -310,36 +366,48 @@ def formMotor(request):
 
     return render(request, 'apploan/modals/apply-renew-motor.html', {'form': form})
 
-
-def apply(request):
-    if request.method == 'POST':
-        form = ApplyForm(request.POST)
-        if form.is_valid():
-            form.save()
-            # Redirect with submitted flag for success modal
-            next_url = request.POST.get('next', '/')
-            return redirect(f"{next_url}?submitted=true")
-        else:
-            messages.error(request, "Please correct the errors below.")
-    else:
-        form = ApplyForm()
-    return render(request, 'apply.html', {'form': form})
-
-
-def enquire(request):
+# COE Renewal
+def COERenewCar(request):
     if request.method == "POST":
-        form = EnquiryForm(request.POST)
+        form = EnquiryRenewCarForm(request.POST, initial={'loan_type': 'car'})
         if form.is_valid():
             form.save()
-            # Redirect with submitted flag for success modal
-            next_url = request.POST.get('next', '/')
-            return redirect(f"{next_url}?submitted=true")
+            messages.success(request, "COE renewal application submitted successfully!")
+            return redirect(request.path)
         else:
             messages.error(request, "Please correct the errors below.")
     else:
-        form = EnquiryForm()
+        form = EnquiryRenewCarForm(initial={'loan_type': 'car'})
 
-    return render(request, 'enquire.html', {'form': form})
+    context = {
+        "form": form,
+        "loan_type": "car",
+        "title": "COE Renewal Car Singapore | COE Renewal Loan & Financing | Fast Approval",
+        "description": "Renew your car COE in Singapore with flexible COE renewal financing. Fast approval support, competitive rates, and easy instalment plans. Request a free quote today.",
+    }
+    return render(request, "apploan/coe/coe-renew-car.html", context)
+
+
+def COERenewMoto(request):
+    if request.method == "POST":
+        form = EnquiryRenewMotorcycleForm(request.POST, initial={'loan_type': 'motorcycle'})
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Motorcycle COE renewal submitted successfully!")
+            return redirect(request.path)
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = EnquiryRenewMotorcycleForm(initial={'loan_type': 'motorcycle'})
+
+    context = {
+        "form": form,
+        "loan_type": "motorcycle",
+        "title": "Motorcycle COE Renewal Singapore | COE Renewal Loan & Financing Fast",
+        "description": "Renew your motorcycle COE in Singapore with flexible COE renewal financing. Fast approval support, easy instalment plans, and competitive rates. Get a free quote today.",
+    }
+    return render(request, "apploan/coe/coe-renew-motor.html", context)
+
 
 def mQuote(request):
     if request.method == "POST":

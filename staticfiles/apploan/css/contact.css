@@ -17,20 +17,20 @@
 .hero-btn {
   display: inline-block;
   padding: 16px 45px;
-  background: linear-gradient(90deg, #b40000, #ff1f1f);
+  background: linear-gradient(90deg, #1970c7, #4aa1f5);
   color: #fff;
   border-radius: 50px;
   font-size: 1.2rem;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 132, 255, 0.4);
   transition: 0.3s ease;
 }
 
 .hero-btn:hover {
-  background: linear-gradient(90deg, #ff1f1f, #b40000);
+  background: linear-gradient(90deg, #1970c7, #4aa1f5);
   transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(255, 0, 0, 0.6);
+  box-shadow: 0 15px 30px rgba(0, 110, 255, 0.6);
 }
 
 
@@ -50,7 +50,7 @@
 .icon-bubble {
     width: 40px;
     height: 40px;
-    background: #ff1f1f;
+    background: #1970c7;
     color: #fff;
     border-radius: 50%;
     display: flex;
@@ -63,7 +63,7 @@
 
 /* Hover animation */
 .icon-bubble:hover {
-    background: #d60000;
+    background: #1970c7;
     transform: scale(1.15);
     box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
@@ -86,7 +86,7 @@
     transform: translateX(-50%);
     width: 60%;
     height: 2px;
-    background: #ff1f1f; /* your brand red */
+    background: #1970c7; /* your brand red */
     border-radius: 5px;
 }
 
@@ -121,7 +121,7 @@
 .icon-box {
     width: 70px;
     height: 70px;
-    background: linear-gradient(135deg, #ef4747, #d62828);
+    background: linear-gradient(135deg, #4aa1f5, #1970c7);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -129,11 +129,11 @@
     font-size: 32px;
     color: white;
     margin: auto;
-    box-shadow: 0 4px 10px rgba(239,71,111,0.4);
+    box-shadow: 0 4px 10px rgba(71, 138, 239, 0.4);
 }
 
 .contact-card-1 .link {
-    color: #ff1f1f;
+    color: #1970c7;
     font-weight: 600;
     text-decoration: none;
 }
@@ -145,12 +145,12 @@
 
 /* CTA Button */
 .btn-primary {
-  background-color: #ff1f1f;
+  background-color: #1970c7;
   border: none;
 }
 
 .btn-primary:hover {
-  background-color: #d60000;
+  background-color: #1970c7;
 }
 
 
