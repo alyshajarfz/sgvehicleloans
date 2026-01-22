@@ -427,7 +427,7 @@ class COEchartView(MobileViewMixin, TemplateView):
 
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://api.whatsapp.com/send?phone=6589259233&text=Hi%2C%20SGVehicleLoans" target="_blank" class="whatsapp-float">
+    <a href="{{ footer.whatsapp_url }}" target="_blank" class="whatsapp-float">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -436,6 +436,7 @@ class COEchartView(MobileViewMixin, TemplateView):
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     {% block extra_js %}{% endblock %}
+    {% include 'apploan/content/success.html' %}
 </body>
 
 <style>

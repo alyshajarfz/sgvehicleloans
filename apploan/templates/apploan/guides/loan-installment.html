@@ -25,6 +25,8 @@
         <h2 class="mb-4">Submit Installment</h2>
         <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+          
           <div class="mb-3">
             <label class="form-label">Full Name / Company Name *</label>
             {{ form.full_name }}

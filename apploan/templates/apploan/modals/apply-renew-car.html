@@ -29,6 +29,7 @@
             <h2>Renew Your Car COE Now!</h2>
 
             <form method="POST" action="{% url 'formCar' %}">
+
                 {% csrf_token %}
 
                 <label>Full Name </label>

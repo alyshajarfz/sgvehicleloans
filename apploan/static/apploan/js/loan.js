@@ -1,18 +1,16 @@
-    // JS to toggle REQ sections
+// ==============================
+// TOGGLE REQ SECTIONS
+// ==============================
 document.querySelectorAll('.req-title').forEach(title => {
   title.addEventListener('click', () => {
     const body = title.nextElementSibling;
     const toggle = title.querySelector('.toggle');
 
     if (body.style.maxHeight) {
-      // Faster close
-      body.style.transition = 'max-height 0.15s ease, padding 0.15s ease, opacity 0.15s ease';
       body.style.maxHeight = null;
       body.style.opacity = 0;
       toggle.textContent = '+';
     } else {
-      // Smooth open
-      body.style.transition = 'max-height 1s ease, padding 0.35s ease, opacity 0.35s ease';
       body.style.maxHeight = body.scrollHeight + 'px';
       body.style.opacity = 1;
       toggle.textContent = '−';
@@ -20,80 +18,119 @@ document.querySelectorAll('.req-title').forEach(title => {
   });
 });
 
-
-document.addEventListener('DOMContentLoaded', function () {
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-  tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl);
+// ==============================
+// TOOLTIP INIT
+// ==============================
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+    new bootstrap.Tooltip(el);
   });
 });
 
-function setupSlider(loanAmountId, interestRateId, monthsId, amountDisplayId, rateDisplayId, monthsDisplayId, repaymentId) {
+// ==============================
+// LOAN CALCULATOR
+// ==============================
+function setupSlider(
+  loanAmountId,
+  interestRateId,
+  termId,
+  amountDisplayId,
+  rateDisplayId,
+  termDisplayId,
+  repaymentId,
+  isFlatRate,
+  isMonthsSlider // Car uses months
+) {
   const loanAmount = document.getElementById(loanAmountId);
   const interestRate = document.getElementById(interestRateId);
-  const loanMonths = document.getElementById(monthsId);
+  const loanTerm = document.getElementById(termId);
 
   const loanAmountDisplay = document.getElementById(amountDisplayId);
   const interestRateDisplay = document.getElementById(rateDisplayId);
-  const loanMonthsDisplay = document.getElementById(monthsDisplayId);
-
+  const termDisplay = document.getElementById(termDisplayId);
   const monthlyRepayment = document.getElementById(repaymentId);
 
   function calculateLoan() {
-    let P = parseFloat(loanAmount.value);
-    let r = parseFloat(interestRate.value)/100/12;
-    let n = parseFloat(loanMonths.value);
-    let M = r === 0 ? P/n : (P*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
-    monthlyRepayment.innerText = "$" + M.toFixed(2);
-  }
+    const P = Number(loanAmount.value);          // Principal
+    const annualRate = Number(interestRate.value) / 100;
+    const term = Number(loanTerm.value);         // Slider value
+    const months = isMonthsSlider ? term : term * 12;
 
-  loanAmount.addEventListener("input", () => {
-    loanAmountDisplay.innerText = loanAmount.value;
-    calculateLoan();
-  });
-  interestRate.addEventListener("input", () => {
-    interestRateDisplay.innerText = interestRate.value;
-    calculateLoan();
-  });
-  loanMonths.addEventListener("input", () => {
-    loanMonthsDisplay.innerText = loanMonths.value;
-    calculateLoan();
-  });
+    let monthly;
 
-  calculateLoan(); // initial calculation
-}
-
-// Initialize both calculators
-setupSlider(
-  "carLoanAmount", "carInterestRate", "carLoanMonths",
-  "carLoanAmountDisplay", "carInterestRateDisplay", "carLoanMonthsDisplay",
-  "carMonthlyRepayment"
-);
-
-setupSlider(
-  "motoLoanAmount", "motoInterestRate", "motoLoanMonths",
-  "motoLoanAmountDisplay", "motoInterestRateDisplay", "motoLoanMonthsDisplay",
-  "motoMonthlyRepayment"
-);
-
-document.querySelectorAll(".btn-increment, .btn-decrement").forEach(button => {
-  button.addEventListener("click", () => {
-    const targetId = button.getAttribute("data-target");
-    const input = document.getElementById(targetId);
-    const step = parseFloat(input.step) || 1;
-    let value = parseFloat(input.value);
-
-    if (button.classList.contains("btn-increment")) {
-      value += step;
+    if (isFlatRate) {
+      // Motorcycle: FLAT RATE (do not touch)
+      const years = months / 12;
+      const totalInterest = P * annualRate * years;
+      monthly = (P + totalInterest) / months;
     } else {
-      value -= step;
+      // Car: REDUCING BALANCE
+      const r = annualRate / 12; // monthly interest rate
+      monthly = r === 0
+        ? P / months
+        : (P * r * Math.pow(1 + r, months)) /
+          (Math.pow(1 + r, months) - 1);
     }
 
-    // Clamp value within min/max
-    value = Math.max(parseFloat(input.min), Math.min(parseFloat(input.max), value));
+    // Display values
+    loanAmountDisplay.innerText = P.toLocaleString();
+    interestRateDisplay.innerText = Number(interestRate.value).toFixed(2);
+    termDisplay.innerText = term;
+    monthlyRepayment.innerText = "$" + monthly.toFixed(2);
+  }
+
+  loanAmount.addEventListener("input", calculateLoan);
+  interestRate.addEventListener("input", calculateLoan);
+  loanTerm.addEventListener("input", calculateLoan);
+
+  calculateLoan();
+}
+
+// ==============================
+// INITIALISE
+// ==============================
+setupSlider(
+  "carLoanAmount",
+  "carInterestRate",
+  "carLoanMonths",
+  "carLoanAmountDisplay",
+  "carInterestRateDisplay",
+  "carLoanMonthsDisplay",
+  "carMonthlyRepayment",
+  false,   // reducing balance
+  true     // Car slider is months
+);
+
+setupSlider(
+  "motoLoanAmount",
+  "motoInterestRate",
+  "motoLoanMonths",
+  "motoLoanAmountDisplay",
+  "motoInterestRateDisplay",
+  "motoLoanMonthsDisplay",
+  "motoMonthlyRepayment",
+  true,    // flat rate
+  false    // Motorcycle slider is years
+);
+
+// ==============================
+// + / − BUTTONS
+// ==============================
+document.querySelectorAll(".btn-increment, .btn-decrement").forEach(button => {
+  button.addEventListener("click", () => {
+    const input = document.getElementById(button.dataset.target);
+
+    const min = Number(input.min);
+    const max = Number(input.max);
+    const step = Number(input.step) || 1;
+
+    let value = Number(input.value);
+    value += button.classList.contains("btn-increment") ? step : -step;
+    value = Math.max(min, Math.min(max, value));
+
     input.value = value;
 
-    // Trigger input event to update display and repayment
-    input.dispatchEvent(new Event("input"));
+    // Force recalculation
+    input.dispatchEvent(new Event("input", { bubbles: true }));
   });
 });

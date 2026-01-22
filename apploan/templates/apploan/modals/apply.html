@@ -31,7 +31,7 @@
           <div class="step-dot">4</div>
         </div>
 
-        <form id="applyForm" method="post" action="{% url 'apply' %}">
+        <form id="applyForm" method="POST" action="{% url 'apply' %}">
           {% csrf_token %}
           <input type="hidden" name="next" value="{{ request.path }}">
 
@@ -92,7 +92,7 @@
             </div>
 
             <div class="mb-3">
-              <label class="form-label">Registration No.</label>
+              <label class="form-label">Vehicle Registration No.</label>
               {{ apply_form.registration_number }}
             </div>
 
@@ -100,9 +100,14 @@
               <label class="form-label">Owner LTA Access Code</label>
               {{ apply_form.lta_access_code }}
               <small class="text-muted d-block mt-1">
-                Get code at OneMotoring → “Request Access Code”.  
-                Recipient number: <strong>98518281</strong>
+                Get code at
+                <a href="https://onemotoring.lta.gov.sg/content/onemotoring/home.html" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                  onemotoring.lta.gov.sg
+                </a>
+                → “Request Access Code”.  
+                Recipient number: <strong>12345678</strong>
               </small>
+
             </div>
 
             <button type="button" class="btn back-btn">Previous</button>
@@ -172,34 +177,6 @@
     </div>
   </div>
 </div>
-
-<!-- Success Modal -->
-<div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-center p-4">
-      <div class="modal-body">
-        <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="green" class="bi bi-check-circle mb-3" viewBox="0 0 16 16">
-          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.97 11.03a.75.75 0 0 0 1.08 0l3.992-3.992a.75.75 0 1 0-1.08-1.08L7.5 9.44 5.53 7.47a.75.75 0 1 0-1.06 1.06l2.5 2.5z"/>
-        </svg>
-        <h5 id="modalMessage"></h5>
-        <button type="button" class="btn btn-success mt-3" data-bs-dismiss="modal">OK!</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    {% if messages %}
-        const message = `{% for m in messages %}{{ m|escapejs }}{% endfor %}`;
-        document.getElementById("modalMessage").innerText = message;
-
-        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-        successModal.show();
-    {% endif %}
-});
-</script>
-
 
 
 <script>

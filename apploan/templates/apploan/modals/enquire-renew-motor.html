@@ -10,6 +10,8 @@
       <div class="modal-body">
         <form method="post" id="enquireRenewForm">
           {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+          
           {{ form.loan_type }}
 
           <div class="mb-3">

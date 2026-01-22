@@ -82,20 +82,22 @@ class MenuSettingAdmin(ModelAdmin):
 @admin.register(LoanRate)
 class LoanRateAdmin(ModelAdmin):
     foldable_fields = '__all__'
-    list_display = ('loan_display', 'interest_rate', 'financing')
-    list_editable = ('interest_rate', 'financing')
+    list_display = ('loan_display', 'interest_rate', 'int_rate_other', 'financing')
+    list_editable = ('interest_rate', 'int_rate_other', 'financing')
     list_display_links = ('loan_display',)
 
     exclude = ('loan_name',)
+    ordering = ('-loan_display',)
 
     def loan_display(self, obj):
         return obj.loan_display or obj.loan_name
     loan_display.short_description = 'Loan Name'
 
+
 # Application
 @admin.register(Application)
 class ApplicationAdmin(ModelAdmin):
-    list_display = ('full_name', 'loan_type', 'preferred_bank', 'created_at')
+    list_display = ('full_name', 'loan_type', 'preferred_bank', 'status', 'created_at')
     list_filter = ('loan_type', 'preferred_bank', 'car_source', 'repayment_mode')
     search_fields = ('full_name', 'email', 'phone', 'registration_number')
     ordering = ('-created_at',)
@@ -194,9 +196,6 @@ class InstallmentSubmitAdmin(ModelAdmin):
         ('Remarks & Privacy', {
             'fields': ('remarks', 'privacy_policy')
         }),
-        ('Meta', {
-            'fields': ('created_at',)
-        }),
     )
 
     
@@ -215,7 +214,7 @@ class FooterSettingAdmin(ModelAdmin):
             "fields": ("op_hours_weekdays", "op_hours_sat")
         }),
         ("Social Media", {
-            "fields": ("facebook_url", "instagram_url", "whatsapp_url", "tiktok_url")
+            "fields": ("facebook_url", "instagram_url", "whatsapp_url", "tiktok_url", "telegram_url")
         }),
     )
 

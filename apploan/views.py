@@ -2,7 +2,7 @@ import requests
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import HeaderVideo, HeaderImage, FooterSetting, Application, CarCOE, MotorCOE, GeneralEnquiry, CarEnquiry, MotorcycleEnquiry, QuoteCar, QuoteMotor
+from .models import ApplyCOE, EnquiryRenew, HeaderVideo, HeaderImage, FooterSetting, Application, CarCOE, MotorCOE, GeneralEnquiry, CarEnquiry, MotorcycleEnquiry, QuoteCar, QuoteMotor
 from django.contrib import messages
 from .forms import QuoteMotorForm, QuoteCarForm, EnquiryForm, EnquiryRenewCarForm, EnquiryRenewMotorcycleForm, ApplyForm, ApplyCOEForm, InstallmentSubmitForm, ContactForm
 from datetime import datetime
@@ -13,21 +13,35 @@ from datetime import timedelta
 from django.db.models import Count
 
 def dashboard_callback(request, context):
-
     recent_submissions_queryset = Application.objects.order_by('-created_at')  # latest first
 
-    # Applications Chart
+    # Last 7 days
+    today = now().date()
+    last_7_days = [today - timedelta(days=i) for i in range(6, -1, -1)] 
+
+    labels = [day.strftime("%a") for day in last_7_days] 
+
+    # Get application count per day
+    applications_per_day = (Application.objects
+        .filter(created_at__date__gte=last_7_days[0])
+        .extra({'day': "date(created_at)"}) 
+        .values('day')
+        .annotate(total=Count('id'))
+    )
+    
+    day_totals = {str(item['day']): item['total'] for item in applications_per_day}
+
+    data = [day_totals.get(str(day), 0) for day in last_7_days]
+
     applications_trend = {
-        "labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-        "data": [5, 7, 6, 8, 10, 12, 9] # Example data
+        "labels": labels,
+        "data": data
     }
 
-    # Last 2 weeks
+    # Last 2 weeks for trending loans
     two_weeks_ago = now() - timedelta(days=14)
-
     LOAN_TYPE_DISPLAY = dict(Application.LOAN_TYPE_CHOICES)
 
-    # Most trending loan types in the last 2 weeks
     trending_loans = (
         Application.objects.filter(created_at__gte=two_weeks_ago)
         .values('loan_type')
@@ -38,13 +52,10 @@ def dashboard_callback(request, context):
     for loan in trending_loans:
         loan['loan_type_display'] = LOAN_TYPE_DISPLAY[loan['loan_type']]
 
-    # Update context for dashboard
     context.update({
         # Users
         "users_total": User.objects.count(),
-        "users_today": User.objects.filter(date_joined__date=now().date()).count(),
-
-        "custom_variable": "Hello from callback",
+        "users_today": User.objects.filter(date_joined__date=today).count(),
 
         # Applications trend
         "applications_trend": applications_trend,
@@ -54,13 +65,15 @@ def dashboard_callback(request, context):
 
         # APPLICATIONS
         "app_general_total": Application.objects.count(),
-        "app_coe_car_total": CarCOE.objects.count(),
-        "app_coe_motor_total": MotorCOE.objects.count(),
+        "app_coe_car_total": ApplyCOE.objects.filter(vehicle_type="car").count(),
+        "app_coe_motor_total": ApplyCOE.objects.filter(vehicle_type="motor").count(),
+
 
         # ENQUIRIES
         "enquiry_general_total": GeneralEnquiry.objects.count(),
-        "enquiry_coe_car_total": CarEnquiry.objects.count(),
-        "enquiry_coe_motor_total": MotorcycleEnquiry.objects.count(),
+        "enquiry_coe_car_total": EnquiryRenew.objects.filter(loan_type="car").count(),
+        "enquiry_coe_motor_total": EnquiryRenew.objects.filter(loan_type="motorcycle").count(),
+
 
         # QUOTES
         "quote_car_total": QuoteCar.objects.count(),
@@ -75,17 +88,23 @@ def dashboard_callback(request, context):
 
 def home(request):
     apply_form = ApplyForm()
+    submitted = request.GET.get('submitted', 'false') == 'true'
+    
     context = {
         'title': 'Car & Motorcycle Loan Singapore | Fast Approval | SGVehicleLoans',
         'description': 'Apply for car and motorcycle loans in Singapore with fast approval. Low interest hire purchase, refinancing, and flexible repayment options. Get a free quote today.',
         'apply_form': apply_form,
+        'submitted': submitted,
     }
     return render(request, 'apploan/home.html', context)
 
+
+# Financing
 def financeUsed(request):
     header_image = HeaderImage.objects.filter(template_type='used_cm').first()
     apply_form = ApplyForm()
     enquiry_form = EnquiryForm()
+    submitted = request.GET.get('submitted', 'false') == 'true'
 
     context = {
         'title': 'Used Car & Motorcycle Loan Singapore | Fast Approval | SGVehicleLoans',
@@ -93,27 +112,15 @@ def financeUsed(request):
         'header_image': header_image,
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
+        'submitted': submitted,
     }
     return render(request, 'apploan/financing/used-cm-loan.html', context)
-
-def financeDirect(request):
-    header_image = HeaderImage.objects.filter(template_type='direct_bs').first()
-    apply_form = ApplyForm()
-    enquiry_form = EnquiryForm()
-
-    context = {
-        'title': 'Direct Car & Motorcycle Loan Singapore | Fast Approval | SG Vehicle Loans',
-        'description': 'Get direct car and motorcycle financing in Singapore with fast approval. Low interest hire purchase options, flexible repayment plans, and quick quotations. Apply today.',
-        'header_image': header_image,
-        'apply_form': apply_form,
-        'enquiry_form': enquiry_form,
-    }
-    return render(request, 'apploan/financing/direct-bs-loan.html', context)
 
 def financeNew(request):
     header_image = HeaderImage.objects.filter(template_type='new_cm').first()
     apply_form = ApplyForm()
     enquiry_form = EnquiryForm()
+    submitted = request.GET.get('submitted', 'false') == 'true'
 
     context = {
         'title': 'New Car & Motorcycle Loan Singapore | Fast Approval | SGVehicleLoans',
@@ -121,13 +128,32 @@ def financeNew(request):
         'header_image': header_image,
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
+        'submitted': submitted,
     }
     return render(request, 'apploan/financing/new-cm-loan.html', context)
+
+
+def financeDirect(request):
+    header_image = HeaderImage.objects.filter(template_type='direct_bs').first()
+    apply_form = ApplyForm()
+    enquiry_form = EnquiryForm()
+    submitted = request.GET.get('submitted', 'false') == 'true'
+
+    context = {
+        'title': 'Direct Car & Motorcycle Loan Singapore | Fast Approval | SG Vehicle Loans',
+        'description': 'Get direct car and motorcycle financing in Singapore with fast approval. Low interest hire purchase options, flexible repayment plans, and quick quotations. Apply today.',
+        'header_image': header_image,
+        'apply_form': apply_form,
+        'enquiry_form': enquiry_form,
+        'submitted': submitted,
+    }
+    return render(request, 'apploan/financing/direct-bs-loan.html', context)
 
 def financeCOECar(request):
     header_image = HeaderImage.objects.filter(template_type='coe_car').first()
     apply_form = ApplyForm()
     enquiry_form = EnquiryForm()
+    submitted = request.GET.get('submitted', 'false') == 'true'
 
     context = {
         'title': 'COE Car Loan Singapore | COE Renewal Financing | Fast Approval',
@@ -135,18 +161,21 @@ def financeCOECar(request):
         'header_image': header_image,
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
+        'submitted': submitted,
     }
     return render(request, 'apploan/financing/coe-car-loan.html', context)
 
 def financeRefinance(request):
     apply_form = ApplyForm()
     enquiry_form = EnquiryForm()
+    submitted = request.GET.get('submitted', 'false') == 'true'
 
     context = {
         'title': 'Car & Motorcycle Loan Refinancing Singapore | Lower Instalments Fast',
         'description': 'Refinance your car or motorcycle loan in Singapore to lower monthly instalments or get better rates. Fast approval support, flexible plans, and quick quotation. Apply now.',
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
+        'submitted': submitted,
     }
     
     return render(request, 'apploan/financing/car-refinancing.html', context)
@@ -154,12 +183,14 @@ def financeRefinance(request):
 def financeInHouse(request):
     apply_form = ApplyForm()
     enquiry_form = EnquiryForm()
+    submitted = request.GET.get('submitted', 'false') == 'true'
 
     context = {
         'title': 'In-House Car & Motorcycle Loan Singapore | Fast Approval | SGVehicleLoans',
         'description': 'Get in-house car and motorcycle financing in Singapore with fast approval support. Flexible instalment plans, competitive rates, and quick quotation. Apply online today.',
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
+        'submitted': submitted,
     }
     
     return render(request, 'apploan/financing/in-house.html', context)
@@ -168,12 +199,14 @@ def financeInHouse(request):
 def financePHVCar(request):
     apply_form = ApplyForm()
     enquiry_form = EnquiryForm()
+    submitted = request.GET.get('submitted', 'false') == 'true'
 
     context = {
         'title': 'PHV Car Loan Singapore | Grab & Private Hire Financing | Fast Approval',
         'description': 'Apply for PHV car loans in Singapore with fast approval support. Financing options for Grab and private hire vehicles, flexible instalments, and competitive rates. Get a free quote today.',
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
+        'submitted': submitted,
     }
     
     return render(request, 'apploan/financing/phv-car-loan.html', context)
@@ -184,6 +217,7 @@ def insCar(request):
     video = HeaderVideo.objects.filter(insurance_type='car').first()
     form = QuoteCarForm()
     enquiry_form = EnquiryForm()
+    submitted = request.GET.get('submitted', 'false') == 'true'
 
     context = {
         'title': 'Car Insurance Singapore | Fast Quote & Competitive Rates | SGVehicleLoans',
@@ -191,6 +225,7 @@ def insCar(request):
         'video': video,
         'form': form,
         'enquiry_form': enquiry_form,
+        'submitted': submitted,
     }
 
     return render(request, 'apploan/insurance/ins-car.html', context)
@@ -200,6 +235,7 @@ def insMotor(request):
     video = HeaderVideo.objects.filter(insurance_type='motorcycle').first()
     form = QuoteMotorForm()
     enquiry_form = EnquiryForm()
+    submitted = request.GET.get('submitted', 'false') == 'true'
 
     context = {
         'title': 'Motorcycle Insurance Singapore | Fast Quote & Competitive Rates',
@@ -207,6 +243,7 @@ def insMotor(request):
         'video': video,
         'form': form,
         'enquiry_form': enquiry_form,
+        'submitted': submitted,
     }
 
     return render(request, 'apploan/insurance/ins-motor.html', context)
@@ -216,12 +253,14 @@ def insMotor(request):
 def rates(request):
     apply_form = ApplyForm()
     enquiry_form = EnquiryForm()
+    submitted = request.GET.get('submitted', 'false') == 'true'
 
     context = {
         'title': 'Car & Motorcycle Loan Interest Rates Singapore | Updated Financing Rates',
         'description': 'View car and motorcycle loan interest rates in Singapore. Compare hire purchase, refinancing, COE renewal financing rates, and flexible repayment options. Get a free quote today.',
         'apply_form': apply_form,
         'enquiry_form': enquiry_form,
+        'submitted': submitted,
     }
 
     return render(request, 'apploan/rates.html', context)
@@ -243,27 +282,6 @@ def guidesFaq(request):
     }
     return render(request, 'apploan/guides/loan-faq.html', context)
 
-
-def guidesInstall(request):
-    if request.method == 'POST':
-        form = InstallmentSubmitForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('/?submitted=true')
-        else:
-            print(form.errors)
-            messages.error(request, "Please correct the errors below.")
-    else:
-        form = InstallmentSubmitForm()
-
-    context = {
-        'title': 'Car & Motorcycle Loan Instalment Guide Singapore | Monthly Repayment Help',
-        'description': 'Learn how car and motorcycle loan instalments work in Singapore. Understand monthly repayments, interest rates, tenure, and hire purchase terms. Use our guide to plan better.',
-        'form': form,
-    }
-    return render(request, 'apploan/guides/loan-installment.html', context)
-
-
 def guidesPay(request):
     context = {
         'title': 'Vehicle Loan Payment Guide Singapore | Car & Motorcycle Hire Purchase Tips',
@@ -279,26 +297,8 @@ def about(request):
     }
     return render(request, 'apploan/about.html', context)
 
-# Contact
-def contact(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Thank you for contacting us!")
-            return redirect(request.path)
-        else:
-            messages.error(request, "Please correct the errors below.")
-    else:
-        form = ContactForm()
 
-    context = {
-        'title': 'Contact SGVehicleLoans | Car & Motorcycle Loan Quote Singapore',
-        'description': 'Contact SGVehicleLoans for car and motorcycle financing in Singapore.',
-        'form': form,
-    }
-    return render(request, 'apploan/contact.html', context)
-
+#----- FORMS HANDLING -----#
 
 # Apply
 def apply(request):
@@ -306,7 +306,6 @@ def apply(request):
         form = ApplyForm(request.POST)
         if form.is_valid():
             form.save()
-            # Redirect with submitted flag for success modal
             next_url = request.POST.get('next', '/')
             return redirect(f"{next_url}?submitted=true")
         else:
@@ -315,13 +314,12 @@ def apply(request):
         form = ApplyForm()
     return render(request, 'apply.html', {'form': form})
 
-
+# Enquire
 def enquire(request):
     if request.method == "POST":
         form = EnquiryForm(request.POST)
         if form.is_valid():
             form.save()
-            # Redirect with submitted flag for success modal
             next_url = request.POST.get('next', '/')
             return redirect(f"{next_url}?submitted=true")
         else:
@@ -331,6 +329,7 @@ def enquire(request):
 
     return render(request, 'enquire.html', {'form': form})
 
+# Apply COE Renewal
 def formCar(request):
     if request.method == 'POST':
         form = ApplyCOEForm(request.POST)
@@ -366,7 +365,7 @@ def formMotor(request):
 
     return render(request, 'apploan/modals/apply-renew-motor.html', {'form': form})
 
-# COE Renewal
+# Enquiry COE Renewal
 def COERenewCar(request):
     if request.method == "POST":
         form = EnquiryRenewCarForm(request.POST, initial={'loan_type': 'car'})
@@ -386,7 +385,6 @@ def COERenewCar(request):
         "description": "Renew your car COE in Singapore with flexible COE renewal financing. Fast approval support, competitive rates, and easy instalment plans. Request a free quote today.",
     }
     return render(request, "apploan/coe/coe-renew-car.html", context)
-
 
 def COERenewMoto(request):
     if request.method == "POST":
@@ -409,6 +407,7 @@ def COERenewMoto(request):
     return render(request, "apploan/coe/coe-renew-motor.html", context)
 
 
+# Insurance Quote
 def mQuote(request):
     if request.method == "POST":
         form = QuoteMotorForm(request.POST)
@@ -430,7 +429,55 @@ def cQuote(request):
     
     return render(request, "quote-c.html", {"form": form})
 
+# Installment
+def guidesInstall(request):
+    submitted = request.GET.get('submitted', 'false') == 'true'
 
+    if request.method == 'POST':
+        form = InstallmentSubmitForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            next_url = request.POST.get('next', request.path) 
+            return redirect(f"{next_url}?submitted=true")
+        else:
+            print(form.errors)
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = InstallmentSubmitForm()
+
+    context = {
+        'title': 'Car & Motorcycle Loan Instalment Guide Singapore | Monthly Repayment Help',
+        'description': 'Learn how car and motorcycle loan instalments work in Singapore. Understand monthly repayments, interest rates, tenure, and hire purchase terms. Use our guide to plan better.',
+        'form': form,
+        'submitted': submitted,
+    }
+    return render(request, 'apploan/guides/loan-installment.html', context)
+
+
+# Contact
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST, request=request) 
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Thank you for contacting us!")
+            next_url = request.POST.get('next', request.path)
+            return redirect(f"{next_url}?submitted=true")
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = ContactForm(request=request) 
+
+    context = {
+        'title': 'Contact SGVehicleLoans | Car & Motorcycle Loan Quote Singapore',
+        'description': 'Contact SG Vehicle Loans for car and motorcycle financing in Singapore. Fast quotation support for hire purchase, refinancing, and COE renewal loans. WhatsApp us today.',
+        'form': form,
+    }
+    return render(request, 'apploan/contact.html', context)
+
+
+# Footer
 def footerSettings(request):
     footer = FooterSetting.objects.first()
+
     return {"footer": footer}

@@ -9,8 +9,8 @@
 
 {% block content %}
 
-{% include 'apploan/modals/apply.html' with form=form %}
-{% include 'apploan/modals/enquire.html' with form=form %}
+{% include 'apploan/modals/apply.html' with form=apply_form %}
+{% include 'apploan/modals/enquire.html' with form=enquiry_form %}
 
 <!-- HERO SECTION -->
 <section class="hero-landing">
@@ -65,14 +65,15 @@
       {% endwith %}
 
       <div class="vertical-divider d-none d-md-block"></div>
-
+      {% with rate=loan_rates.used_cm %}
       <div class="rate-card">
         <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
         <p class="txt-from text-muted mb-1">From</p>
-        <h1 class="fw-bold mb-2 text-danger">2.88%</h1>
+        <h1 class="fw-bold mb-2 text-danger">{{ rate.int_rate_other }}%</h1>
         <p class="txt-rate text-muted mb-3">Interest Rate</p>
         <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
       </div>
+      {% endwith %}
     </div>
   </div>
 
@@ -93,14 +94,15 @@
       {% endwith %}
 
       <div class="vertical-divider d-none d-md-block"></div>
-
+      {% with rate=loan_rates.new_cm %}
       <div class="rate-card">
         <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
         <p class="txt-from text-muted mb-1">From</p>
-        <h1 class="fw-bold mb-2 text-danger">2.89%</h1>
+        <h1 class="fw-bold mb-2 text-danger">{{ rate.int_rate_other }}%</h1>
         <p class="txt-rate text-muted mb-3">Interest Rate</p>
         <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
       </div>
+      {% endwith %}
     </div>
   </div>
 
@@ -121,14 +123,15 @@
       {% endwith %}
 
       <div class="vertical-divider d-none d-md-block"></div>
-
+      {% with rate=loan_rates.direct_bs %}
       <div class="rate-card">
         <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
         <p class="txt-from text-muted mb-1">From</p>
-        <h1 class="fw-bold mb-2 text-danger">2.98%</h1>
+        <h1 class="fw-bold mb-2 text-danger">{{ rate.int_rate_other }}%</h1>
         <p class="txt-rate text-muted mb-3">Interest Rate</p>
         <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
       </div>
+      {% endwith %}
     </div>
   </div>
 
@@ -149,14 +152,15 @@
       {% endwith %}
 
       <div class="vertical-divider d-none d-md-block"></div>
-
+      {% with rate=loan_rates.coe_car %}
       <div class="rate-card">
         <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
         <p class="txt-from text-muted mb-1">From</p>
-        <h1 class="fw-bold mb-2 text-danger">3.28%</h1>
+        <h1 class="fw-bold mb-2 text-danger">{{ rate.int_rate_other }}%</h1>
         <p class="txt-rate text-muted mb-3">Interest Rate</p>
         <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
       </div>
+      {% endwith %}
     </div>
   </div>
 
@@ -177,14 +181,15 @@
       {% endwith %}
 
       <div class="vertical-divider d-none d-md-block"></div>
-
+      {% with rate=loan_rates.ref_car %}
       <div class="rate-card">
         <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
         <p class="txt-from text-muted mb-1">From</p>
-        <h1 class="fw-bold mb-2 text-danger">3.98%</h1>
+        <h1 class="fw-bold mb-2 text-danger">{{ rate.int_rate_other }}%</h1>
         <p class="txt-rate text-muted mb-3">Interest Rate</p>
         <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
       </div>
+      {% endwith %}
     </div>
   </div>
 
@@ -205,14 +210,15 @@
       {% endwith %}
 
       <div class="vertical-divider d-none d-md-block"></div>
-
+      {% with rate=loan_rates.in_house %}
       <div class="rate-card">
         <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
         <p class="txt-from text-muted mb-1">From</p>
-        <h1 class="fw-bold mb-2 text-danger">5.78%</h1>
+        <h1 class="fw-bold mb-2 text-danger">{{ rate.int_rate_other }}%</h1>
         <p class="txt-rate text-muted mb-3">Interest Rate</p>
         <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
       </div>
+      {% endwith %}
     </div>
   </div>
 
@@ -233,14 +239,15 @@
       {% endwith %}
 
       <div class="vertical-divider d-none d-md-block"></div>
-
+      {% with rate=loan_rates.phv_car %}
       <div class="rate-card">
         <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
         <p class="txt-from text-muted mb-1">From</p>
-        <h1 class="fw-bold mb-2 text-danger">3.88%</h1>
+        <h1 class="fw-bold mb-2 text-danger">{{ rate.int_rate_other }}%</h1>
         <p class="txt-rate text-muted mb-3">Interest Rate</p>
         <a href="#" class="btn-apply enquire-btn" data-bs-toggle="modal" data-bs-target="#enquireNowModal">Enquire Now</a>
       </div>
+      {% endwith %}
     </div>
   </div>
 

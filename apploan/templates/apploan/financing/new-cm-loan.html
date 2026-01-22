@@ -10,8 +10,8 @@
 
 {% block content %}
 
-{% include 'apploan/modals/apply.html' with form=form %}
-{% include 'apploan/modals/enquire.html' with form=form %}
+{% include 'apploan/modals/apply.html' with form=apply_form %}
+{% include 'apploan/modals/enquire.html' with form=enquiry_form %}
 
 <div class="used-loan-banner">
     <div class="banner-content">
@@ -376,7 +376,7 @@
       <h1 class="fw-bold mb-2 text-primary">{{ rate.interest_rate }}%</h2>
       <p class="txt-rate text-muted mb-0">Interest Rate</p>
     </div>
-    {% endwith %}
+    
 
     <!-- Vertical Divider -->
     <div class="vertical-divider d-none d-md-block"></div>
@@ -385,9 +385,10 @@
     <div class="rate-card text-center p-4 ">
       <h6 class="txt-hd text-secondary mb-2">Other Companies</h6>
       <p class="txt-from text-muted mb-1">From</p>
-      <h1 class="fw-bold mb-2 text-danger">2.88%</h2>
+      <h1 class="fw-bold mb-2 text-danger">{{ rate.int_rate_other }}%</h1>
       <p class="txt-rate text-muted mb-0">Interest Rate</p>
     </div>
+    {% endwith %}
 
   </div>
 
@@ -400,102 +401,9 @@
   </div>
 </div>
 
+{% include "apploan/content/loan-calc.html" %}
 
-  <!-- Heading -->
-<div class="text-center mb-5">
-  <h2 class="calc-heading">Car & Motorcycle Loan Calculator (Monthly Repayment)</h2>
-    <div class="mx-auto my-3" style="width: 150px; height: 3.5px; background: linear-gradient(90deg, #0c4d99, #007dc5ff);"></div>
-  <p class="calc-subheading">Use our Used Car Loan Calculator to calculate or get an estimate of your monthly instalment repayments for your used car.</p>
-</div>
-
-<div class="container my-5">
-  <div class="row justify-content-center gx-0"> <!-- remove gutter -->
-    <!-- CAR LOAN -->
-    <div class="col-md-6 px-0 d-flex justify-content-end"> <!-- remove column padding -->
-      <div class="loan-box">
-        <h3>Car Loan</h3>
-        <div class="slider-group">
-          <label>Loan Amount ($) <span id="carLoanAmountDisplay" class="slider-value">15000</span></label>
-          <div class="button-row" style="position:relative; width:100%; margin-bottom:30px;">
-            <span class="btn-decrement" data-target="carLoanAmount" 
-                  style="position:absolute; left:0; cursor:pointer; user-select:none;">-</span>
-            <span class="btn-increment" data-target="carLoanAmount" 
-                  style="position:absolute; right:0; cursor:pointer; user-select:none;">+</span>
-          </div>
-          <input type="range" min="1000" max="100000" step="500" id="carLoanAmount" value="15000" class="form-range">
-        </div>
-        <div class="slider-group">
-          <label>Interest Rate (%) <span id="carInterestRateDisplay" class="slider-value">3.5</span></label>
-          <div class="button-row" style="position:relative; width:100%; margin-bottom:30px;">
-            <span class="btn-decrement" data-target="carInterestRate" 
-                  style="position:absolute; left:0; cursor:pointer; user-select:none;">-</span>
-            <span class="btn-increment" data-target="carInterestRate" 
-                  style="position:absolute; right:0; cursor:pointer; user-select:none;">+</span>
-          </div>
-          <input type="range" min="0" max="20" step="0.1" id="carInterestRate" value="3.5" class="form-range">
-        </div>
-        <div class="slider-group">
-          <label>Tenure (Months) <span id="carLoanMonthsDisplay" class="slider-value">60</span></label>
-          <div class="button-row" style="position:relative; width:100%; margin-bottom:30px;">
-            <span class="btn-decrement" data-target="carLoanMonths" 
-                  style="position:absolute; left:0; cursor:pointer; user-select:none;">-</span>
-            <span class="btn-increment" data-target="carLoanMonths" 
-                  style="position:absolute; right:0; cursor:pointer; user-select:none;">+</span>
-          </div>
-          <input type="range" min="1" max="120" step="1" id="carLoanMonths" value="60" class="form-range">
-        </div>
-        <div class="loan-result">
-          <h2 id="carMonthlyRepayment">$0</h2>
-          <p>Monthly Repayment</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- MOTORCYCLE LOAN -->
-    <div class="col-md-6 px-0 d-flex justify-content-start"> <!-- remove column padding -->
-      <div class="loan-box">
-        <h3>Motorcycle Loan</h3>
-        <div class="slider-group">
-          <label>Loan Amount ($) <span id="motoLoanAmountDisplay" class="slider-value">5000</span></label>
-          <div class="button-row" style="position:relative; width:100%; margin-bottom:30px;">
-            <span class="btn-decrement" data-target="motoLoanAmount" 
-                  style="position:absolute; left:0; cursor:pointer; user-select:none;">-</span>
-            <span class="btn-increment" data-target="motoLoanAmount" 
-                  style="position:absolute; right:0; cursor:pointer; user-select:none;">+</span>
-          </div>
-          <input type="range" min="500" max="50000" step="250" id="motoLoanAmount" value="5000" class="form-range">
-        </div>
-        <div class="slider-group">
-          <label>Interest Rate (%) <span id="motoInterestRateDisplay" class="slider-value">4.0</span></label>
-          <div class="button-row" style="position:relative; width:100%; margin-bottom:30px;">
-            <span class="btn-decrement" data-target="motoInterestRate" 
-                  style="position:absolute; left:0; cursor:pointer; user-select:none;">-</span>
-            <span class="btn-increment" data-target="motoInterestRate" 
-                  style="position:absolute; right:0; cursor:pointer; user-select:none;">+</span>
-          </div>
-          <input type="range" min="0" max="20" step="0.1" id="motoInterestRate" value="4.0" class="form-range">
-        </div>
-        <div class="slider-group">
-          <label>Tenure (Months) <span id="motoLoanMonthsDisplay" class="slider-value">36</span></label>
-          <div class="button-row" style="position:relative; width:100%; margin-bottom:30px;">
-            <span class="btn-decrement" data-target="motoLoanMonths" 
-                  style="position:absolute; left:0; cursor:pointer; user-select:none;">-</span>
-            <span class="btn-increment" data-target="motoLoanMonths" 
-                  style="position:absolute; right:0; cursor:pointer; user-select:none;">+</span>
-          </div>
-          <input type="range" min="1" max="120" step="1" id="motoLoanMonths" value="36" class="form-range">
-        </div>
-        <div class="loan-result">
-          <h2 id="motoMonthlyRepayment">$0</h2>
-          <p>Monthly Repayment</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="text-center mb-5">
+<div class="text-center mb-5 mt-5">
   <h2 class="procedure-heading">Procedure & Online Application for Car & Motorcycle Loan</h2>
     <div class="mx-auto my-3" style="width: 150px; height: 3.5px; background: linear-gradient(90deg, #0c4d99, #007dc5ff);"></div>
   <p class="procedure-subheading">Get a Car & Motorcycle Loan in 3 Easy Steps!</p>
@@ -579,8 +487,4 @@
 {% include "apploan/content/faq.html" with faqs=faqs faq_title="New Car & Motorcycle Loan FAQ" %}
 
 
-{% endblock %}
-
-{% block extra_js %}
-<script src="{% static 'apploan/js/loan.js' %}"></script>
 {% endblock %}

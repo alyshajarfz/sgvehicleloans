@@ -123,6 +123,8 @@ class ApplyForm(forms.ModelForm):
     class Meta:
         model = Apply
         fields = '__all__'
+        exclude = ['status']
+        
         widgets = {
             'full_name': forms.TextInput(attrs={'class': 'form-control', 'required': True,"placeholder": "Enter Full Name"}),
             'phone': forms.TextInput(attrs={'class': 'form-control', 'required': True,"placeholder": "Enter Phone Number"}),
@@ -181,14 +183,14 @@ class InstallmentSubmitForm(forms.ModelForm):
         }
 
 
+import random
 from django import forms
+from .models import Contact
 
 class ContactForm(forms.ModelForm):
     captcha_answer = forms.IntegerField(
-        label="CAPTCHA: 5 + 4 = ?", required=True,widget=forms.NumberInput(attrs={
-            'class': 'form-control',  
-            'placeholder': 'CAPTCHA: 5 + 4 = ?'
-        })
+        required=True,
+        widget=forms.NumberInput(attrs={'class': 'form-control'})
     )
 
     class Meta:
@@ -204,8 +206,32 @@ class ContactForm(forms.ModelForm):
             'privacy_policy': forms.CheckboxInput(attrs={'class': 'form-check-input', 'required': True}),
         }
 
+    def __init__(self, *args, **kwargs):
+        # Expect request to be passed in kwargs
+        self.request = kwargs.pop('request', None)
+        super().__init__(*args, **kwargs)
+
+        # Only generate new numbers if not in session
+        if self.request and 'captcha' not in self.request.session:
+            self.request.session['captcha'] = (random.randint(1, 10), random.randint(1, 10))
+
+        # Read numbers from session
+        if self.request and 'captcha' in self.request.session:
+            self.num1, self.num2 = self.request.session['captcha']
+        else:
+            # fallback
+            self.num1, self.num2 = 1, 1
+
+        question = f"{self.num1} + {self.num2} = ?"
+        self.fields['captcha_answer'].label = f"CAPTCHA: {question}"
+        self.fields['captcha_answer'].widget.attrs['placeholder'] = f"CAPTCHA: {question}"
+
     def clean_captcha_answer(self):
         answer = self.cleaned_data.get('captcha_answer')
-        if answer != 9:  # 5 + 4 = 9
+        if answer != self.num1 + self.num2:
             raise forms.ValidationError("Incorrect CAPTCHA answer.")
+
+        # Remove CAPTCHA from session once validated
+        if self.request and 'captcha' in self.request.session:
+            self.request.session.pop('captcha')
         return answer

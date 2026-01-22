@@ -246,7 +246,7 @@ UNFOLD = {
                 "collapsible": True,  # Collapsible group of links
                 "items": [
                     {
-                        "title": _("General Application"),
+                        "title": _("General Loan Application"),
                         "icon": "data_table",
                         "link": reverse_lazy("admin:apploan_application_changelist"), #admin:<app_label>_<model_name>_changelist
                     },
@@ -261,7 +261,7 @@ UNFOLD = {
                         "link": reverse_lazy("admin:apploan_motorcoe_changelist"), 
                     },
                     {
-                        "title": _("General Enquiries"),
+                        "title": _("General Loan Enquiries"),
                         "icon": "tooltip_2",
                         "link": reverse_lazy("admin:apploan_generalenquiry_changelist"),
                     },
@@ -274,6 +274,16 @@ UNFOLD = {
                         "title": _("Enquiry COE Renew Motorcycle"),
                         "icon": "cached",
                         "link": reverse_lazy("admin:apploan_motorcycleenquiry_changelist"),
+                    },
+                    {
+                        "title": _("Car Installment Submission"),
+                        "icon": "chat_paste_go",
+                        "link": reverse_lazy("admin:apploan_installmentsubmit_changelist"),
+                    },
+                    {
+                        "title": _("Contact Enquiry"),
+                        "icon": "contact_phone",
+                        "link": reverse_lazy("admin:apploan_contact_changelist"),
                     },
                 ],
             },

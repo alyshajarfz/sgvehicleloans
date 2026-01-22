@@ -45,7 +45,8 @@ class MenuSetting(models.Model):
 class LoanRate(models.Model):
     loan_name = models.CharField(max_length=50)
     loan_display = models.CharField(max_length=100, blank=True, null=True)
-    interest_rate = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True)
+    interest_rate = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True, verbose_name="SGVehicleLoans Interest Rate")
+    int_rate_other = models.DecimalField(max_digits=5, decimal_places=2,null=True,blank=True, verbose_name="Other Company Interest Rate")
     financing = models.DecimalField(max_digits=5, decimal_places=0, null=True, blank=True)
 
     def __str__(self):
@@ -513,6 +514,12 @@ class Apply(models.Model):
         ('quarterly', 'Quarterly'),
     ]
 
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+
     # STEP 1: Contact
     full_name = models.CharField(max_length=200)
     phone = models.CharField(max_length=20)
@@ -525,7 +532,7 @@ class Apply(models.Model):
     omv = models.DecimalField(max_digits=10, decimal_places=2)
     arf = models.DecimalField(max_digits=10, decimal_places=2)
     registration_date = models.DateField()
-    registration_number = models.CharField(max_length=50)
+    registration_number = models.CharField(max_length=50, verbose_name="Vehicle Registration Number")
     lta_access_code = models.CharField(max_length=50)
 
     # STEP 3: Loan
@@ -539,11 +546,12 @@ class Apply(models.Model):
     # STEP 4: Remarks
     remarks = models.TextField()
     privacy_policy = models.BooleanField(default=False)
+    status = models.CharField(max_length=20,choices=STATUS_CHOICES,default='pending')
 
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.full_name} - {self.loan_type}"
+        return f"{self.full_name} - {self.get_loan_type_display()} ({self.get_status_display()})"
 
 class Application(Apply):  # proxy model
     class Meta:
@@ -582,37 +590,6 @@ class MotorCOE(ApplyCOE):
         verbose_name = "Application COE Renewal Motorcycle"
         verbose_name_plural = "Application COE Renewal Motorcycle"
 
-
-# Footer
-class FooterSetting(models.Model):
-    address = models.TextField(default="400 Balestier Road,\nBalestier Plaza #02-23,\nSingapore 329802")
-    google_map_embed = models.TextField(
-        default="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.750498216391!2d103.8478215758166!3d1.3256235616514813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19d8ad2a9e11%3A0x1b8c2cdaf63e0fbb!2sBalestier%20Plaza!5e0!3m2!1sen!2smy!4v1764923928289!5m2!1sen!2smy"
-    )
-    
-    # Contact info
-    hotline = models.CharField(max_length=50, default="(+65) 6444 4400")
-    office = models.CharField(max_length=50, default="+65 6681 6778")
-    fax = models.CharField(max_length=50, default="+65 6256 1229")
-    
-    # Operating hours
-    op_hours_weekdays = models.CharField(max_length=100, default="Mon–Fri: 10am–6pm")
-    op_hours_sat = models.CharField(max_length=100, default="Sat: 12pm–4pm")
-    
-    # Social media
-    facebook_url = models.URLField(default="https://www.facebook.com/login", help_text="Please put your Facebook page link here.")
-    instagram_url = models.URLField(default="https://www.instagram.com/accounts/login/", blank=True, help_text="Please put your Instagram profile link here.")
-    whatsapp_url = models.URLField(default="https://api.whatsapp.com/send?phone=6589259233&text=Hi%2C%20SGVehicleLoans", blank=True, help_text="Please put your WhatsApp link here.")
-    tiktok_url = models.URLField(default="https://www.tiktok.com/login", blank=True, help_text="Please put your TikTok profile link here.")
-    
-    class Meta:
-        verbose_name = "Footer Setting"
-        verbose_name_plural = "Footer Settings"
-
-    def __str__(self):
-        return "Footer Settings"
-
-
 # Installment
 class InstallmentSubmit(models.Model):
     full_name = models.CharField(max_length=255)
@@ -621,11 +598,11 @@ class InstallmentSubmit(models.Model):
     email = models.EmailField()
 
     vehicle_reg = models.CharField(max_length=20)
-    install_amount = models.DecimalField(max_digits=10, decimal_places=2, help_text="Monthly instalment amount")
-    transfer_amount = models.DecimalField(max_digits=10, decimal_places=2, help_text="Amount transferred")
+    install_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    transfer_amount = models.DecimalField(max_digits=10, decimal_places=2)
 
     reference = models.CharField(max_length=100)
-    proof_pay = models.FileField(upload_to='installments/', help_text="Upload transfer receipt")
+    proof_pay = models.FileField(upload_to='installments/', help_text="Please Download To View The Receipt.")
     remarks = models.TextField(blank=True, null=True)
 
     privacy_policy = models.BooleanField(default=False)
@@ -659,3 +636,35 @@ class Contact(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.enquiry_type}"
+
+
+# Footer
+class FooterSetting(models.Model):
+    address = models.TextField(default="400 Balestier Road,\nBalestier Plaza #02-23,\nSingapore 329802")
+    google_map_embed = models.TextField(
+        default="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.750498216391!2d103.8478215758166!3d1.3256235616514813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19d8ad2a9e11%3A0x1b8c2cdaf63e0fbb!2sBalestier%20Plaza!5e0!3m2!1sen!2smy!4v1764923928289!5m2!1sen!2smy"
+    )
+    
+    # Contact info
+    hotline = models.CharField(max_length=50, default="(+65) 6444 4400")
+    office = models.CharField(max_length=50, default="+65 6681 6778")
+    fax = models.CharField(max_length=50, default="+65 6256 1229")
+    
+    # Operating hours
+    op_hours_weekdays = models.CharField(max_length=100, default="Mon–Fri: 10am–6pm")
+    op_hours_sat = models.CharField(max_length=100, default="Sat: 12pm–4pm")
+    
+    # Social media
+    facebook_url = models.URLField(blank=True, help_text="Please put your Facebook page link here.")
+    instagram_url = models.URLField(blank=True, help_text="Please put your Instagram profile link here.")
+    whatsapp_url = models.URLField(blank=True, help_text="Please put your WhatsApp link here.")
+    tiktok_url = models.URLField(blank=True, help_text="Please put your TikTok profile link here.")
+    telegram_url = models.URLField(blank=True, help_text="Please put your Telegram profile link here.")
+    
+    class Meta:
+        verbose_name = "Footer Setting"
+        verbose_name_plural = "Footer Settings"
+
+    def __str__(self):
+        return "Footer Settings"
+    
