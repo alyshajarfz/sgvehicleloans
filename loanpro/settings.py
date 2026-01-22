@@ -101,8 +101,11 @@ WSGI_APPLICATION = 'loanpro.wsgi.application'
 #}
 
 from decouple import config
+import os
 
-if os.getenv('DJANGO_ENV') == 'PRODUCTION':
+ENV = os.getenv('DJANGO_ENV', 'DEVELOPMENT')
+
+if ENV.upper() == 'PRODUCTION':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -114,14 +117,12 @@ if os.getenv('DJANGO_ENV') == 'PRODUCTION':
         }
     }
 else:
-    # Local development: SQLite
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-
 
 #DATABASES = {
     #'default': {
